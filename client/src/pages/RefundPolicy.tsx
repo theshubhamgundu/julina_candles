@@ -21,14 +21,14 @@ const RefundPolicy: React.FC = () => {
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">1. Return Eligibility</h2>
             <p>
-              Due to the perishable nature of food and agricultural products, returns are accepted only if the outer packaging is damaged upon receipt, sealed bag is ruptured, or an incorrect item was delivered.
+              Returns are accepted if the product arrives with damaged packaging, the candle/melt is defective, or an incorrect item was delivered. Products must be unused and in original condition to be eligible for return.
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-serif font-bold text-primary mb-2">2. Reporting Damaged or Ruptured Deliveries</h2>
+            <h2 className="text-lg font-serif font-bold text-primary mb-2">2. Reporting Issues with Deliveries</h2>
             <p>
-              Please notify our customer support team within <strong>48 hours</strong> of delivery by emailing photos/videos of the damaged package to <a href="mailto:myotrixnutrition@gmail.com" className="text-secondary hover:underline">myotrixnutrition@gmail.com</a> or messaging us on WhatsApp at <strong>+91 70329 87770</strong>.
+              Please notify our customer support team within <strong>48 hours</strong> of delivery by emailing photos/videos of any issues with your package to <a href="mailto:pranita311096@gmail.com" className="text-secondary hover:underline">pranita311096@gmail.com</a> or messaging us on WhatsApp at <strong>+91 73048 88197</strong>.
             </p>
           </section>
 

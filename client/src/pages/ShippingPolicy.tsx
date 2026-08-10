@@ -14,7 +14,7 @@ const ShippingPolicy: React.FC = () => {
         <div className="mb-8 border-b border-gray-100 pb-6">
           <span className="text-xs font-semibold text-secondary uppercase tracking-widest">ORDER FULFILLMENT</span>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mt-1">Shipping & Delivery Policy</h1>
-          <p className="text-xs text-muted mt-2">Last Updated: July 24, 2026 • Julina Candles & Melts (Myotrixnutrition LLP)</p>
+          <p className="text-xs text-muted mt-2">Last Updated: July 24, 2026 • Julina Candles & Melts</p>
         </div>
 
         <div className="space-y-6 text-sm text-ink leading-relaxed">
@@ -43,6 +43,13 @@ const ShippingPolicy: React.FC = () => {
             <h2 className="text-lg font-serif font-bold text-primary mb-2">4. Order Tracking</h2>
             <p>
               Once your shipment is dispatched, a tracking ID and link will be sent via SMS and email. You can also view active order status under <strong>My Orders</strong> in your account dashboard.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-serif font-bold text-primary mb-2">5. Contact Support</h2>
+            <p>
+              For shipping inquiries or tracking assistance, please contact us at <a href="mailto:pranita311096@gmail.com" className="text-secondary hover:underline">pranita311096@gmail.com</a> or WhatsApp <strong>+91 73048 88197</strong>.
             </p>
           </section>
         </div>

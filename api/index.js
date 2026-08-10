@@ -1,10 +1,10 @@
 import crypto from 'crypto';
-import { createClient } from '@supabase/supabase-js';
+// import { createClient } from '@supabase/supabase-js';
 
-// Supabase Database Connection
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://ygqddtioylsrvgecmmfh.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlncWRkdGlveWxzcnZnZWNtbWZoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NDg5NjA4OSwiZXhwIjoyMTAwNDcyMDg5fQ.s3bO24CLIPJP6_VQorTIYfxAVLBdVrM9zO-9hJwtysQ';
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+// ⚠️ Supabase integration is temporarily silenced
+// const SUPABASE_URL = process.env.SUPABASE_URL;
+// const SUPABASE_KEY = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY;
+// const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Simple password hashing and comparison (use bcrypt in production)
 function hashPassword(password) {
@@ -20,29 +20,29 @@ function generateShipperToken() {
   return crypto.randomBytes(64).toString('hex');
 }
 
-// ICICI Bank OPG Payment Gateway Configuration
-const ICICI_CONFIG = {
-  get MID() { return process.env.ICICI_MID || '100000000490311'; },
-  get KEY() { return process.env.ICICI_KEY || 'bd7461c6-7e54-4d75-b088-1deb659a666d'; },
-  get AGG_ID() { return process.env.ICICI_AGG_ID || '100000000490310'; },
-  get INITIATE_SALE_URL() { return 'https://pgpay.icicibank.com/pg/api/v2/initiateSale'; },
-  get COMMAND_URL() { return 'https://pgpay.icicibank.com/pg/api/command'; },
-  get SETTLEMENT_URL() { return 'https://pgpay.icicibank.com/pg/api/settlementDetails'; }
-};
+// ⚠️ ICICI Bank OPG Payment Gateway is DISABLED
+// const ICICI_CONFIG = {
+//   get MID() { return process.env.ICICI_MID || '100000000490311'; },
+//   get KEY() { return process.env.ICICI_KEY || 'bd7461c6-7e54-4d75-b088-1deb659a666d'; },
+//   get AGG_ID() { return process.env.ICICI_AGG_ID || '100000000490310'; },
+//   get INITIATE_SALE_URL() { return 'https://pgpay.icicibank.com/pg/api/v2/initiateSale'; },
+//   get COMMAND_URL() { return 'https://pgpay.icicibank.com/pg/api/command'; },
+//   get SETTLEMENT_URL() { return 'https://pgpay.icicibank.com/pg/api/settlementDetails'; }
+// };
 
 // ICICI SHA-256 HMAC SecureHash (ASCII message encoding per ICICI spec)
-function generateICICISecureHash(payload, secretKey) {
-  const sortedKeys = Object.keys(payload).sort();
-  let plainHashtext = '';
-  for (const key of sortedKeys) {
-    if (payload[key] !== undefined && payload[key] !== null) {
-      plainHashtext += payload[key];
-    }
-  }
-  const hmac = crypto.createHmac('sha256', secretKey);
-  hmac.update(Buffer.from(plainHashtext, 'ascii'));
-  return hmac.digest('hex');
-}
+// function generateICICISecureHash(payload, secretKey) {
+//   const sortedKeys = Object.keys(payload).sort();
+//   let plainHashtext = '';
+//   for (const key of sortedKeys) {
+//     if (payload[key] !== undefined && payload[key] !== null) {
+//       plainHashtext += payload[key];
+//     }
+//   }
+//   const hmac = crypto.createHmac('sha256', secretKey);
+//   hmac.update(Buffer.from(plainHashtext, 'ascii'));
+//   return hmac.digest('hex');
+// }
 
 // Resend Email API Configuration
 const RESEND_CONFIG = {

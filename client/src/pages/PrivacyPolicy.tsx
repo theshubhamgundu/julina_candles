@@ -65,9 +65,10 @@ const PrivacyPolicy: React.FC = () => {
             <h2 className="text-lg font-serif font-bold text-primary mb-2">6. Contact Our Data Officer</h2>
             <p className="text-xs text-muted">
               If you have any questions or requests regarding your data privacy, please contact:<br />
-              <strong>Entity:</strong> Myotrixnutrition LLP (Julina Candles & Melts)<br />
-              <strong>Address:</strong> 8-3-1/14, Road No 2B, Virat Nagar, Hyderabad, Telangana - 500097, India<br />
-              <strong>Email:</strong> <a href="mailto:myotrixnutrition@gmail.com" className="text-secondary hover:underline">myotrixnutrition@gmail.com</a>
+              <strong>Entity:</strong> Julina Candles & Melts<br />
+              <strong>Address:</strong> Hyderabad, Telangana, India<br />
+              <strong>Email:</strong> <a href="mailto:pranita311096@gmail.com" className="text-secondary hover:underline">pranita311096@gmail.com</a><br />
+              <strong>Phone/WhatsApp:</strong> +91 73048 88197
             </p>
           </section>
         </div>

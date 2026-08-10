@@ -27,9 +27,9 @@ const TermsAndConditions: React.FC = () => {
           </section>
 
           <section>
-            <h2 className="text-lg font-serif font-bold text-primary mb-2">2. Health & Nutritional Disclaimer</h2>
+            <h2 className="text-lg font-serif font-bold text-primary mb-2">2. Product Disclaimer</h2>
             <p>
-              Julina Candles & Melts Artisanal Candles is clinically tested (GI 51) and developed in partnership with ICAR-IIRR. However, our products are nutritional food items and are not intended to replace medical treatment, prescription diabetic medication, or professional clinical diagnosis. Always consult your doctor or healthcare provider regarding medical conditions.
+              Julina Candles & Melts handcrafted artisanal candles are premium home décor and ambiance products. Our products are not intended for medical use or therapeutic treatment. Always ensure proper ventilation when using candles and keep away from children and pets.
             </p>
           </section>
 
@@ -65,9 +65,9 @@ const TermsAndConditions: React.FC = () => {
             <h2 className="text-lg font-serif font-bold text-primary mb-2">7. Contact Information</h2>
             <p className="text-xs text-muted">
               For any legal inquiries regarding these Terms & Conditions, please contact us:<br />
-              <strong>Entity:</strong> Myotrixnutrition LLP (Julina Candles & Melts)<br />
-              <strong>Address:</strong> 8-3-1/14, Road No 2B, Virat Nagar, Hyderabad, Telangana - 500097, India<br />
-              <strong>Email:</strong> <a href="mailto:myotrixnutrition@gmail.com" className="text-secondary hover:underline">myotrixnutrition@gmail.com</a> | <strong>Phone/WhatsApp:</strong> +91 70329 87770
+              <strong>Entity:</strong> Julina Candles & Melts<br />
+              <strong>Address:</strong> Hyderabad, Telangana, India<br />
+              <strong>Email:</strong> <a href="mailto:pranita311096@gmail.com" className="text-secondary hover:underline">pranita311096@gmail.com</a> | <strong>Phone/WhatsApp:</strong> +91 73048 88197
             </p>
           </section>
         </div>
