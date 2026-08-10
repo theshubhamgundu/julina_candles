@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import Razorpay from 'razorpay';
 // import { createClient } from '@supabase/supabase-js';
 
 // ⚠️ Supabase integration is temporarily silenced
@@ -44,9 +45,33 @@ function generateShipperToken() {
 //   return hmac.digest('hex');
 // }
 
+// ─── Razorpay Payment Gateway Configuration ───
+const RAZORPAY_CONFIG = {
+  get KEY_ID() { return process.env.RAZORPAY_KEY_ID || 'rzp_test_TO0ThkJfCuEUj1'; },
+  get KEY_SECRET() { return process.env.RAZORPAY_KEY_SECRET || '6xP6d7KSkclsv7M50V7cUl2D'; },
+};
+
+// Initialize Razorpay instance
+function getRazorpayInstance() {
+  return new Razorpay({
+    key_id: RAZORPAY_CONFIG.KEY_ID,
+    key_secret: RAZORPAY_CONFIG.KEY_SECRET,
+  });
+}
+
+// Verify Razorpay payment signature using HMAC-SHA256
+function verifyRazorpaySignature(orderId, paymentId, signature) {
+  const expectedSignature = crypto
+    .createHmac('sha256', RAZORPAY_CONFIG.KEY_SECRET)
+    .update(`${orderId}|${paymentId}`)
+    .digest('hex');
+
+  return expectedSignature === signature;
+}
+
 // Resend Email API Configuration
 const RESEND_CONFIG = {
-  get KEY() { return process.env.RESEND_API_KEY || 're_h4jk9A4g_7wSoexEh1MiAP22yq3VhFKMV'; },
+  get KEY() { return process.env.RESEND_API_KEY || 're_UZ29KUAH_PjdpPNsPbAWveZDj48Tv5woU'; },
   get FROM() { return process.env.RESEND_FROM_EMAIL || 'Julina Candles & Melts <sales@julinacandles.in>'; }
 };
 
@@ -486,6 +511,106 @@ export default async function handler(req, res) {
         merchantTxnNo,
         iciciResponse: iciciData,
       });
+    }
+
+    // ─── PAYMENTS: Razorpay Create Order ───
+    if (url.includes('/api/v1/payments/razorpay/create-order')) {
+      if (req.method !== 'POST') {
+        return res.status(405).json({ success: false, message: 'Method not allowed' });
+      }
+
+      try {
+        const { amount, currency, receipt, description, customer_name, customer_email, customer_phone } = req.body;
+
+        // Validate amount (minimum 100 paise = ₹1)
+        const amountInPaise = parseInt(amount, 10);
+        if (!amountInPaise || amountInPaise < 100) {
+          return res.status(400).json({
+            success: false,
+            message: 'Invalid amount. Minimum amount is ₹1 (100 paise)',
+          });
+        }
+
+        // Create Razorpay instance
+        const razorpay = getRazorpayInstance();
+
+        // Create order on Razorpay
+        const order = await razorpay.orders.create({
+          amount: amountInPaise,
+          currency: currency || 'INR',
+          receipt: receipt || `order_${Date.now()}`,
+          description: description || 'Julina Candles & Melts Purchase',
+          customer_notify: 1,
+          notes: {
+            customer_name: customer_name || 'Julina Customer',
+            customer_email: customer_email || 'support@julinacandles.in',
+            customer_phone: customer_phone || '',
+          },
+        });
+
+        console.log('✅ Razorpay order created:', order.id);
+
+        return res.status(200).json({
+          success: true,
+          order_id: order.id,
+          amount: order.amount,
+          currency: order.currency,
+          receipt: order.receipt,
+        });
+      } catch (error) {
+        console.error('❌ Razorpay order creation failed:', error.message);
+        return res.status(500).json({
+          success: false,
+          message: 'Failed to create payment order',
+          error: error.message,
+        });
+      }
+    }
+
+    // ─── PAYMENTS: Razorpay Verify Signature ───
+    if (url.includes('/api/v1/payments/razorpay/verify-payment')) {
+      if (req.method !== 'POST') {
+        return res.status(405).json({ success: false, message: 'Method not allowed' });
+      }
+
+      try {
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+
+        // Validate required fields
+        if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+          return res.status(400).json({
+            success: false,
+            message: 'Missing payment verification details',
+          });
+        }
+
+        // Verify signature using HMAC-SHA256
+        const isSignatureValid = verifyRazorpaySignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
+
+        if (!isSignatureValid) {
+          console.error('❌ Razorpay signature verification failed for order:', razorpay_order_id);
+          return res.status(400).json({
+            success: false,
+            message: 'Payment verification failed. Signature mismatch.',
+          });
+        }
+
+        console.log('✅ Razorpay payment verified successfully for order:', razorpay_order_id);
+
+        return res.status(200).json({
+          success: true,
+          message: 'Payment verified successfully',
+          razorpay_order_id,
+          razorpay_payment_id,
+        });
+      } catch (error) {
+        console.error('❌ Razorpay payment verification error:', error.message);
+        return res.status(500).json({
+          success: false,
+          message: 'Payment verification error',
+          error: error.message,
+        });
+      }
     }
 
     // ─── PAYMENTS: Callback (Return URL) Handler ───
