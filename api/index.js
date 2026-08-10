@@ -1544,7 +1544,7 @@ export default async function handler(req, res) {
       if (!error && data && data.length > 0) {
         productsList = data.map(mapProduct);
       } else {
-        productsList = JULINA_CANDLE_PRODUCTS.slice(0, 6);
+        productsList = [];
       }
 
       const resBody = {
