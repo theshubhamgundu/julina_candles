@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaInstagram, FaWhatsapp, FaYoutube, FaEnvelope, FaPhone, FaLocationDot } from 'react-icons/fa6';
+import { FaInstagram, FaWhatsapp, FaEnvelope, FaPhone, FaLocationDot } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
@@ -14,8 +14,8 @@ const Footer: React.FC = () => {
         {/* Column 1: Brand & Social (4 cols) */}
         <div className="lg:col-span-4 space-y-6">
           <Link to="/" className="inline-block">
-            <div className="w-24 h-24 rounded-2xl bg-[#FBF6ED] p-2.5 shadow-xl border-2 border-[#C79A56] flex items-center justify-center transform hover:scale-105 transition-transform duration-300">
-              <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts Logo" className="w-full h-full object-contain" />
+            <div className="w-24 h-24 rounded-full bg-[#FBF6ED] p-2 shadow-xl border-2 border-[#C79A56] flex items-center justify-center overflow-hidden transform hover:scale-105 transition-transform duration-300">
+              <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts Logo" className="w-full h-full object-cover rounded-full" />
             </div>
           </Link>
 
@@ -28,50 +28,57 @@ const Footer: React.FC = () => {
 
           {/* Social Links */}
           <div className="flex items-center gap-3 pt-2">
-            {[
-              { icon: <FaInstagram />, href: 'https://instagram.com/julinacandles.in', label: 'Instagram', color: 'hover:text-[#E1306C]' },
-              { icon: <FaWhatsapp />, href: 'https://wa.me/917304888197', label: 'WhatsApp', color: 'hover:text-[#25D366]' },
-              { icon: <FaYoutube />, href: 'http://www.youtube.com/@julinacandles.1', label: 'YouTube', color: 'hover:text-[#FF0000]' },
-            ].map((social, i) => (
-              <a
-                key={i}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className={`w-10 h-10 rounded-full bg-white/10 border border-white/15 text-white flex items-center justify-center text-base transition-all duration-300 hover:bg-white/20 hover:scale-110 ${social.color}`}
-              >
-                {social.icon}
-              </a>
-            ))}
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/julina_candles_n_melts"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center text-white text-lg transition-all duration-300 hover:scale-110 shadow-md"
+            >
+              <FaInstagram />
+            </a>
+
+            {/* WhatsApp */}
+            <a
+              href="https://wa.me/917304888197"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center text-white text-lg transition-all duration-300 hover:scale-110 shadow-md"
+            >
+              <FaWhatsapp />
+            </a>
           </div>
         </div>
 
-        {/* Column 2: Quick Links (2 cols) */}
-        <div className="lg:col-span-2 space-y-4">
-          <h4 className="font-serif font-bold text-white text-base border-b border-[#C79A56]/30 pb-2">
-            Company
-          </h4>
-          <ul className="space-y-2.5 text-xs text-[#F4EADA]/80 font-medium">
-            <li><Link to="/" className="hover:text-[#C79A56] transition-colors flex items-center gap-2">Home</Link></li>
-            <li><Link to="/about" className="hover:text-[#C79A56] transition-colors flex items-center gap-2">About Our Brand</Link></li>
-            <li><Link to="/products" className="hover:text-[#C79A56] transition-colors flex items-center gap-2">All Products</Link></li>
-            <li><Link to="/search" className="hover:text-[#C79A56] transition-colors flex items-center gap-2">Search Catalog</Link></li>
-            <li><Link to="/cart" className="hover:text-[#C79A56] transition-colors flex items-center gap-2">Shopping Cart</Link></li>
-          </ul>
-        </div>
+        {/* Column 2 & 3 Wrapper for Mobile 2-column layout */}
+        <div className="lg:col-span-5 grid grid-cols-2 gap-6">
+          {/* Company Links */}
+          <div className="space-y-4">
+            <h4 className="font-serif font-bold text-white text-sm sm:text-base border-b border-[#C79A56]/30 pb-2">
+              Company
+            </h4>
+            <ul className="space-y-2 text-xs text-[#F4EADA]/80 font-medium">
+              <li><Link to="/" className="hover:text-[#C79A56] transition-colors">Home</Link></li>
+              <li><Link to="/about" className="hover:text-[#C79A56] transition-colors">About Our Brand</Link></li>
+              <li><Link to="/products" className="hover:text-[#C79A56] transition-colors">All Products</Link></li>
+              <li><Link to="/cart" className="hover:text-[#C79A56] transition-colors">Shopping Cart</Link></li>
+            </ul>
+          </div>
 
-        {/* Column 3: Customer Policies (3 cols) */}
-        <div className="lg:col-span-3 space-y-4">
-          <h4 className="font-serif font-bold text-white text-base border-b border-[#C79A56]/30 pb-2">
-            Customer Care & Policies
-          </h4>
-          <ul className="space-y-2.5 text-xs text-[#F4EADA]/80 font-medium">
-            <li><Link to="/terms" className="hover:text-[#C79A56] transition-colors">Terms & Conditions</Link></li>
-            <li><Link to="/privacy" className="hover:text-[#C79A56] transition-colors">Privacy Policy</Link></li>
-            <li><Link to="/shipping-policy" className="hover:text-[#C79A56] transition-colors">Shipping & Delivery Policy</Link></li>
-            <li><Link to="/refund-policy" className="hover:text-[#C79A56] transition-colors">Refund & Returns Policy</Link></li>
-          </ul>
+          {/* Customer Care & Policies Links */}
+          <div className="space-y-4">
+            <h4 className="font-serif font-bold text-white text-sm sm:text-base border-b border-[#C79A56]/30 pb-2">
+              Customer Care & Policies
+            </h4>
+            <ul className="space-y-2 text-xs text-[#F4EADA]/80 font-medium">
+              <li><Link to="/terms" className="hover:text-[#C79A56] transition-colors">Terms & Conditions</Link></li>
+              <li><Link to="/privacy" className="hover:text-[#C79A56] transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/shipping-policy" className="hover:text-[#C79A56] transition-colors">Shipping & Delivery Policy</Link></li>
+              <li><Link to="/refund-policy" className="hover:text-[#C79A56] transition-colors">Refund & Returns Policy</Link></li>
+            </ul>
+          </div>
         </div>
 
         {/* Column 4: Contact & Global Export Desk (3 cols) */}

@@ -1612,15 +1612,51 @@ export default async function handler(req, res) {
 
       const { data, error, count } = await query;
 
-      if (error) {
-        return res.status(500).json({ success: false, message: error.message });
+      let products = (data || []).map(mapProduct);
+      let totalCount = count || 0;
+
+      // Fallback to hardcoded products when Supabase is empty or errors
+      if ((!data || data.length === 0) && !search && !category && !price) {
+        // No filters applied and no data — use fallback
+        let fallback = [...JULINA_CANDLE_PRODUCTS];
+
+        if (sort === 'asc') {
+          fallback.sort((a, b) => a.price - b.price);
+        } else if (sort === 'desc') {
+          fallback.sort((a, b) => b.price - a.price);
+        }
+
+        totalCount = fallback.length;
+        const fromIdx = (page - 1) * limit;
+        const toIdx = fromIdx + limit;
+        products = fallback.slice(fromIdx, toIdx);
+      } else if ((!data || data.length === 0) && (search || category)) {
+        // Filters applied — try filtering fallback data
+        let fallback = [...JULINA_CANDLE_PRODUCTS];
+
+        if (search) {
+          fallback = fallback.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+        }
+        if (category) {
+          fallback = fallback.filter(p => p.category === category);
+        }
+        if (sort === 'asc') {
+          fallback.sort((a, b) => a.price - b.price);
+        } else if (sort === 'desc') {
+          fallback.sort((a, b) => b.price - a.price);
+        }
+
+        totalCount = fallback.length;
+        const fromIdx = (page - 1) * limit;
+        const toIdx = fromIdx + limit;
+        products = fallback.slice(fromIdx, toIdx);
       }
 
-      const totalPage = Math.ceil((count || 0) / limit);
+      const totalPage = Math.ceil(totalCount / limit);
 
       return res.status(200).json({
         success: true,
-        products: (data || []).map(mapProduct),
+        products,
         totalPage,
       });
     }

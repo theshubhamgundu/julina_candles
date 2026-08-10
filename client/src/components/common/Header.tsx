@@ -43,7 +43,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" onClick={closeMobileMenu} className="flex items-center gap-2.5">
-              <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts Logo" className="h-9 md:h-12 w-auto object-contain" />
+              <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover border border-[#E6DACB]" />
               <span className="text-lg md:text-2xl font-serif font-bold tracking-wide text-[#5C2333]">Julina Candles & Melts</span>
             </Link>
           </div>
@@ -55,7 +55,7 @@ const Header: React.FC = () => {
               <span className="text-xs font-sans">Home</span>
             </Link>
 
-            <Link to="/search" className={linkClass}>
+            <Link to="/products" className={linkClass}>
               <FaSearch />
               <span className="text-xs">Search</span>
             </Link>
@@ -78,7 +78,7 @@ const Header: React.FC = () => {
 
           {/* Mobile Quick Action Buttons */}
           <div className="md:hidden flex items-center gap-4">
-            <Link to="/search" className="text-[#5C2333] hover:text-[#c4633c] transition-colors p-1" aria-label="Search">
+            <Link to="/products" className="text-[#5C2333] hover:text-[#c4633c] transition-colors p-1" aria-label="Search">
               <FaSearch className="text-lg" />
             </Link>
 
@@ -105,7 +105,7 @@ const Header: React.FC = () => {
           onClick={closeMobileMenu}
         >
           <div
-            className={`fixed top-0 right-0 w-[82%] max-w-sm h-full bg-gradient-to-b from-[#144f2b] to-[#185e33] text-white shadow-2xl p-6 flex flex-col justify-between transition-transform duration-300 ease-out ${
+            className={`fixed top-0 right-0 w-full h-full bg-gradient-to-b from-[#144f2b] to-[#185e33] text-white shadow-2xl p-6 flex flex-col justify-between transition-transform duration-300 ease-out ${
               isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
             onClick={(e) => e.stopPropagation()}
@@ -154,14 +154,7 @@ const Header: React.FC = () => {
                   <span>Our Story & Mission</span>
                 </Link>
 
-                <Link
-                  to="/search"
-                  onClick={closeMobileMenu}
-                  className="flex items-center gap-3.5 px-4 py-3 rounded-xl hover:bg-white/10 text-white font-medium text-base transition-colors"
-                >
-                  <FaSearch className="text-[#e5c158]" />
-                  <span>Search Products</span>
-                </Link>
+
 
                 <Link
                   to="/cart"
@@ -193,9 +186,6 @@ const Header: React.FC = () => {
                 <span>WhatsApp Support</span>
               </a>
 
-              <p className="text-[11px] text-cream/70 text-center mt-1">
-                Julina Candles & Melts © 2026 • Luxury Decorative & Scented Candle Exporter
-              </p>
             </div>
           </div>
         </div>

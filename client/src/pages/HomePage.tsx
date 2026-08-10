@@ -85,8 +85,8 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* ─── 4 Trust Pillars Bar ─── */}
-      <section className="pb-16 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <section className="pb-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {[
             {
               icon: <FaHeadset />,

@@ -4,8 +4,8 @@ import { useCategoriesQuery, useSearchProductsQuery } from '../redux/api/product
 import ReactPaginate from 'react-paginate';
 import { Product } from '../types/api-types';
 import ProductCard from '../components/ProductCard';
-import { FaFilter } from 'react-icons/fa';
 import { usePageSEO } from '../hooks/usePageSEO';
+import { FaSearch } from 'react-icons/fa';
 
 const ProductsPage: React.FC = () => {
     const location = useLocation();
@@ -16,7 +16,8 @@ const ProductsPage: React.FC = () => {
     const [sort, setSort] = useState<'asc' | 'desc' | 'relevance'>('relevance');
     const [limit, setLimit] = useState<number>(12);
     const [page, setPage] = useState<number>(1);
-    const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false);
+    const [search, setSearch] = useState<string>('');
+
 
     useEffect(() => {
         const cat = new URLSearchParams(location.search).get('category');
@@ -31,7 +32,7 @@ const ProductsPage: React.FC = () => {
 
     const { data: categoriesData } = useCategoriesQuery('');
     const { data, isLoading, isError } = useSearchProductsQuery({
-        search: '',
+        search: search,
         category: selectedCategory || undefined,
         price: undefined,
         sort: sort !== 'relevance' ? sort : undefined,
@@ -79,7 +80,7 @@ const ProductsPage: React.FC = () => {
                 <div className="flex flex-col lg:flex-row gap-8 items-start">
                     
                     {/* Left Sidebar Filters */}
-                    <div className={`w-full lg:w-1/4 space-y-6 ${showMobileFilters ? 'block' : 'hidden lg:block'}`}>
+                    <div className="hidden lg:block w-full lg:w-1/4 space-y-6">
                         
                         {/* Categories Box */}
                         <div className="bg-white rounded-2xl p-5 border border-[#E6DACB] shadow-xs">
@@ -169,18 +170,18 @@ const ProductsPage: React.FC = () => {
                         {/* Top Toolbar */}
                         <div className="bg-[#FAF6EE] p-4 rounded-2xl border border-[#E6DACB] flex flex-col sm:flex-row items-center justify-between gap-4">
                           
-                          <div className="flex items-center gap-4">
-                            <button
-                              onClick={() => setShowMobileFilters(!showMobileFilters)}
-                              className="lg:hidden flex items-center gap-2 bg-white border border-[#E6DACB] text-[#5C2333] font-bold text-xs px-3.5 py-2 rounded-full"
-                            >
-                              <FaFilter className="text-xs" />
-                              <span>Filters</span>
-                            </button>
-                            
-                            <span className="text-xs font-sans text-gray-600">
-                              Showing {data?.products?.length ? `1–${data.products.length}` : '0'} of {data?.totalProducts || data?.products?.length || 0} item(s)
-                            </span>
+                          <div className="flex items-center w-full sm:w-auto max-w-xs relative">
+                            <FaSearch className="absolute left-3 text-gray-400 text-xs" />
+                            <input
+                              type="text"
+                              placeholder="Search products..."
+                              value={search}
+                              onChange={(e) => {
+                                setSearch(e.target.value);
+                                setPage(1);
+                              }}
+                              className="w-full bg-white border border-[#E6DACB] rounded-full pl-9 pr-4 py-1.5 text-xs text-gray-700 font-sans focus:outline-none focus:ring-1 focus:ring-[#C79A56]"
+                            />
                           </div>
 
                           <div className="flex items-center gap-3">
@@ -236,7 +237,7 @@ const ProductsPage: React.FC = () => {
                             </div>
                         ) : (
                             <>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
                                     {data.products.map((product: Product) => (
                                         <ProductCard key={product._id} product={product} />
                                     ))}
