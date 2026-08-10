@@ -79,7 +79,7 @@ const MyOrders: React.FC = () => {
                                     <td className="p-4 text-sm md:text-base">{order._id}</td>
                                     <td className="p-4 text-sm md:text-base">{new Date(order.createdAt).toLocaleDateString()}</td>
                                     <td className="p-4 text-sm md:text-base">{order.status  }</td>
-                                    <td className="p-4 text-sm md:text-base font-bold text-[#185e33]">₹ {order.total.toFixed(2)}</td>
+                                    <td className="p-4 text-sm md:text-base font-bold text-[#5C2333]">₹ {order.total.toFixed(2)}</td>
                                     <td className="p-4">
                                         <button
                                             className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm md:text-base hover:bg-blue-600 transition"

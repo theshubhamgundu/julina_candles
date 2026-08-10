@@ -375,126 +375,126 @@ const JULINA_CANDLE_PRODUCTS = [
     _id: "1", id: "1",
     name: "Caramel Coffee Cream Candle", category: "Coffee Collection Candles",
     description: "Rich espresso aroma blended with sweet caramel and smooth cream in a luxury glass jar. Handcrafted with 100% natural soy wax for a warm, cozy ambiance.",
-    price: 499, stock: 50, photo: "/images/products/caramel coffee cream.png", featured: true,
+    price: 499, stock: 50, photo: "/images/caramel coffee cream.png", featured: true,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "2", id: "2",
     name: "Coffee Beans Candle", category: "Coffee Collection Candles",
     description: "Embedded with real roasted coffee beans and infused with dark roast coffee fragrance notes. Perfect for coffee lovers and warm living spaces.",
-    price: 549, stock: 45, photo: "/images/products/coffee beans candles.png", featured: true,
+    price: 549, stock: 45, photo: "/images/coffee beans candles.png", featured: true,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "3", id: "3",
     name: "Handicraft Lotus Pond Urli Candle", category: "Decorative Urli Candles",
     description: "Traditional handcrafted brass-style urli candle featuring sculpted lotus petals floating on scented soy wax. Ideal for festive decor and grand celebrations.",
-    price: 899, stock: 30, photo: "/images/products/handicraf lotus pond.png", featured: true,
+    price: 899, stock: 30, photo: "/images/handicraf lotus pond.png", featured: true,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "4", id: "4",
     name: "Lotus Pond Urli Candle", category: "Decorative Urli Candles",
     description: "Elegant lotus pond design urli candle infused with serene jasmine and lotus botanical essential oils. Creates a tranquil home atmosphere.",
-    price: 799, stock: 35, photo: "/images/products/lotus pond urli.png", featured: false,
+    price: 799, stock: 35, photo: "/images/lotus pond urli.png", featured: false,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "5", id: "5",
     name: "Lotus Urli Scented Candle", category: "Decorative Urli Candles",
     description: "Artisanal decorative urli filled with scented soy wax and lotus highlights. Brings traditional warmth and soothing aroma to Diwali and spiritual rituals.",
-    price: 749, stock: 40, photo: "/images/products/lotus urli scented.png", featured: false,
+    price: 749, stock: 40, photo: "/images/lotus urli scented.png", featured: false,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "6", id: "6",
     name: "Peacock Pink Wax Urli Candle", category: "Decorative Urli Candles",
     description: "Exquisite royal peacock urli infused with vibrant pink soy wax and floral notes. Adds majestic Indian heritage charm to any table center.",
-    price: 999, stock: 25, photo: "/images/products/peacock pink wax urli.png", featured: true,
+    price: 999, stock: 25, photo: "/images/peacock pink wax urli.png", featured: true,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "7", id: "7",
     name: "Peacock White Wax Urli Candle", category: "Decorative Urli Candles",
     description: "Premium white soy wax candle set in a detailed peacock urli frame. Pure sandalwood and white musk fragrance for calm luxury.",
-    price: 999, stock: 25, photo: "/images/products/peacock white wax urli.png", featured: false,
+    price: 999, stock: 25, photo: "/images/peacock white wax urli.png", featured: false,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "8", id: "8",
     name: "Soy Wax Sunflower Urli Candle", category: "Decorative Urli Candles",
     description: "Hand-poured golden sunflower urli candle made with eco-friendly soy wax. Radiant sunflower design bringing warmth and joy to festive spaces.",
-    price: 699, stock: 40, photo: "/images/products/soy wax sunflower urli.png", featured: true,
+    price: 699, stock: 40, photo: "/images/soy wax sunflower urli.png", featured: true,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "9", id: "9",
     name: "Sunflower Decorative Urli Candle", category: "Decorative Urli Candles",
     description: "Bright decorative sunflower urli candle designed for pooja room, festive gifting, and elegant dinner tables.",
-    price: 649, stock: 50, photo: "/images/products/sunflower decorative urli.png", featured: false,
+    price: 649, stock: 50, photo: "/images/sunflower decorative urli.png", featured: false,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "10", id: "10",
     name: "Sunflower Urli Candle", category: "Decorative Urli Candles",
     description: "Charming sunflower shaped scented urli candle with long burn time and clean non-toxic soot-free smoke.",
-    price: 599, stock: 60, photo: "/images/products/sunflower urli candle.png", featured: false,
+    price: 599, stock: 60, photo: "/images/sunflower urli candle.png", featured: false,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "11", id: "11",
     name: "Laddu Shot Glass Candle", category: "Festival & Traditional Candles",
     description: "Festive laddu dessert inspired shot glass candle. Smells delightful with sweet cardamom and vanilla notes, perfect for Diwali return gifts.",
-    price: 349, stock: 80, photo: "/images/products/laddu shot glass.png", featured: true,
+    price: 349, stock: 80, photo: "/images/laddu shot glass.png", featured: true,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "12", id: "12",
     name: "Modak Shaped Scented Candle", category: "Festival & Traditional Candles",
     description: "Handmade modak shaped soy wax candle crafted for Ganesh Chaturthi and traditional Indian festivities. Sweet coconut & saffron aroma.",
-    price: 399, stock: 75, photo: "/images/products/modak shaped scented.png", featured: true,
+    price: 399, stock: 75, photo: "/images/modak shaped scented.png", featured: true,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "13", id: "13",
     name: "Soy Wax Concrete Shankh Conch Shell Candle", category: "Festival & Traditional Candles",
     description: "Sacred shankh (conch shell) candle molded in concrete with pure soy wax. Symbolizes peace, positivity, and spiritual purity.",
-    price: 799, stock: 30, photo: "/images/products/soy wax concrete shankh.png", featured: true,
+    price: 799, stock: 30, photo: "/images/soy wax concrete shankh.png", featured: true,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "14", id: "14",
     name: "Daisy Flower Jar Candles", category: "Floral & Decorative Candles",
     description: "Delicate daisy flower embeds in a crystal clear glass jar. Infused with fresh floral bouquet fragrance notes.",
-    price: 499, stock: 45, photo: "/images/products/daisy flower jar.png", featured: true,
+    price: 499, stock: 45, photo: "/images/daisy flower jar.png", featured: true,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "15", id: "15",
     name: "Daisy Scented Soy Wax Candles", category: "Floral & Decorative Candles",
     description: "Natural soy wax candle topped with hand-poured daisy flowers. Soft lavender and wild daisy essential oils.",
-    price: 449, stock: 50, photo: "/images/products/daisy scented soy wax.png", featured: false,
+    price: 449, stock: 50, photo: "/images/daisy scented soy wax.png", featured: false,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "16", id: "16",
     name: "Rose Heart Candle", category: "Floral & Decorative Candles",
     description: "Romantic heart-shaped candle adorned with red rose petals and infused with premium Bulgarian rose essential oil.",
-    price: 549, stock: 40, photo: "/images/products/rose heart candle.png", featured: true,
+    price: 549, stock: 40, photo: "/images/rose heart candle.png", featured: true,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "17", id: "17",
     name: "Scented Glass Jar Candle", category: "Floral & Decorative Candles",
     description: "Classic frosted glass jar candle filled with rich aromatherapy scented wax and wooden wick for a soothing crackle.",
-    price: 399, stock: 60, photo: "/images/products/scented glass jar.png", featured: false,
+    price: 399, stock: 60, photo: "/images/scented glass jar.png", featured: false,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "18", id: "18",
     name: "Julina Artisanal Rituals Gift Box", category: "Floral & Decorative Candles",
     description: "Luxury candle gift set featuring assortment of scented jar candles, floral melts, and brass snuffer. The ultimate gift for loved ones.",
-    price: 1299, stock: 20, photo: "/images/products/julina candles melts artisanal rituals 1.png", featured: true,
+    price: 1299, stock: 20, photo: "/images/julina candles melts artisanal rituals 1.png", featured: true,
     variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   }
 ];

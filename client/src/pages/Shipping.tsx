@@ -163,8 +163,8 @@ const Shipping: React.FC = () => {
         navigate('/checkout');
     };
 
-    const inputClass = "w-full px-4 py-3 border-2 border-[#ede3cf] rounded-xl bg-white text-sm focus:border-[#185e33] focus:ring-1 focus:ring-[#185e33]/30 outline-none transition-all placeholder:text-gray-400";
-    const labelClass = "block text-xs font-bold text-[#185e33] uppercase tracking-wider mb-1.5";
+    const inputClass = "w-full px-4 py-3 border-2 border-[#ede3cf] rounded-xl bg-white text-sm focus:border-[#5C2333] focus:ring-1 focus:ring-[#5C2333]/30 outline-none transition-all placeholder:text-gray-400";
+    const labelClass = "block text-xs font-bold text-[#5C2333] uppercase tracking-wider mb-1.5";
 
     return (
         <div className="min-h-screen bg-[#faf6ee] py-8 px-4">
@@ -173,7 +173,7 @@ const Shipping: React.FC = () => {
 
                 {/* Page Header */}
                 <div className="text-center mb-6">
-                    <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#185e33]">
+                    <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#5C2333]">
                         Delivery Address
                     </h2>
                     <p className="text-xs text-gray-500 mt-1">
@@ -188,16 +188,16 @@ const Shipping: React.FC = () => {
                         onClick={() => setDeliveryType('current_location')}
                         className={`p-4 rounded-2xl border-2 text-left transition-all relative flex flex-col justify-between ${
                             deliveryType === 'current_location'
-                                ? 'bg-white border-[#185e33] shadow-md ring-2 ring-[#185e33]/20'
-                                : 'bg-white/70 border-[#ede3cf] hover:border-[#185e33]/50'
+                                ? 'bg-white border-[#5C2333] shadow-md ring-2 ring-[#5C2333]/20'
+                                : 'bg-white/70 border-[#ede3cf] hover:border-[#5C2333]/50'
                         }`}
                     >
                         <div className="flex items-start justify-between mb-2">
-                            <div className="p-2.5 rounded-xl bg-[#185e33]/10 text-[#185e33]">
+                            <div className="p-2.5 rounded-xl bg-[#5C2333]/10 text-[#5C2333]">
                                 <FaMapMarkerAlt className="text-xl" />
                             </div>
                             {deliveryType === 'current_location' && (
-                                <FaCheckCircle className="text-[#185e33] text-lg" />
+                                <FaCheckCircle className="text-[#5C2333] text-lg" />
                             )}
                         </div>
                         <div>
@@ -215,8 +215,8 @@ const Shipping: React.FC = () => {
                         onClick={() => setDeliveryType('nearest_landmark')}
                         className={`p-4 rounded-2xl border-2 text-left transition-all relative flex flex-col justify-between ${
                             deliveryType === 'nearest_landmark'
-                                ? 'bg-white border-[#185e33] shadow-md ring-2 ring-[#185e33]/20'
-                                : 'bg-white/70 border-[#ede3cf] hover:border-[#185e33]/50'
+                                ? 'bg-white border-[#5C2333] shadow-md ring-2 ring-[#5C2333]/20'
+                                : 'bg-white/70 border-[#ede3cf] hover:border-[#5C2333]/50'
                         }`}
                     >
                         <div className="flex items-start justify-between mb-2">
@@ -224,7 +224,7 @@ const Shipping: React.FC = () => {
                                 <FaBuilding className="text-xl" />
                             </div>
                             {deliveryType === 'nearest_landmark' && (
-                                <FaCheckCircle className="text-[#185e33] text-lg" />
+                                <FaCheckCircle className="text-[#5C2333] text-lg" />
                             )}
                         </div>
                         <div>
@@ -245,7 +245,7 @@ const Shipping: React.FC = () => {
                     {deliveryType === 'current_location' && (
                         <div className="mb-6 p-4 rounded-xl bg-[#f7f4ec] border border-[#ede3cf] flex flex-col sm:flex-row items-center justify-between gap-3">
                             <div>
-                                <h4 className="font-bold text-xs text-[#185e33] uppercase tracking-wider flex items-center gap-1.5 mb-1">
+                                <h4 className="font-bold text-xs text-[#5C2333] uppercase tracking-wider flex items-center gap-1.5 mb-1">
                                     <FaCompass /> GPS Location Detection
                                 </h4>
                                 <p className="text-xs text-gray-600">
@@ -258,7 +258,7 @@ const Shipping: React.FC = () => {
                                 type="button"
                                 onClick={handleDetectGPS}
                                 disabled={locatingGPS}
-                                className="w-full sm:w-auto bg-[#185e33] hover:bg-[#134b28] text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md shrink-0 active:scale-95"
+                                className="w-full sm:w-auto bg-[#5C2333] hover:bg-[#134b28] text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md shrink-0 active:scale-95"
                             >
                                 <FaCrosshairs className={locatingGPS ? "animate-spin" : ""} />
                                 <span>{locatingGPS ? "Detecting GPS..." : "📍 Get My Location"}</span>
@@ -322,7 +322,7 @@ const Shipping: React.FC = () => {
                             />
                             {suggestedAddr && deliveryType === 'current_location' && (
                                 <p className="mt-1 text-xs text-gray-500 flex items-center gap-1">
-                                    <FaMap className="text-gray-400" /> Suggested: <button type="button" onClick={() => setAddress(suggestedAddr)} className="text-[#185e33] underline hover:text-[#134b28] text-left">{suggestedAddr}</button>
+                                    <FaMap className="text-gray-400" /> Suggested: <button type="button" onClick={() => setAddress(suggestedAddr)} className="text-[#5C2333] underline hover:text-[#134b28] text-left">{suggestedAddr}</button>
                                 </p>
                             )}
                         </div>
@@ -386,7 +386,7 @@ const Shipping: React.FC = () => {
                         {/* Submit Button */}
                         <button
                             type="submit"
-                            className="w-full bg-[#185e33] hover:bg-[#134b28] text-white font-bold py-3.5 px-4 rounded-full transition-colors shadow-md text-base mt-6 flex items-center justify-center gap-2"
+                            className="w-full bg-[#5C2333] hover:bg-[#134b28] text-white font-bold py-3.5 px-4 rounded-full transition-colors shadow-md text-base mt-6 flex items-center justify-center gap-2"
                         >
                             <span>Proceed to Checkout ➔</span>
                         </button>

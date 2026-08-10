@@ -1,27 +1,37 @@
 import React from 'react';
-import { FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa';
+import { FaInstagram, FaWhatsapp, FaYoutube, FaEnvelope, FaPhone, FaLocationDot, FaShieldHalved } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-[#185e33] text-white font-sans relative">
+    <footer className="w-full bg-[#2A1C22] text-[#FBF6ED] font-sans relative overflow-hidden">
+      {/* Glow Effects */}
+      <div className="absolute top-0 right-1/3 w-80 h-80 bg-[#C79A56]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#5C2333]/25 rounded-full blur-3xl pointer-events-none" />
 
-      {/* ─── Main Footer Content ─── */}
-      <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start relative z-10">
-        
+      {/* ─── Main Footer Content Grid ─── */}
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 relative z-10 border-t border-white/10">
         {/* Column 1: Brand & Social (4 cols) */}
-        <div className="lg:col-span-4 flex flex-col items-start">
-          {/* Circular Logo Badge */}
-          <div className="w-32 h-32 rounded-full bg-white flex items-center justify-center p-3.5 shadow-lg mb-6 border-2 border-[#e5c158]">
-            <img src="/images/logo.png" alt="Julina Candles & Melts Logo" className="w-full h-full object-contain" />
+        <div className="lg:col-span-4 space-y-6">
+          <Link to="/" className="inline-block">
+            <div className="w-24 h-24 rounded-2xl bg-[#FBF6ED] p-2.5 shadow-xl border-2 border-[#C79A56] flex items-center justify-center transform hover:scale-105 transition-transform duration-300">
+              <img src="/images/logo.png" alt="Julina Candles & Melts Logo" className="w-full h-full object-contain" />
+            </div>
+          </Link>
+
+          <div>
+            <h4 className="text-xl font-serif font-bold text-white">Julina Candles & Melts</h4>
+            <p className="text-xs text-[#F4EADA]/80 mt-2 leading-relaxed font-light">
+              Trusted Exporter & Supplier of handcrafted decorative candles, 100% natural soy wax jars, lotus pond urlis, coffee collection candles, and luxury gift boxes from Maharashtra, India.
+            </p>
           </div>
 
-          {/* Social Icons */}
-          <div className="flex gap-3.5 mb-6">
+          {/* Social Links */}
+          <div className="flex items-center gap-3 pt-2">
             {[
-              { icon: <FaInstagram className="text-[#E1306C]" />, href: 'https://instagram.com/julinacandles.in', label: 'Instagram' },
-              { icon: <FaWhatsapp className="text-[#25D366]" />, href: 'https://wa.me/917304888197', label: 'WhatsApp' },
-              { icon: <FaYoutube className="text-[#FF0000]" />, href: 'http://www.youtube.com/@julinacandles.1', label: 'YouTube' },
+              { icon: <FaInstagram />, href: 'https://instagram.com/julinacandles.in', label: 'Instagram', color: 'hover:text-[#E1306C]' },
+              { icon: <FaWhatsapp />, href: 'https://wa.me/917304888197', label: 'WhatsApp', color: 'hover:text-[#25D366]' },
+              { icon: <FaYoutube />, href: 'http://www.youtube.com/@julinacandles.1', label: 'YouTube', color: 'hover:text-[#FF0000]' },
             ].map((social, i) => (
               <a
                 key={i}
@@ -29,84 +39,90 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="w-10 h-10 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center text-xl shadow-md transition-colors"
+                className={`w-10 h-10 rounded-full bg-white/10 border border-white/15 text-white flex items-center justify-center text-base transition-all duration-300 hover:bg-white/20 hover:scale-110 ${social.color}`}
               >
                 {social.icon}
               </a>
             ))}
           </div>
-
-          <p className="text-sm text-cream/90 leading-relaxed">
-            Copyright 2026 Julina Candles & Melts.<br />
-            Luxury Decorative & Scented Candle Exporter
-          </p>
         </div>
 
-        {/* 2-Column Side-by-Side Wrapper for Mobile (Company on Left, Policies on Right) */}
-        <div className="lg:col-span-4 grid grid-cols-2 gap-6 w-full">
-          {/* Column 2: Essential Quick Links */}
-          <div>
-            <h4 className="font-bold text-white text-lg mb-4 font-serif">Company</h4>
-            <ul className="space-y-3 text-sm text-cream/95 font-medium">
-              <li><Link to="/" className="hover:text-white transition flex items-center gap-2"><span className="text-[#e5c158] text-base">•</span> Home</Link></li>
-              <li><Link to="/about" className="hover:text-white transition flex items-center gap-2"><span className="text-[#e5c158] text-base">•</span> About Us</Link></li>
-              <li><Link to="/products" className="hover:text-white transition flex items-center gap-2"><span className="text-[#e5c158] text-base">•</span> All Products</Link></li>
-              <li><Link to="/search" className="hover:text-white transition flex items-center gap-2"><span className="text-[#e5c158] text-base">•</span> Search</Link></li>
-              <li><Link to="/cart" className="hover:text-white transition flex items-center gap-2"><span className="text-[#e5c158] text-base">•</span> Cart</Link></li>
-            </ul>
-          </div>
-
-          {/* Column 3: Legal & Policies List */}
-          <div>
-            <h4 className="font-bold text-white text-lg mb-4 font-serif">Policies</h4>
-            <ul className="space-y-3 text-sm text-cream/95 font-medium">
-              <li><Link to="/terms" className="hover:text-white transition flex items-center gap-2"><span className="text-[#e5c158] text-base">•</span> Terms & Conditions</Link></li>
-              <li><Link to="/privacy" className="hover:text-white transition flex items-center gap-2"><span className="text-[#e5c158] text-base">•</span> Privacy Policy</Link></li>
-              <li><Link to="/shipping-policy" className="hover:text-white transition flex items-center gap-2"><span className="text-[#e5c158] text-base">•</span> Shipping Policy</Link></li>
-              <li><Link to="/refund-policy" className="hover:text-white transition flex items-center gap-2"><span className="text-[#e5c158] text-base">•</span> Refund & Returns</Link></li>
-            </ul>
-          </div>
+        {/* Column 2: Quick Links (2 cols) */}
+        <div className="lg:col-span-2 space-y-4">
+          <h4 className="font-serif font-bold text-white text-base border-b border-[#C79A56]/30 pb-2">
+            Company
+          </h4>
+          <ul className="space-y-2.5 text-xs text-[#F4EADA]/80 font-medium">
+            <li><Link to="/" className="hover:text-[#C79A56] transition-colors flex items-center gap-2">Home</Link></li>
+            <li><Link to="/about" className="hover:text-[#C79A56] transition-colors flex items-center gap-2">About Our Brand</Link></li>
+            <li><Link to="/products" className="hover:text-[#C79A56] transition-colors flex items-center gap-2">All Products</Link></li>
+            <li><Link to="/search" className="hover:text-[#C79A56] transition-colors flex items-center gap-2">Search Catalog</Link></li>
+            <li><Link to="/cart" className="hover:text-[#C79A56] transition-colors flex items-center gap-2">Shopping Cart</Link></li>
+          </ul>
         </div>
 
-        {/* Column 4: Contact & Inquiries (4 cols) */}
-        <div className="lg:col-span-4 text-sm text-cream/95 space-y-4">
-          <div>
-            <h4 className="font-bold text-white text-lg mb-1.5 font-serif">Get in Touch:</h4>
-            <p className="leading-snug"><a href="mailto:pranita311096@gmail.com" className="hover:underline">pranita311096@gmail.com</a> (Order queries)</p>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-white text-lg font-serif">Customer Care:</h4>
-            <p className="mt-1">+91 73048 88197</p>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-white text-lg font-serif">Timings:</h4>
-            <p className="mt-1">10 AM - 7 PM (Monday to Saturday)</p>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-white text-lg font-serif">Location:</h4>
-            <p className="leading-relaxed text-cream/90 mt-1">
-              Room No. 28, Sai Shraddha Apartment, Sai Nagari, Ashelegaon, Ulhasnagar, Maharashtra - 421004
-            </p>
-          </div>
+        {/* Column 3: Customer Policies (3 cols) */}
+        <div className="lg:col-span-3 space-y-4">
+          <h4 className="font-serif font-bold text-white text-base border-b border-[#C79A56]/30 pb-2">
+            Customer Care & Policies
+          </h4>
+          <ul className="space-y-2.5 text-xs text-[#F4EADA]/80 font-medium">
+            <li><Link to="/terms" className="hover:text-[#C79A56] transition-colors">Terms & Conditions</Link></li>
+            <li><Link to="/privacy" className="hover:text-[#C79A56] transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/shipping-policy" className="hover:text-[#C79A56] transition-colors">Shipping & Delivery Policy</Link></li>
+            <li><Link to="/refund-policy" className="hover:text-[#C79A56] transition-colors">Refund & Returns Policy</Link></li>
+          </ul>
         </div>
 
+        {/* Column 4: Contact & Global Export Desk (3 cols) */}
+        <div className="lg:col-span-3 space-y-4 text-xs text-[#F4EADA]/80">
+          <h4 className="font-serif font-bold text-white text-base border-b border-[#C79A56]/30 pb-2">
+            Get in Touch
+          </h4>
+
+          <div className="flex items-start gap-3">
+            <FaPhone className="text-[#C79A56] text-sm mt-0.5 flex-shrink-0" />
+            <div>
+              <span className="text-[10px] uppercase font-bold text-[#C79A56] block">Phone & WhatsApp:</span>
+              <a href="tel:+917304888197" className="hover:text-white transition-colors font-medium">+91 73048 88197</a>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <FaEnvelope className="text-[#C79A56] text-sm mt-0.5 flex-shrink-0" />
+            <div>
+              <span className="text-[10px] uppercase font-bold text-[#C79A56] block">Email Queries:</span>
+              <a href="mailto:pranita311096@gmail.com" className="hover:text-white transition-colors font-medium">pranita311096@gmail.com</a>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <FaLocationDot className="text-[#C79A56] text-sm mt-0.5 flex-shrink-0" />
+            <div>
+              <span className="text-[10px] uppercase font-bold text-[#C79A56] block">Manufacturing & Headquarters:</span>
+              <p className="leading-relaxed font-light text-[11px] mt-0.5">
+                Room No. 28, Sai Shraddha Apartment, Sai Nagari, Ashelegaon, Ulhasnagar, Maharashtra - 421004
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* ─── Bottom Artisanal Candles Decorative Banner ─── */}
-      <div className="w-full -mt-16 md:-mt-24 relative z-20 pointer-events-none">
-        <img
-          src="/images/candles_footer_banner.png"
-          alt="Artisanal Candles Footer Decoration"
-          className="w-full h-auto block"
-        />
-      </div>
+      {/* ─── Bottom Copyright Bar ─── */}
+      <div className="border-t border-white/10 bg-[#1E1418] py-6 text-xs text-[#F4EADA]/60 font-light">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p>© 2026 Julina Candles & Melts. All rights reserved.</p>
 
+          <div className="flex items-center gap-2 text-[11px] text-[#C79A56]">
+            <FaShieldHalved />
+            <span>100% Secure Checkout via Razorpay & UPI</span>
+          </div>
+
+          <p className="text-[11px]">Crafted with ♥ in Maharashtra, India</p>
+        </div>
+      </div>
     </footer>
   );
 };
 
 export default Footer;
-

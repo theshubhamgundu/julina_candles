@@ -2,46 +2,81 @@ import React from 'react';
 
 const customerReviews = [
   {
-    name: 'Priya Sharma',
+    name: 'Amulya Kulkarni',
     location: 'Mumbai, Maharashtra',
     metric: '⭐ Verified Homeowner',
-    review: 'The Lotus Pond Urli Candle elevated our Diwali decor completely! The fragrance is soothing and lasts for hours without any smoke.',
-    avatar: 'https://ui-avatars.com/api/?name=Priya+Sharma&background=5C2333&color=fff',
+    review: 'The Lotus Pond Urli Candle elevated our festive decor completely! The fragrance is soothing and lasts for hours without any smoke.',
+    avatar: '/avatars/Amulaya.webp',
   },
   {
-    name: 'Rahul Mehta',
-    location: 'Pune, Maharashtra',
+    name: 'Ajay Deshmukh',
+    location: 'Ulhasnagar, Maharashtra',
     metric: '⭐ Wholesale Buyer',
     review: 'Ordered Caramel Coffee Cream & Coffee Beans candles in bulk for corporate gifting. Everyone loved the realistic coffee aroma!',
-    avatar: 'https://ui-avatars.com/api/?name=Rahul+Mehta&background=C79A56&color=fff',
+    avatar: '/avatars/Ajay_Reddy.webp',
   },
   {
-    name: 'Ananya Roy',
-    location: 'Dubai, UAE',
-    metric: '⭐ International Importer',
+    name: 'Shridhar Sawant',
+    location: 'Solapur, Maharashtra',
+    metric: '⭐ Exporter Partner',
     review: 'Julina Candles & Melts delivered our bulk export order on time with exquisite custom packaging. Premium Indian soy wax quality!',
-    avatar: 'https://ui-avatars.com/api/?name=Ananya+Roy&background=2A1C22&color=fff',
+    avatar: '/avatars/Shridhar_Reddy.webp',
   },
   {
-    name: 'Kavita Patel',
-    location: 'Surat, Gujarat',
+    name: 'Bhargavi Joshi',
+    location: 'Nagpur, Maharashtra',
     metric: '⭐ Verified Homeowner',
     review: 'The Peacock Pink Wax Urli Candle is a masterpiece. The floral fragrance fills the living room beautifully.',
-    avatar: 'https://ui-avatars.com/api/?name=Kavita+Patel&background=5C2333&color=fff',
+    avatar: '/avatars/Bhargavi.webp',
   },
   {
-    name: 'Vikram Joshi',
-    location: 'Delhi NCR',
+    name: 'Avinash Patil',
+    location: 'Pune, Maharashtra',
     metric: '⭐ Event Decorator',
     review: 'We used Julina Modak and Shankh candles for a luxury wedding event. The guests were enchanted by the fragrance and craftsmanship.',
-    avatar: 'https://ui-avatars.com/api/?name=Vikram+Joshi&background=C79A56&color=fff',
+    avatar: '/avatars/Avinash.webp',
   },
   {
-    name: 'Sneha Kulkarni',
-    location: 'Thane, Maharashtra',
+    name: 'Harshini Katta',
+    location: 'Nashik, Maharashtra',
     metric: '⭐ Verified Homeowner',
     review: 'Love the Daisy Scented Soy Wax Jars! Clean burn with zero soot. Will definitely order again.',
-    avatar: 'https://ui-avatars.com/api/?name=Sneha+Kulkarni&background=2A1C22&color=fff',
+    avatar: '/avatars/Harshini katta.webp',
+  },
+  {
+    name: 'Sai Kiran Wagh',
+    location: 'Ulhasnagar, Maharashtra',
+    metric: '⭐ Bulk Customer',
+    review: 'Hand-poured candles with amazing finish and scent throw. Very fast delivery and top quality packaging.',
+    avatar: '/avatars/Sai Kiran.webp',
+  },
+  {
+    name: 'Suma Mahajan',
+    location: 'Thane, Maharashtra',
+    metric: '⭐ Verified Homeowner',
+    review: 'The Rose Heart Candle smells heavenly. It creates such a serene and pleasant vibe in our home.',
+    avatar: '/avatars/Suma.webp',
+  },
+  {
+    name: 'Prafful More',
+    location: 'Kolhapur, Maharashtra',
+    metric: '⭐ Event Decorator',
+    review: 'Outstanding traditional urli design candles for Diwali. Highly recommended for wholesale buyers.',
+    avatar: '/avatars/Prafful.webp',
+  },
+  {
+    name: 'Pavani Gawde',
+    location: 'Chhatrapati Sambhajinagar, Maharashtra',
+    metric: '⭐ Verified Homeowner',
+    review: '100% natural soy wax candles with zero smoke pollution. Safe for kids and pets!',
+    avatar: '/avatars/Pavani.webp',
+  },
+  {
+    name: 'Jalender Shinde',
+    location: 'Navi Mumbai, Maharashtra',
+    metric: '⭐ Corporate Gifter',
+    review: 'Extremely polite customer support and exceptional quality decorative candles. Very satisfied!',
+    avatar: '/avatars/Jalender.webp',
   },
 ];
 
@@ -79,9 +114,12 @@ const CustomerReviews: React.FC = () => {
 
               <div className="flex items-center gap-3 pt-3 mt-3 border-t border-gray-100">
                 <img
-                  src={customer.avatar}
+                  src={encodeURI(customer.avatar)}
                   alt={customer.name}
-                  className="w-10 h-10 rounded-full object-cover border border-[#C79A56] flex-shrink-0"
+                  className="w-10 h-10 rounded-full object-cover border-2 border-[#C79A56] flex-shrink-0 shadow-xs"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(customer.name)}&background=5C2333&color=fff`;
+                  }}
                 />
                 <div>
                   <p className="text-xs font-bold text-[#2A1C22] leading-snug">{customer.name}</p>

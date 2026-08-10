@@ -21,7 +21,7 @@ const Header: React.FC = () => {
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
-  const linkClass = "flex flex-col items-center gap-1 text-[#185e33] hover:text-[#c4633c] transition duration-300";
+  const linkClass = "flex flex-col items-center gap-1 text-[#5C2333] hover:text-[#c4633c] transition duration-300";
 
   return (
     <>
@@ -39,13 +39,13 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      <header className="bg-white/95 text-[#185e33] border-b border-[#efe9db] shadow-sm p-3.5 px-4 md:px-12 relative z-40 transition-all duration-300">
+      <header className="bg-white/95 text-[#5C2333] border-b border-[#efe9db] shadow-sm p-3.5 px-4 md:px-12 relative z-40 transition-all duration-300">
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" onClick={closeMobileMenu} className="flex items-center gap-2.5">
               <img src="/images/logo.png" alt="Julina Candles & Melts Logo" className="h-9 md:h-12 w-auto object-contain" />
-              <span className="text-lg md:text-2xl font-serif font-bold tracking-wide text-[#185e33]">Julina Candles & Melts</span>
+              <span className="text-lg md:text-2xl font-serif font-bold tracking-wide text-[#5C2333]">Julina Candles & Melts</span>
             </Link>
           </div>
 
@@ -79,11 +79,11 @@ const Header: React.FC = () => {
 
           {/* Mobile Quick Action Buttons */}
           <div className="md:hidden flex items-center gap-4">
-            <Link to="/search" className="text-[#185e33] hover:text-[#c4633c] transition-colors p-1" aria-label="Search">
+            <Link to="/search" className="text-[#5C2333] hover:text-[#c4633c] transition-colors p-1" aria-label="Search">
               <FaSearch className="text-lg" />
             </Link>
 
-            <Link to="/cart" className="text-[#185e33] hover:text-[#c4633c] transition-colors p-1 relative" aria-label="Cart">
+            <Link to="/cart" className="text-[#5C2333] hover:text-[#c4633c] transition-colors p-1 relative" aria-label="Cart">
               <FaShoppingCart className="text-lg" />
               {cartCount > 0 && (
                 <span className="absolute -top-1.5 -right-2 font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center shadow-xs bg-[#c4633c] text-white">
@@ -92,7 +92,7 @@ const Header: React.FC = () => {
               )}
             </Link>
 
-            <button onClick={toggleMobileMenu} className="text-xl focus:outline-none p-1 ml-1 text-[#185e33]" aria-label="Toggle Menu">
+            <button onClick={toggleMobileMenu} className="text-xl focus:outline-none p-1 ml-1 text-[#5C2333]" aria-label="Toggle Menu">
               {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>

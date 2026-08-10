@@ -2,38 +2,10 @@ import React from 'react';
 import FeaturedSection from '../components/FeaturedSection';
 import PopularProducts from '../components/PopularProduct';
 import { useLatestProductsQuery } from '../redux/api/product.api';
-import Banner from '../components/common/Banner';
 import CustomerReviews from '../components/common/CustomerReviews';
-import FAQSection from '../components/common/FAQSection';
 import { usePageSEO } from '../hooks/usePageSEO';
-import { webPageSchema, faqSchema } from '../seo/schemas';
-
-const HOME_FAQS = [
-  {
-    question: 'What makes Julina Candles & Melts special?',
-    answer: 'Julina Candles & Melts is a trusted exporter and supplier of handcrafted decorative candles, scented soy wax candles, and traditional urli candles from Maharashtra, India.',
-  },
-  {
-    question: 'Are your candles safe and non-toxic?',
-    answer: 'Yes, 100%. Our candles are made with pure, eco-friendly soy wax which burns soot-free and non-toxic.',
-  },
-  {
-    question: 'Do you accept bulk, wholesale, and global export orders?',
-    answer: 'Yes! We supply wholesalers, retailers, event planners, and international buyers with custom packaging.',
-  },
-  {
-    question: 'How long do your scented soy wax candles burn?',
-    answer: 'Our jar and urli candles offer extended burn times ranging from 25 to 50+ hours depending on the candle size.',
-  },
-  {
-    question: 'How long does shipping take across India and globally?',
-    answer: 'Orders within India are dispatched within 24–48 hours and delivered in 3 to 5 business days.',
-  },
-  {
-    question: 'How can I contact support regarding my order or custom request?',
-    answer: 'You can connect with our customer support team directly on WhatsApp or phone at +91 7304888197 or email us at pranita311096@gmail.com.',
-  },
-];
+import { webPageSchema } from '../seo/schemas';
+import { FaHeadset, FaTruckFast, FaGift, FaAward } from 'react-icons/fa6';
 
 const HomePage: React.FC = () => {
   const { data: productData, isLoading: productLoading, isError: productError } = useLatestProductsQuery('');
@@ -54,7 +26,6 @@ const HomePage: React.FC = () => {
           'Handcrafted decorative, scented, and soy wax candle exporter and supplier from Maharashtra, India.',
         breadcrumb: [{ name: 'Home', url: '/' }],
       }),
-      faqSchema(HOME_FAQS),
     ],
   });
 
@@ -86,68 +57,95 @@ const HomePage: React.FC = () => {
       {/* ─── Hero Section ─── */}
       <FeaturedSection />
 
-      {/* ─── Trust Strip ─── */}
-      <Banner />
+      {/* ─── Products Collection ─── */}
+      <PopularProducts products={products} />
 
-      {/* ─── Craftsmanship Section ─── */}
-      <section className="py-16 bg-white border-y border-[#E6DACB]">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <p className="text-xs font-sans font-bold text-[#C79A56] uppercase tracking-[0.2em] mb-3">
-              Why Julina Candles & Melts
-            </p>
-            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-[#2A1C22] leading-tight mb-6">
-              Artisanal Elegance.<br />
-              <span className="text-[#5C2333]">Pure Natural Soy Wax.</span>
+      {/* ─── What Makes Us Unique Section (Graphic Image) ─── */}
+      <section className="py-10 bg-[#FAF6EE] border-y border-[#E6DACB]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex justify-center">
+          <img
+            src="/images/what_makes_us_unique.png"
+            alt="What Makes Us Unique - Candles That Complement Your Home"
+            className="w-full max-w-5xl h-auto object-contain rounded-2xl shadow-xs"
+          />
+        </div>
+      </section>
+
+      {/* ─── Customer Reviews ─── */}
+      <CustomerReviews />
+
+      {/* ─── Reach Out To Us Callout Banner ─── */}
+      <section className="px-6 my-10 max-w-7xl mx-auto">
+        <div className="relative rounded-[28px] overflow-hidden shadow-xl bg-[#2A1C22] text-center py-14 px-6 border border-[#C79A56]/30">
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-25 pointer-events-none"
+            style={{ backgroundImage: "url('/images/reach_out_bg.jpeg')" }}
+          />
+          <div className="relative z-10 max-w-xl mx-auto space-y-3">
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-white tracking-wide">
+              Reach Out to Us
             </h2>
-            <p className="text-gray-600 text-[15px] leading-relaxed mb-8 max-w-lg">
-              We handcraft exquisite decorative candles, lotus pond urlis, coffee bean infused jars, and festive modak candles. Made with 100% natural soy wax and therapeutic aromatherapy essential oils.
+            <p className="text-xs sm:text-sm text-[#F4EADA]/80 font-sans font-light">
+              If you have any inquiries or concerns, please don't hesitate to reach out to us.
             </p>
-            <div className="space-y-5">
-              {[
-                { title: '100% Eco-Friendly Soy Wax', desc: 'Clean, non-toxic, soot-free burn safe for every home environment.' },
-                { title: 'Hand-poured in Maharashtra, India', desc: 'Crafted with artistic precision and Indian cultural heritage motifs.' },
-                { title: 'Global Bulk Export & Wholesale', desc: 'Custom branding, sturdy packaging, and nationwide/worldwide shipping.' },
-              ].map((item, i) => (
-                <div key={i} className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#C79A56]/15 flex items-center justify-center mt-0.5">
-                    <svg className="w-4 h-4 text-[#5C2333]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="text-[15px] font-semibold text-[#2A1C22]">{item.title}</h4>
-                    <p className="text-sm text-gray-500 mt-0.5">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
+            <div className="pt-2">
+              <a
+                href="https://wa.me/917304888197"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-[#5C2333] hover:bg-[#3E1622] text-white font-bold text-xs sm:text-sm px-7 py-2.5 rounded-full transition-all shadow-md border border-[#C79A56]/40"
+              >
+                Contact
+              </a>
             </div>
-          </div>
-          <div className="relative flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#5C2333]/5 to-[#C79A56]/10 rounded-3xl -rotate-2"></div>
-            <img
-              src="/images/products/julina candles melts artisanal rituals 1.png"
-              alt="Julina Candles & Melts Artisanal Collection"
-              className="relative w-full max-w-md object-contain drop-shadow-xl rounded-2xl border-4 border-white"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = '/images/logo.png';
-              }}
-            />
           </div>
         </div>
       </section>
 
-      {/* ─── Products ─── */}
-      <PopularProducts products={products} />
-
-      {/* ─── Products ─── */}
-      <PopularProducts products={products} />
-
-      {/* ─── Reviews ─── */}
-      <CustomerReviews />
-
-      {/* ─── Brand & Service FAQs ─── */}
-      <FAQSection />
+      {/* ─── 4 Trust Pillars Bar ─── */}
+      <section className="pb-16 px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            {
+              icon: <FaHeadset />,
+              title: 'Post-sale Support',
+              subtitle: 'Reach out to us for queries',
+            },
+            {
+              icon: <FaTruckFast />,
+              title: 'Pan India Shipping',
+              subtitle: 'In 3 to 5 business days',
+            },
+            {
+              icon: <FaGift />,
+              title: 'Product Offers',
+              subtitle: 'Offers on selective products',
+            },
+            {
+              icon: <FaAward />,
+              title: 'Finest Quality Assured',
+              subtitle: 'For a premium experience',
+            },
+          ].map((pillar, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-full border border-[#5C2333]/30 px-5 py-3.5 flex items-center gap-3.5 shadow-2xs hover:shadow-md transition-all hover:border-[#5C2333]"
+            >
+              <div className="text-[#5C2333] text-2xl flex-shrink-0">
+                {pillar.icon}
+              </div>
+              <div className="min-w-0">
+                <h4 className="font-serif font-bold text-xs sm:text-sm text-[#2A1C22] leading-tight">
+                  {pillar.title}
+                </h4>
+                <p className="text-[11px] text-gray-500 font-sans font-light truncate mt-0.5">
+                  {pillar.subtitle}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

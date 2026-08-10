@@ -24,7 +24,7 @@ const heroSlides = [
     title: 'Julina Artisanal Rituals & Gift Sets',
     subtitle: '100% Eco-Friendly Soy Wax • Hand-poured in Maharashtra, India',
     badge: 'LUXURY EXPORT',
-    src: '/images/julina candles melts artisanal rituals 1.png',
+    src: '/images/lotus pond urli.png',
     link: '/products',
   },
 ];
@@ -128,13 +128,16 @@ const FeaturedSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Hero Image Showcase */}
+          {/* Right Column: Hero Image Showcase (Uniform Sizing) */}
           <div className="lg:col-span-6 flex justify-center items-center">
-            <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden bg-gradient-to-b from-white/10 to-white/5 border border-white/15 p-4 shadow-2xl backdrop-blur-sm group">
+            <div className="relative w-full max-w-[380px] h-[340px] sm:h-[400px] rounded-3xl overflow-hidden bg-gradient-to-b from-white/10 to-white/5 border border-white/15 p-6 shadow-2xl backdrop-blur-sm group flex items-center justify-center">
               <img
-                src={heroSlides[currentIndex].src}
+                src={encodeURI(heroSlides[currentIndex].src)}
                 alt={heroSlides[currentIndex].title}
-                className="w-full h-full object-contain drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-full max-h-[340px] object-contain drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/images/logo.png';
+                }}
               />
               <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/20 pointer-events-none" />
             </div>

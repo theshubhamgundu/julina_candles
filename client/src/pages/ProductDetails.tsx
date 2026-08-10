@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import BackButton from '../components/common/BackBtn';
-import Banner from '../components/common/Banner';
 import { useProductDetailsQuery } from '../redux/api/product.api';
 import { addToCart, decrementCartItem, incrementCartItem } from '../redux/reducers/cart.reducer';
 import { RootState } from '../redux/store';
@@ -90,7 +89,7 @@ const SingleProduct: React.FC = () => {
         return (
             <div className="flex items-center justify-center min-h-[60vh] bg-[#f6f1e7]">
                 <div className="flex flex-col items-center gap-3">
-                    <div className="w-10 h-10 border-4 border-[#185e33]/20 border-t-[#185e33] rounded-full animate-spin"></div>
+                    <div className="w-10 h-10 border-4 border-[#5C2333]/20 border-t-[#5C2333] rounded-full animate-spin"></div>
                     <p className="text-sm text-gray-500 font-sans">Loading product details...</p>
                 </div>
             </div>
@@ -102,9 +101,9 @@ const SingleProduct: React.FC = () => {
             <div className="flex flex-col items-center justify-center min-h-[60vh] bg-[#f6f1e7] p-4 text-center">
         <BackButton fallback="/products" />
                 <p className="text-4xl mb-3">🌾</p>
-                <h2 className="text-xl font-serif font-bold text-[#185e33] mb-2">Product Not Found</h2>
+                <h2 className="text-xl font-serif font-bold text-[#5C2333] mb-2">Product Not Found</h2>
                 <p className="text-sm text-gray-500 max-w-sm mb-4">The product you are looking for might be unavailable or removed.</p>
-                <button onClick={() => navigate('/products')} className="bg-[#185e33] text-white px-6 py-2.5 rounded-full text-xs font-bold shadow-md">
+                <button onClick={() => navigate('/products')} className="bg-[#5C2333] text-white px-6 py-2.5 rounded-full text-xs font-bold shadow-md">
                     Browse All Products
                 </button>
             </div>
@@ -162,6 +161,15 @@ const SingleProduct: React.FC = () => {
         navigate('/cart');
     };
 
+    const getPhotoUrl = (photoUrl?: string) => {
+        if (!photoUrl) return '/images/logo.png';
+        let cleaned = photoUrl.replace('/images/products/', '/images/');
+        if (!cleaned.startsWith('/') && !cleaned.startsWith('http')) {
+            cleaned = '/' + cleaned;
+        }
+        return encodeURI(cleaned);
+    };
+
     return (
         <div className="min-h-screen bg-[#f6f1e7] py-6 sm:py-10 px-4">
             <div className="max-w-5xl mx-auto space-y-6">
@@ -187,7 +195,7 @@ const SingleProduct: React.FC = () => {
                         )}
 
                         <img
-                            src={resolvedProduct.photo || '/images/mainImage.png'}
+                            src={getPhotoUrl(resolvedProduct.photo)}
                             alt={resolvedProduct.name}
                             className="w-full h-64 sm:h-80 md:h-96 object-contain drop-shadow-md hover:scale-105 transition-transform duration-300"
                         />
@@ -196,18 +204,18 @@ const SingleProduct: React.FC = () => {
                     {/* Right: Product Details */}
                     <div className="flex-1 flex flex-col justify-between space-y-5">
                         <div>
-                            <span className="inline-block bg-[#185e33]/10 text-[#185e33] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 capitalize">
+                            <span className="inline-block bg-[#5C2333]/10 text-[#5C2333] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 capitalize">
                                 {resolvedProduct.category}
                             </span>
 
-                            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#185e33] leading-tight mb-2">
+                            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#5C2333] leading-tight mb-2">
                                 {resolvedProduct.name}
                             </h1>
 
                             {/* Variant Selector */}
                             {hasVariants && (
                                 <div className="my-4 bg-[#faf6ee] p-4 rounded-2xl border border-[#ede3cf] space-y-2.5">
-                                    <label className="block text-xs font-bold text-[#185e33] uppercase tracking-wider">
+                                    <label className="block text-xs font-bold text-[#5C2333] uppercase tracking-wider">
                                         Select Pack Quantity / Weight:
                                     </label>
                                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -223,12 +231,12 @@ const SingleProduct: React.FC = () => {
                                                         isVariantOutOfStock
                                                             ? 'border-red-200 bg-red-50/40 cursor-not-allowed opacity-70'
                                                             : selectedVariant?.id === variant.id
-                                                                ? 'border-2 border-[#185e33] bg-[#185e33] text-white shadow-md'
-                                                                : 'border-[#ede3cf] bg-white text-gray-800 hover:border-[#185e33]/50'
+                                                                ? 'border-2 border-[#5C2333] bg-[#5C2333] text-white shadow-md'
+                                                                : 'border-[#ede3cf] bg-white text-gray-800 hover:border-[#5C2333]/50'
                                                     }`}
                                                 >
                                                     <span className={`text-xs font-extrabold ${
-                                                        isVariantOutOfStock ? 'text-red-400' : selectedVariant?.id === variant.id ? 'text-[#e5c158]' : 'text-[#185e33]'
+                                                        isVariantOutOfStock ? 'text-red-400' : selectedVariant?.id === variant.id ? 'text-[#e5c158]' : 'text-[#5C2333]'
                                                     }`}>
                                                         {variant.label}
                                                     </span>
@@ -252,7 +260,7 @@ const SingleProduct: React.FC = () => {
                             )}
 
                             <div className="flex items-baseline gap-3 mb-4">
-                                <span className="text-2xl sm:text-3xl font-extrabold text-[#185e33]">
+                                <span className="text-2xl sm:text-3xl font-extrabold text-[#5C2333]">
                                     ₹ {currentPrice.toFixed(2)}
                                 </span>
                                 {discountPercent > 0 && (
@@ -295,7 +303,7 @@ const SingleProduct: React.FC = () => {
                                     <div className="flex items-center justify-between bg-[#faf6ee] border border-[#ede3cf] rounded-full px-4 py-2 flex-1">
                                         <button
                                             onClick={handleDecrement}
-                                            className="w-8 h-8 rounded-full bg-white text-[#185e33] font-bold text-lg flex items-center justify-center hover:bg-gray-100 shadow-xs"
+                                            className="w-8 h-8 rounded-full bg-white text-[#5C2333] font-bold text-lg flex items-center justify-center hover:bg-gray-100 shadow-xs"
                                         >
                                             −
                                         </button>
@@ -303,14 +311,14 @@ const SingleProduct: React.FC = () => {
                                         <button
                                             onClick={handleIncrement}
                                             disabled={isCurrentlyOutOfStock}
-                                            className={`w-8 h-8 rounded-full ${isCurrentlyOutOfStock ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-[#185e33] hover:bg-gray-100 shadow-xs'} font-bold text-lg flex items-center justify-center`}
+                                            className={`w-8 h-8 rounded-full ${isCurrentlyOutOfStock ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-[#5C2333] hover:bg-gray-100 shadow-xs'} font-bold text-lg flex items-center justify-center`}
                                         >
                                             +
                                         </button>
                                     </div>
                                     <button
                                         onClick={handleGoToCart}
-                                        className="flex-1 bg-[#185e33] hover:bg-[#134b28] text-white font-bold py-3 px-6 rounded-full text-sm transition-all shadow-md text-center"
+                                        className="flex-1 bg-[#5C2333] hover:bg-[#134b28] text-white font-bold py-3 px-6 rounded-full text-sm transition-all shadow-md text-center"
                                     >
                                         Go to Cart ➔
                                     </button>
@@ -321,7 +329,7 @@ const SingleProduct: React.FC = () => {
                                     disabled={isCurrentlyOutOfStock}
                                     className={`w-full py-4 px-6 rounded-full font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2 ${
                                         !isCurrentlyOutOfStock
-                                            ? 'bg-[#185e33] hover:bg-[#134b28] text-white'
+                                            ? 'bg-[#5C2333] hover:bg-[#134b28] text-white'
                                             : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                                     }`}
                                 >
@@ -334,10 +342,6 @@ const SingleProduct: React.FC = () => {
                             )}
                         </div>
                     </div>
-                </div>
-
-                <div className="mt-8">
-                    <Banner />
                 </div>
             </div>
         </div>

@@ -68,12 +68,12 @@ const SearchPage: React.FC = () => {
                 {/* Search Bar Top Header */}
                 <div className="bg-white p-4 sm:p-6 rounded-3xl shadow-md border border-[#ede3cf] space-y-4">
                     <div className="flex items-center justify-between">
-                        <h1 className="text-xl sm:text-2xl font-serif font-bold text-[#185e33]">Search & Filter Catalog</h1>
+                        <h1 className="text-xl sm:text-2xl font-serif font-bold text-[#5C2333]">Search & Filter Catalog</h1>
                         
                         {/* Mobile Filter Toggle Button */}
                         <button
                             onClick={() => setShowMobileFilters(!showMobileFilters)}
-                            className="lg:hidden flex items-center gap-2 bg-[#faf6ee] border border-[#ede3cf] text-[#185e33] font-bold text-xs px-3.5 py-2 rounded-full shadow-2xs"
+                            className="lg:hidden flex items-center gap-2 bg-[#faf6ee] border border-[#ede3cf] text-[#5C2333] font-bold text-xs px-3.5 py-2 rounded-full shadow-2xs"
                         >
                             <FaFilter className="text-xs" />
                             <span>Filters</span>
@@ -90,7 +90,7 @@ const SearchPage: React.FC = () => {
                         showMobileFilters ? 'block' : 'hidden lg:block'
                     }`}>
                         <div className="flex items-center justify-between mb-4 lg:hidden">
-                            <h3 className="font-serif font-bold text-base text-[#185e33]">Filter Products</h3>
+                            <h3 className="font-serif font-bold text-base text-[#5C2333]">Filter Products</h3>
                             <button onClick={() => setShowMobileFilters(false)} className="text-gray-400 p-1">
                                 <FaTimes />
                             </button>
@@ -119,7 +119,7 @@ const SearchPage: React.FC = () => {
                         {isLoading ? (
                             <div className="flex items-center justify-center min-h-[40vh]">
                                 <div className="flex flex-col items-center gap-3">
-                                    <div className="w-10 h-10 border-4 border-[#185e33]/20 border-t-[#185e33] rounded-full animate-spin"></div>
+                                    <div className="w-10 h-10 border-4 border-[#5C2333]/20 border-t-[#5C2333] rounded-full animate-spin"></div>
                                     <p className="text-xs text-gray-500">Searching products...</p>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@ const SearchPage: React.FC = () => {
                                 <p className="text-4xl">🔍</p>
                                 <h3 className="text-lg font-bold text-gray-700 font-serif">No products match your search</h3>
                                 <p className="text-xs text-gray-500">Try searching for "Lotus", "Coffee", "Urli", or adjusting your price filters.</p>
-                                <button onClick={clearFilters} className="bg-[#185e33] text-white px-5 py-2 rounded-full text-xs font-bold shadow-xs">
+                                <button onClick={clearFilters} className="bg-[#5C2333] text-white px-5 py-2 rounded-full text-xs font-bold shadow-xs">
                                     Clear All Filters
                                 </button>
                             </div>
@@ -158,11 +158,11 @@ const SearchPage: React.FC = () => {
                                             pageClassName="rounded-full overflow-hidden"
                                             pageLinkClassName="w-8 h-8 flex items-center justify-center text-xs font-bold text-gray-700 hover:bg-gray-100"
                                             previousClassName="rounded-full overflow-hidden"
-                                            previousLinkClassName="px-3 py-1 text-xs font-bold text-[#185e33] hover:bg-[#faf6ee]"
+                                            previousLinkClassName="px-3 py-1 text-xs font-bold text-[#5C2333] hover:bg-[#faf6ee]"
                                             nextClassName="rounded-full overflow-hidden"
-                                            nextLinkClassName="px-3 py-1 text-xs font-bold text-[#185e33] hover:bg-[#faf6ee]"
+                                            nextLinkClassName="px-3 py-1 text-xs font-bold text-[#5C2333] hover:bg-[#faf6ee]"
                                             breakClassName="px-2 text-xs font-bold text-gray-400"
-                                            activeClassName="!bg-[#185e33] text-white"
+                                            activeClassName="!bg-[#5C2333] text-white"
                                             activeLinkClassName="!text-white"
                                             disabledClassName="opacity-30 cursor-not-allowed pointer-events-none"
                                         />

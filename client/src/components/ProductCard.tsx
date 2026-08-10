@@ -67,6 +67,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     navigate('/cart');
   };
 
+  const getPhotoUrl = (photoUrl?: string) => {
+    if (!photoUrl) return '/images/logo.png';
+    let cleaned = photoUrl.replace('/images/products/', '/images/');
+    if (!cleaned.startsWith('/') && !cleaned.startsWith('http')) {
+      cleaned = '/' + cleaned;
+    }
+    return encodeURI(cleaned);
+  };
+
   return (
     <div
       onClick={() => navigate(`/product/${product._id}`)}
@@ -95,7 +104,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         )}
 
         <img
-          src={product.photo || '/images/logo.png'}
+          src={getPhotoUrl(product.photo)}
           alt={product.name}
           className="w-full h-full object-contain p-2 group-hover:scale-108 transition-transform duration-500 drop-shadow-md"
         />
