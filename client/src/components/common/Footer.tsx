@@ -37,14 +37,9 @@ const Footer: React.FC = () => {
           </div>
 
           <p className="text-sm text-cream/90 leading-relaxed">
-            Copyright 2026 Julina Candles & Melts (Myotrixnutrition LLP).<br />
-            Powered By Julina Candles & Melts
+            Copyright 2026 Julina Candles & Melts.<br />
+            Handcrafted Artisanal Candles & Melts
           </p>
-
-          {/* Subtle Official Partner Text */}
-          <div className="mt-4 pt-3 border-t border-white/10 w-full text-xs text-cream/70 tracking-wide">
-            <span className="opacity-90 font-medium">- Official Partner with IIRR - ICAR -</span>
-          </div>
         </div>
 
         {/* 2-Column Side-by-Side Wrapper for Mobile (Company on Left, Policies on Right) */}
@@ -77,12 +72,12 @@ const Footer: React.FC = () => {
         <div className="lg:col-span-4 text-sm text-cream/95 space-y-4">
           <div>
             <h4 className="font-bold text-white text-lg mb-1.5 font-serif">Get in Touch:</h4>
-            <p className="leading-snug"><a href="mailto:myotrixnutrition@gmail.com" className="hover:underline">myotrixnutrition@gmail.com</a> (Order queries)</p>
+            <p className="leading-snug"><a href="mailto:pranita311096@gmail.com" className="hover:underline">pranita311096@gmail.com</a> (Order queries)</p>
           </div>
 
           <div>
             <h4 className="font-bold text-white text-lg font-serif">Customer Care:</h4>
-            <p className="mt-1">+91 70329 87770 / +91 70329 67775</p>
+            <p className="mt-1">+91 73048 88197</p>
           </div>
 
           <div>
@@ -100,11 +95,11 @@ const Footer: React.FC = () => {
 
       </div>
 
-      {/* ─── Bottom Organic Rice Harvest Soil Image Banner ─── */}
+      {/* ─── Bottom Artisanal Candles Decorative Banner ─── */}
       <div className="w-full -mt-16 md:-mt-24 relative z-20 pointer-events-none">
         <img
-          src="/images/rice_footer_banner.png"
-          alt="Earthy Rice Harvest Footer Decoration"
+          src="/images/candles_footer_banner.png"
+          alt="Artisanal Candles Footer Decoration"
           className="w-full h-auto block"
         />
       </div>
