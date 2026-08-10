@@ -369,129 +369,219 @@ function mapProduct(row) {
 const JULINA_CANDLE_PRODUCTS = [
   {
     _id: "1", id: "1",
-    name: "Caramel Coffee Cream Candle", category: "Coffee Collection Candles",
-    description: "Rich espresso aroma blended with sweet caramel and smooth cream in a luxury glass jar. Handcrafted with 100% natural soy wax for a warm, cozy ambiance.",
-    price: 499, stock: 50, photo: "/images/caramel coffee cream.png", featured: true,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Kesari Kripa Urli Candle", category: "Festive Urli Candles",
+    description: "Inspired by vibrant hues of Marigold flowers. Handcrafted natural soy wax candle in brass-style decorative urli. Customisation available.",
+    price: 299, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389845/julina_candles/products/handicraf_lotus_pond.png", featured: true,
+    variants: [
+      { id: "1_45", name: "4.5 inch", label: "4.5 inch", price: 299, salePrice: 299, mrp: 350, stock: 50, inStock: true },
+      { id: "1_55", name: "5.5 inch", label: "5.5 inch", price: 339, salePrice: 339, mrp: 399, stock: 50, inStock: true },
+      { id: "1_65", name: "6.5 inch", label: "6.5 inch", price: 379, salePrice: 379, mrp: 449, stock: 50, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "2", id: "2",
-    name: "Coffee Beans Candle", category: "Coffee Collection Candles",
-    description: "Embedded with real roasted coffee beans and infused with dark roast coffee fragrance notes. Perfect for coffee lovers and warm living spaces.",
-    price: 549, stock: 45, photo: "/images/coffee beans candles.png", featured: true,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Sakora Bloom Urli Candle", category: "Festive Urli Candles",
+    description: "Handcrafted decorative urli candle topped with vibrant floral blooms and leaves. Customisation available.",
+    price: 289, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389855/julina_candles/products/lotus_pond_urli.png", featured: true,
+    variants: [
+      { id: "2_45", name: "4.5 inch", label: "4.5 inch", price: 289, salePrice: 289, mrp: 330, stock: 50, inStock: true },
+      { id: "2_55", name: "5.5 inch", label: "5.5 inch", price: 329, salePrice: 329, mrp: 380, stock: 50, inStock: true },
+      { id: "2_65", name: "6.5 inch", label: "6.5 inch", price: 369, salePrice: 369, mrp: 420, stock: 50, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "3", id: "3",
-    name: "Handicraft Lotus Pond Urli Candle", category: "Decorative Urli Candles",
-    description: "Traditional handcrafted brass-style urli candle featuring sculpted lotus petals floating on scented soy wax. Ideal for festive decor and grand celebrations.",
-    price: 899, stock: 30, photo: "/images/handicraf lotus pond.png", featured: true,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Vasant Leela Urli Candle", category: "Festive Urli Candles",
+    description: "Traditional urli candle embellished with handcrafted daisy flowers and pearl beads. Customisation available.",
+    price: 289, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389857/julina_candles/products/lotus_urli_scented.png", featured: true,
+    variants: [
+      { id: "3_45", name: "4.5 inch", label: "4.5 inch", price: 289, salePrice: 289, mrp: 330, stock: 50, inStock: true },
+      { id: "3_55", name: "5.5 inch", label: "5.5 inch", price: 329, salePrice: 329, mrp: 380, stock: 50, inStock: true },
+      { id: "3_65", name: "6.5 inch", label: "6.5 inch", price: 369, salePrice: 369, mrp: 420, stock: 50, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "4", id: "4",
-    name: "Lotus Pond Urli Candle", category: "Decorative Urli Candles",
-    description: "Elegant lotus pond design urli candle infused with serene jasmine and lotus botanical essential oils. Creates a tranquil home atmosphere.",
-    price: 799, stock: 35, photo: "/images/lotus pond urli.png", featured: false,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Sunflower Bliss Urli Candle", category: "Festive Urli Candles",
+    description: "Golden sunflower urli candle adorned with hand-poured sunflower embeds and golden sparkle.",
+    price: 149, stock: 60, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389880/julina_candles/products/soy_wax_sunflower_urli.png", featured: true,
+    variants: [
+      { id: "4_35", name: "3.5 inch", label: "3.5 inch", price: 149, salePrice: 149, mrp: 180, stock: 60, inStock: true },
+      { id: "4_45", name: "4.5 inch", label: "4.5 inch", price: 199, salePrice: 199, mrp: 240, stock: 60, inStock: true },
+      { id: "4_55", name: "5.5 inch", label: "5.5 inch", price: 259, salePrice: 259, mrp: 300, stock: 60, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "5", id: "5",
-    name: "Lotus Urli Scented Candle", category: "Decorative Urli Candles",
-    description: "Artisanal decorative urli filled with scented soy wax and lotus highlights. Brings traditional warmth and soothing aroma to Diwali and spiritual rituals.",
-    price: 749, stock: 40, photo: "/images/lotus urli scented.png", featured: false,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Peacock Urli Candle", category: "Festive Urli Candles",
+    description: "Royal peacock decorative urli frame filled with scented soy wax and floral highlights. Customisation available.",
+    price: 279, stock: 40, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389862/julina_candles/products/peacock_pink_wax_urli.png", featured: true,
+    variants: [
+      { id: "5_6", name: "6 inch", label: "6 inch", price: 279, salePrice: 279, mrp: 320, stock: 40, inStock: true },
+      { id: "5_8", name: "8 inch", label: "8 inch", price: 319, salePrice: 319, mrp: 370, stock: 40, inStock: true },
+      { id: "5_10", name: "10 inch", label: "10 inch", price: 359, salePrice: 359, mrp: 420, stock: 40, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "6", id: "6",
-    name: "Peacock Pink Wax Urli Candle", category: "Decorative Urli Candles",
-    description: "Exquisite royal peacock urli infused with vibrant pink soy wax and floral notes. Adds majestic Indian heritage charm to any table center.",
-    price: 999, stock: 25, photo: "/images/peacock pink wax urli.png", featured: true,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Round Urli Candles", category: "Festive Urli Candles",
+    description: "Classic round metallic urli candle embedded with vibrant orange marigolds. Customisation available.",
+    price: 359, stock: 45, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389884/julina_candles/products/sunflower_decorative_urli.png", featured: false,
+    variants: [
+      { id: "6_4", name: "4 inch", label: "4 inch", price: 359, salePrice: 359, mrp: 400, stock: 45, inStock: true },
+      { id: "6_5", name: "5 inch", label: "5 inch", price: 399, salePrice: 399, mrp: 450, stock: 45, inStock: true },
+      { id: "6_6", name: "6 inch", label: "6 inch", price: 449, salePrice: 449, mrp: 500, stock: 45, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "7", id: "7",
-    name: "Peacock White Wax Urli Candle", category: "Decorative Urli Candles",
-    description: "Premium white soy wax candle set in a detailed peacock urli frame. Pure sandalwood and white musk fragrance for calm luxury.",
-    price: 999, stock: 25, photo: "/images/peacock white wax urli.png", featured: false,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Diya Urli Candle", category: "Festive Urli Candles",
+    description: "Multi-diya urli candle featuring a centerpiece of white flowers framed by golden wax diyas. Customisation available.",
+    price: 249, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389889/julina_candles/products/sunflower_urli_candle.png", featured: false,
+    variants: [
+      { id: "7_8", name: "8 inch", label: "8 inch", price: 249, salePrice: 249, mrp: 299, stock: 50, inStock: true },
+      { id: "7_10", name: "10 inch", label: "10 inch", price: 329, salePrice: 329, mrp: 399, stock: 50, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "8", id: "8",
-    name: "Soy Wax Sunflower Urli Candle", category: "Decorative Urli Candles",
-    description: "Hand-poured golden sunflower urli candle made with eco-friendly soy wax. Radiant sunflower design bringing warmth and joy to festive spaces.",
-    price: 699, stock: 40, photo: "/images/soy wax sunflower urli.png", featured: true,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Moon Sun Urli Candle", category: "Festive Urli Candles",
+    description: "Artistic brass bowl candle featuring sculpted celestial Sun & Moon design with gold leaf accents.",
+    price: 199, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389866/julina_candles/products/peacock_white_wax_urli.png", featured: true,
+    variants: [
+      { id: "8_35", name: "3.5 inch", label: "3.5 inch", price: 199, salePrice: 199, mrp: 249, stock: 50, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "9", id: "9",
-    name: "Sunflower Decorative Urli Candle", category: "Decorative Urli Candles",
-    description: "Bright decorative sunflower urli candle designed for pooja room, festive gifting, and elegant dinner tables.",
-    price: 649, stock: 50, photo: "/images/sunflower decorative urli.png", featured: false,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Laksh Siddhi Urli Candles", category: "Festive Urli Candles",
+    description: "Set of 2 golden glass jar candles featuring Lord Ganesha and Goddess Lakshmi motifs. Customisation available.",
+    price: 299, stock: 40, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389849/julina_candles/products/laddu_shot_glass.png", featured: true,
+    variants: [
+      { id: "9_2", name: "Pack of 2 (3.5 inch)", label: "Pack of 2", price: 299, salePrice: 299, mrp: 350, stock: 40, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "10", id: "10",
-    name: "Sunflower Urli Candle", category: "Decorative Urli Candles",
-    description: "Charming sunflower shaped scented urli candle with long burn time and clean non-toxic soot-free smoke.",
-    price: 599, stock: 60, photo: "/images/sunflower urli candle.png", featured: false,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Wooden Dough Bowl Candle", category: "Wooden Dough Bowl Candles",
+    description: "Rustic hand-carved wooden bowl filled with natural soy wax and scented spices like cinnamon & dried orange slice. Customisation available.",
+    price: 229, stock: 40, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389873/julina_candles/products/soy_wax_concrete_shankh.png", featured: true,
+    variants: [
+      { id: "10_4", name: "4 inch", label: "4 inch", price: 229, salePrice: 229, mrp: 280, stock: 40, inStock: true },
+      { id: "10_5", name: "5 inch", label: "5 inch", price: 269, salePrice: 269, mrp: 320, stock: 40, inStock: true },
+      { id: "10_6", name: "6 inch", label: "6 inch", price: 309, salePrice: 309, mrp: 360, stock: 40, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "11", id: "11",
-    name: "Laddu Shot Glass Candle", category: "Festival & Traditional Candles",
-    description: "Festive laddu dessert inspired shot glass candle. Smells delightful with sweet cardamom and vanilla notes, perfect for Diwali return gifts.",
-    price: 349, stock: 80, photo: "/images/laddu shot glass.png", featured: true,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Mithai Candles", category: "Mithai Candles",
+    description: "Dessert-inspired candles shaped like Motichoor Laddus and Modaks with silver leaf detailing. Available in Pack of 4 & Pack of 6.",
+    price: 119, stock: 60, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389859/julina_candles/products/modak_shaped_scented.png", featured: true,
+    variants: [
+      { id: "11_4", name: "Pack of 4", label: "Pack of 4", price: 119, salePrice: 119, mrp: 150, stock: 60, inStock: true },
+      { id: "11_6", name: "Pack of 6", label: "Pack of 6", price: 279, salePrice: 279, mrp: 330, stock: 60, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "12", id: "12",
-    name: "Modak Shaped Scented Candle", category: "Festival & Traditional Candles",
-    description: "Handmade modak shaped soy wax candle crafted for Ganesh Chaturthi and traditional Indian festivities. Sweet coconut & saffron aroma.",
-    price: 399, stock: 75, photo: "/images/modak shaped scented.png", featured: true,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Peony Candles", category: "Floral Candles",
+    description: "Sculpted peony flower candles infused with delicate floral aromatherapy notes. Size: 8.5cm width, 4.5cm height.",
+    price: 109, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389843/julina_candles/products/daisy_scented_soy_wax.png", featured: true,
+    variants: [
+      { id: "12_1", name: "Single piece", label: "Single piece", price: 109, salePrice: 109, mrp: 140, stock: 50, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "13", id: "13",
-    name: "Soy Wax Concrete Shankh Conch Shell Candle", category: "Festival & Traditional Candles",
-    description: "Sacred shankh (conch shell) candle molded in concrete with pure soy wax. Symbolizes peace, positivity, and spiritual purity.",
-    price: 799, stock: 30, photo: "/images/soy wax concrete shankh.png", featured: true,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Daisy Candle", category: "Floral Candles",
+    description: "Pack of 4 vibrant daisy flower candles. Size: 5.8cm width, 1.2cm height. Customisation available.",
+    price: 119, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389840/julina_candles/products/daisy_flower_jar.png", featured: false,
+    variants: [
+      { id: "13_4", name: "Pack of 4", label: "Pack of 4", price: 119, salePrice: 119, mrp: 150, stock: 50, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "14", id: "14",
-    name: "Daisy Flower Jar Candles", category: "Floral & Decorative Candles",
-    description: "Delicate daisy flower embeds in a crystal clear glass jar. Infused with fresh floral bouquet fragrance notes.",
-    price: 499, stock: 45, photo: "/images/daisy flower jar.png", featured: true,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Rose Bud Candle", category: "Floral Candles",
+    description: "Pack of 4 rose bud candles infused with romantic rose essential oil. Size: 4cm width, 5cm height.",
+    price: 100, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389869/julina_candles/products/rose_heart_candle.png", featured: true,
+    variants: [
+      { id: "14_4", name: "Pack of 4", label: "Pack of 4", price: 100, salePrice: 100, mrp: 130, stock: 50, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "15", id: "15",
-    name: "Daisy Scented Soy Wax Candles", category: "Floral & Decorative Candles",
-    description: "Natural soy wax candle topped with hand-poured daisy flowers. Soft lavender and wild daisy essential oils.",
-    price: 449, stock: 50, photo: "/images/daisy scented soy wax.png", featured: false,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Rose Heart Candles", category: "Floral Candles",
+    description: "Pack of 2 heart-shaped rose candles. Size: 6.5cm width, 4.5cm height. Customisation available.",
+    price: 109, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389871/julina_candles/products/scented_glass_jar.png", featured: true,
+    variants: [
+      { id: "15_2", name: "Pack of 2", label: "Pack of 2", price: 109, salePrice: 109, mrp: 140, stock: 50, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "16", id: "16",
-    name: "Rose Heart Candle", category: "Floral & Decorative Candles",
-    description: "Romantic heart-shaped candle adorned with red rose petals and infused with premium Bulgarian rose essential oil.",
-    price: 549, stock: 40, photo: "/images/rose heart candle.png", featured: true,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Kumud Jyot", category: "Floral Candles",
+    description: "Lotus flower candle set on a traditional brass stand. Size: 9cm width, 4.5cm height. Customisation available.",
+    price: 129, stock: 45, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389834/julina_candles/products/caramel_coffee_cream.png", featured: false,
+    variants: [
+      { id: "16_1", name: "Single piece", label: "Single piece", price: 129, salePrice: 129, mrp: 160, stock: 45, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "17", id: "17",
-    name: "Scented Glass Jar Candle", category: "Floral & Decorative Candles",
-    description: "Classic frosted glass jar candle filled with rich aromatherapy scented wax and wooden wick for a soothing crackle.",
-    price: 399, stock: 60, photo: "/images/scented glass jar.png", featured: false,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Sunflower Blossom Candle", category: "Glass Jar Candles",
+    description: "Ribbed glass bowl filled with natural soy wax and a hand-poured sunflower top. Size: 8.5cm diameter, 4.5cm height.",
+    price: 209, stock: 40, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389837/julina_candles/products/coffee_beans_candles.png", featured: true,
+    variants: [
+      { id: "17_1", name: "Single piece", label: "Single piece", price: 209, salePrice: 209, mrp: 260, stock: 40, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   },
   {
     _id: "18", id: "18",
-    name: "Julina Artisanal Rituals Gift Box", category: "Floral & Decorative Candles",
-    description: "Luxury candle gift set featuring assortment of scented jar candles, floral melts, and brass snuffer. The ultimate gift for loved ones.",
-    price: 1299, stock: 20, photo: "/images/julina candles melts artisanal rituals 1.png", featured: true,
-    variants: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+    name: "Daisy Bloom Candles", category: "Glass Jar Candles",
+    description: "Clear glass jar with lid containing a blooming daisy candle. Size: 8.5cm diameter, 4.5cm height.",
+    price: 209, stock: 40, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389840/julina_candles/products/daisy_flower_jar.png", featured: true,
+    variants: [
+      { id: "18_1", name: "Single piece", label: "Single piece", price: 209, salePrice: 209, mrp: 260, stock: 40, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+  },
+  {
+    _id: "19", id: "19",
+    name: "Frost Glass Candles", category: "Glass Jar Candles",
+    description: "Luxury matte frost glass jar candle (220ml) with custom label & box. Customisation available.",
+    price: 199, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389871/julina_candles/products/scented_glass_jar.png", featured: true,
+    variants: [
+      { id: "19_220", name: "220ml", label: "220ml", price: 199, salePrice: 199, mrp: 250, stock: 50, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+  },
+  {
+    _id: "20", id: "20",
+    name: "Tinted Jar Candle", category: "Glass Jar Candles",
+    description: "Cut-glass tinted jar candle (150ml) with matching glass lid. Customisation available.",
+    price: 129, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389840/julina_candles/products/daisy_flower_jar.png", featured: false,
+    variants: [
+      { id: "20_150", name: "150ml", label: "150ml", price: 129, salePrice: 129, mrp: 160, stock: 50, inStock: true }
+    ],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
   }
 ];
 
@@ -1023,7 +1113,7 @@ export default async function handler(req, res) {
               name: 'Caramel Coffee Cream Candle',
               price: 499,
               quantity: 1,
-              photo: '/images/products/caramel coffee cream.png'
+              photo: '/images/productshttps://res.cloudinary.com/bzykgznp/image/upload/v1786389834/julina_candles/products/caramel_coffee_cream.png'
             }
           ],
           subTotal: 499,
@@ -1542,12 +1632,12 @@ export default async function handler(req, res) {
         .from('products')
         .select('*')
         .order('created_at', { ascending: false })
-        .limit(6);
+        .limit(50);
 
       if (!error && data && data.length > 0) {
         productsList = data.map(mapProduct);
       } else {
-        productsList = JULINA_CANDLE_PRODUCTS.slice(0, 6);
+        productsList = JULINA_CANDLE_PRODUCTS;
       }
 
       const resBody = {
@@ -1595,14 +1685,14 @@ export default async function handler(req, res) {
 
     // ─── PRODUCTS: Get Categories ───
     if (url.includes('/api/v1/products/categories')) {
-      const { data, error } = await supabase
-        .from('products')
-        .select('category');
-
-      let categories = ['Coffee Collection Candles', 'Decorative Urli Candles', 'Festival & Traditional Candles', 'Floral & Decorative Candles'];
-      if (!error && data && data.length > 0) {
-        categories = [...new Set(data.map((row) => row.category))];
-      }
+      const categories = [
+        'Festive Urli Candles',
+        'Wooden Dough Bowl Candles',
+        'Mithai Candles',
+        'Floral Candles',
+        'Glass Jar Candles',
+        'Fragrances'
+      ];
 
       const resBody = {
         success: true,
@@ -1756,17 +1846,26 @@ export default async function handler(req, res) {
         .eq('id', id)
         .single();
 
-      if (error || !data) {
-        return res.status(404).json({ success: false, message: 'Product not found' });
+      if (data) {
+        const resBody = {
+          success: true,
+          product: mapProduct(data),
+        };
+        if (global.fastApiCache) global.fastApiCache.set(url, { body: resBody, timestamp: Date.now() });
+        return res.status(200).json(resBody);
       }
 
-      const resBody = {
-        success: true,
-        product: mapProduct(data),
-      };
-      if (global.fastApiCache) global.fastApiCache.set(url, { body: resBody, timestamp: Date.now() });
+      // Fallback for numeric IDs matching default items
+      const mockProduct = JULINA_CANDLE_PRODUCTS.find(p => p.id === id || p._id === id);
+      if (mockProduct) {
+        const resBody = {
+          success: true,
+          product: mapProduct(mockProduct),
+        };
+        return res.status(200).json(resBody);
+      }
 
-      return res.status(200).json(resBody);
+      return res.status(404).json({ success: false, message: 'Product not found' });
     }
 
     // ─── PRODUCTS: Update Product (PUT) ───

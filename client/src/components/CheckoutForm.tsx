@@ -94,7 +94,7 @@ const CheckoutForm: React.FC = () => {
         currency: rzpData.currency || 'INR',
         name: 'Julina Candles & Melts',
         description: 'Handcrafted Luxury Candles & Melts',
-        image: '/images/logo.png',
+        image: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png',
         order_id: rzpData.order_id,
         handler: async function (response: any) {
           notify('Payment verified! Saving order...', 'success');
@@ -179,7 +179,7 @@ const CheckoutForm: React.FC = () => {
       <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-[#E6DACB] max-w-xl w-full">
         {/* Merchant Branding Header */}
         <div className="flex flex-col items-center mb-6 text-center border-b border-[#E6DACB] pb-5">
-          <img src="/images/logo.png" alt="Julina Candles & Melts" className="h-16 w-auto mb-2" />
+          <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts" className="h-16 w-auto mb-2" />
           <h1 className="text-2xl font-serif font-bold text-[#2A1C22]">Julina Candles & Melts</h1>
           <p className="text-xs text-gray-500 mt-1">Secure Razorpay Payment Gateway</p>
         </div>

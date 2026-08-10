@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, incrementCartItem, decrementCartItem } from '../redux/reducers/cart.reducer';
 import { RootState } from '../redux/store';
 import { Product } from '../types/api-types';
-import { FaShoppingBag, FaStar } from 'react-icons/fa';
+import { FaShoppingBag } from 'react-icons/fa';
 
 interface ProductCardProps {
   product: Product;
@@ -68,7 +68,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   const getPhotoUrl = (photoUrl?: string) => {
-    if (!photoUrl) return '/images/logo.png';
+    if (!photoUrl) return 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png';
     let cleaned = photoUrl.replace('/images/products/', '/images/');
     if (!cleaned.startsWith('/') && !cleaned.startsWith('http')) {
       cleaned = '/' + cleaned;
@@ -82,18 +82,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       className="bg-white rounded-3xl p-5 border border-[#E6DACB] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between h-full group relative cursor-pointer overflow-hidden"
     >
       {/* Top Image Container */}
-      <div className="relative bg-[#FBF6ED] rounded-2xl p-4 flex items-center justify-center h-60 md:h-72 mb-4 border border-[#E6DACB]/60 overflow-hidden group-hover:bg-[#F8EFE0] transition-colors">
-        {/* Category Badge */}
-        <span className="bg-[#5C2333] text-[#FBF6ED] text-[10px] font-bold px-3 py-1 rounded-full absolute top-3 left-3 z-10 shadow-xs uppercase tracking-wider">
-          {product.category || 'Soy Wax Candle'}
-        </span>
-
-        {/* Rating Badge */}
-        <div className="bg-white/80 backdrop-blur-md text-[#C79A56] text-[10px] font-bold px-2.5 py-1 rounded-full absolute top-3 right-3 z-10 shadow-xs flex items-center gap-1 border border-[#E6DACB]">
-          <FaStar className="text-xs" />
-          <span>4.9</span>
-        </div>
-
+      <div className="relative bg-[#FBF6ED] rounded-2xl flex items-center justify-center h-64 md:h-80 mb-4 border border-[#E6DACB]/60 overflow-hidden group-hover:bg-[#F8EFE0] transition-colors">
         {/* Out of Stock Overlay */}
         {isOutOfStock && (
           <div className="absolute inset-0 bg-white/75 backdrop-blur-xs z-20 flex items-center justify-center rounded-2xl">
@@ -106,7 +95,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <img
           src={getPhotoUrl(product.photo)}
           alt={product.name}
-          className="w-full h-full object-contain p-2 group-hover:scale-108 transition-transform duration-500 drop-shadow-md"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
       </div>
 

@@ -5,7 +5,7 @@ import { saveShippingInfo } from '../redux/reducers/cart.reducer';
 import { RootState } from '../redux/store';
 import { notify } from '../utils/util';
 import BackButton from '../components/common/BackBtn';
-import { FaMapMarkerAlt, FaCrosshairs, FaBuilding, FaCheckCircle, FaCompass, FaMap } from 'react-icons/fa';
+import { FaCrosshairs, FaMapMarkerAlt, FaTruck, FaShieldAlt } from 'react-icons/fa';
 import { usePageSEO } from '../hooks/usePageSEO';
 
 const INDIAN_STATES = [
@@ -20,7 +20,7 @@ const INDIAN_STATES = [
 const Shipping: React.FC = () => {
     usePageSEO({
         title: 'Shipping Address | Julina Candles & Melts',
-        description: 'Enter your shipping address for Julina Candles & Melts delivery.',
+        description: 'Enter your delivery address for Julina Candles & Melts.',
         canonical: '/shipping',
         noIndex: true,
     });
@@ -38,64 +38,21 @@ const Shipping: React.FC = () => {
         }
     }, [cartItems.length, navigate]);
 
-    // Delivery Type: 'current_location' | 'nearest_landmark'
-    const [deliveryType, setDeliveryType] = useState<'current_location' | 'nearest_landmark'>(
-        shippingInfo.deliveryType || 'current_location'
-    );
-
     const [name, setName] = useState(shippingInfo.name || user?.name || '');
     const [email, setEmail] = useState(shippingInfo.email || user?.email || '');
     const [address, setAddress] = useState(shippingInfo.address || '');
     const [landmark, setLandmark] = useState(shippingInfo.landmark || '');
-    const [city, setCity] = useState(shippingInfo.city || 'Hyderabad');
+    const [city, setCity] = useState(shippingInfo.city || '');
     const [state, setState] = useState(shippingInfo.state || 'Telangana');
     const [pinCode, setPinCode] = useState(shippingInfo.pinCode || '');
     const [phone, setPhone] = useState(shippingInfo.phone || '');
-    
-    // Suggested address from Geocoder
-    const [suggestedAddr, setSuggestedAddr] = useState('');
 
     // Captured Coordinates state
     const [latitude, setLatitude] = useState<number | undefined>(shippingInfo.latitude);
     const [longitude, setLongitude] = useState<number | undefined>(shippingInfo.longitude);
-
     const [locatingGPS, setLocatingGPS] = useState(false);
 
-    // Reverse Geocoding - purely suggestive, non-destructive
-    const handleReverseGeocode = async (lat: number, lng: number) => {
-        try {
-            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1`);
-            const data = await res.json();
-            if (data && data.address) {
-                const { address: addr } = data;
-                
-                const detectedCity = addr.city || addr.town || addr.village || addr.county || '';
-                const detectedState = addr.state || '';
-                const detectedPinCode = addr.postcode || '';
-
-                const parts = [];
-                if (addr.building || addr.house_number) parts.push(addr.building || addr.house_number);
-                if (addr.road || addr.pedestrian || addr.street) parts.push(addr.road || addr.pedestrian || addr.street);
-                if (addr.suburb || addr.neighbourhood || addr.residential) parts.push(addr.suburb || addr.neighbourhood || addr.residential);
-
-                const sAddr = parts.join(', ') || data.display_name?.split(',').slice(0, 3).join(', ') || '';
-                setSuggestedAddr(sAddr);
-
-                // Safely update empty fields
-                setCity(prev => prev || detectedCity);
-                setPinCode(prev => prev || detectedPinCode);
-                
-                if (detectedState) {
-                    const match = INDIAN_STATES.find(s => s.toLowerCase() === detectedState.toLowerCase());
-                    if (match) setState(prev => prev || match);
-                }
-            }
-        } catch (e) {
-            console.error("GPS Reverse geocode fallback error:", e);
-        }
-    };
-
-    // High accuracy GPS Auto-Detection
+    // Auto-fill address via GPS Reverse Geocoding
     const handleDetectGPS = () => {
         if (!navigator.geolocation) {
             notify('Geolocation is not supported by your browser', 'error');
@@ -104,17 +61,48 @@ const Shipping: React.FC = () => {
 
         setLocatingGPS(true);
         navigator.geolocation.getCurrentPosition(
-            (position) => {
+            async (position) => {
                 const { latitude: lat, longitude: lng } = position.coords;
                 setLatitude(lat);
                 setLongitude(lng);
-                handleReverseGeocode(lat, lng);
-                setLocatingGPS(false);
-                notify('Exact GPS location captured successfully!', 'success');
+
+                try {
+                    const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1`);
+                    const data = await res.json();
+                    if (data && data.address) {
+                        const { address: addr } = data;
+                        
+                        const detectedCity = addr.city || addr.town || addr.village || addr.county || '';
+                        const detectedState = addr.state || '';
+                        const detectedPinCode = addr.postcode || '';
+
+                        const parts = [];
+                        if (addr.building || addr.house_number) parts.push(addr.building || addr.house_number);
+                        if (addr.road || addr.pedestrian || addr.street) parts.push(addr.road || addr.pedestrian || addr.street);
+                        if (addr.suburb || addr.neighbourhood || addr.residential) parts.push(addr.suburb || addr.neighbourhood || addr.residential);
+
+                        const formattedStreet = parts.join(', ') || data.display_name?.split(',').slice(0, 3).join(', ') || '';
+                        
+                        if (formattedStreet) setAddress(formattedStreet);
+                        if (detectedCity) setCity(detectedCity);
+                        if (detectedPinCode) setPinCode(detectedPinCode);
+
+                        if (detectedState) {
+                            const match = INDIAN_STATES.find(s => s.toLowerCase() === detectedState.toLowerCase());
+                            if (match) setState(match);
+                        }
+                        notify('Location details filled automatically!', 'success');
+                    }
+                } catch (e) {
+                    console.error("GPS Reverse geocode error:", e);
+                    notify('GPS location detected!', 'success');
+                } finally {
+                    setLocatingGPS(false);
+                }
             },
             (error) => {
                 console.error("GPS detection error:", error);
-                notify('Unable to detect location. Please grant location permissions in your browser.', 'error');
+                notify('Unable to detect location. Please type your address manually.', 'error');
                 setLocatingGPS(false);
             },
             { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
@@ -124,12 +112,9 @@ const Shipping: React.FC = () => {
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const trimmedName = name.trim();
-        if (!trimmedName || !email || !phone || !address) {
-            notify('Please fill all required fields including Full Name, Email, Phone & Address', 'error');
-            return;
-        }
-        if (deliveryType === 'nearest_landmark' && (!city || !state || !pinCode)) {
-            notify('Please fill City, State and Pincode', 'error');
+
+        if (!trimmedName || !email || !phone || !address || !city || !state || !pinCode) {
+            notify('Please fill all required fields', 'error');
             return;
         }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -140,8 +125,8 @@ const Shipping: React.FC = () => {
             notify('Please enter a valid 10-digit mobile number', 'error');
             return;
         }
-        if (deliveryType === 'current_location' && (!latitude || !longitude)) {
-            notify('Please tap "Get My Location" to capture your GPS coordinates', 'error');
+        if (!/^\d{6}$/.test(pinCode.trim())) {
+            notify('Please enter a valid 6-digit Pincode', 'error');
             return;
         }
 
@@ -153,11 +138,11 @@ const Shipping: React.FC = () => {
             city,
             state,
             country: 'India',
-            pinCode,
+            pinCode: pinCode.trim(),
             phone,
-            latitude: deliveryType === 'current_location' ? latitude : undefined,
-            longitude: deliveryType === 'current_location' ? longitude : undefined,
-            deliveryType,
+            latitude,
+            longitude,
+            deliveryType: 'nearest_landmark',
         }));
 
         navigate('/checkout');
@@ -177,96 +162,40 @@ const Shipping: React.FC = () => {
                         Delivery Address
                     </h2>
                     <p className="text-xs text-gray-500 mt-1">
-                        Select your preferred delivery location method
+                        Enter your shipping details for order delivery
                     </p>
-                </div>
-
-                {/* Delivery Option Prompt Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                    <button
-                        type="button"
-                        onClick={() => setDeliveryType('current_location')}
-                        className={`p-4 rounded-2xl border-2 text-left transition-all relative flex flex-col justify-between ${
-                            deliveryType === 'current_location'
-                                ? 'bg-white border-[#5C2333] shadow-md ring-2 ring-[#5C2333]/20'
-                                : 'bg-white/70 border-[#ede3cf] hover:border-[#5C2333]/50'
-                        }`}
-                    >
-                        <div className="flex items-start justify-between mb-2">
-                            <div className="p-2.5 rounded-xl bg-[#5C2333]/10 text-[#5C2333]">
-                                <FaMapMarkerAlt className="text-xl" />
-                            </div>
-                            {deliveryType === 'current_location' && (
-                                <FaCheckCircle className="text-[#5C2333] text-lg" />
-                            )}
-                        </div>
-                        <div>
-                            <h3 className="font-bold text-sm text-gray-900 mb-0.5">
-                                Deliver to Current Location
-                            </h3>
-                            <p className="text-xs text-gray-500 leading-relaxed">
-                                Pinpoint exact coordinates using GPS
-                            </p>
-                        </div>
-                    </button>
-
-                    <button
-                        type="button"
-                        onClick={() => setDeliveryType('nearest_landmark')}
-                        className={`p-4 rounded-2xl border-2 text-left transition-all relative flex flex-col justify-between ${
-                            deliveryType === 'nearest_landmark'
-                                ? 'bg-white border-[#5C2333] shadow-md ring-2 ring-[#5C2333]/20'
-                                : 'bg-white/70 border-[#ede3cf] hover:border-[#5C2333]/50'
-                        }`}
-                    >
-                        <div className="flex items-start justify-between mb-2">
-                            <div className="p-2.5 rounded-xl bg-[#c4633c]/10 text-[#c4633c]">
-                                <FaBuilding className="text-xl" />
-                            </div>
-                            {deliveryType === 'nearest_landmark' && (
-                                <FaCheckCircle className="text-[#5C2333] text-lg" />
-                            )}
-                        </div>
-                        <div>
-                            <h3 className="font-bold text-sm text-gray-900 mb-0.5">
-                                Deliver to Another Location
-                            </h3>
-                            <p className="text-xs text-gray-500 leading-relaxed">
-                                Enter a different delivery address manually
-                            </p>
-                        </div>
-                    </button>
                 </div>
 
                 {/* Main Form Box */}
                 <div className="bg-white rounded-2xl border-2 border-[#ede3cf] p-6 shadow-lg">
 
-                    {/* GPS Auto-Detect Header (Shown for Current Location mode) */}
-                    {deliveryType === 'current_location' && (
-                        <div className="mb-6 p-4 rounded-xl bg-[#f7f4ec] border border-[#ede3cf] flex flex-col sm:flex-row items-center justify-between gap-3">
+                    {/* Auto-Fill via GPS Header */}
+                    <div className="mb-6 p-4 rounded-xl bg-[#f7f4ec] border border-[#ede3cf] flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <div className="flex items-center gap-3">
+                            <div className="p-2.5 rounded-xl bg-[#5C2333]/10 text-[#5C2333]">
+                                <FaMapMarkerAlt className="text-xl" />
+                            </div>
                             <div>
-                                <h4 className="font-bold text-xs text-[#5C2333] uppercase tracking-wider flex items-center gap-1.5 mb-1">
-                                    <FaCompass /> GPS Location Detection
+                                <h4 className="font-bold text-xs text-[#5C2333] uppercase tracking-wider mb-0.5">
+                                    Auto-Fill Location
                                 </h4>
-                                <p className="text-xs text-gray-600">
-                                    {latitude && longitude
-                                        ? `Captured Coordinates: ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`
-                                        : "Tap button to set exact delivery coordinates"}
+                                <p className="text-xs text-gray-500">
+                                    Use GPS to automatically fill your current city & address
                                 </p>
                             </div>
-                            <button
-                                type="button"
-                                onClick={handleDetectGPS}
-                                disabled={locatingGPS}
-                                className="w-full sm:w-auto bg-[#5C2333] hover:bg-[#134b28] text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md shrink-0 active:scale-95"
-                            >
-                                <FaCrosshairs className={locatingGPS ? "animate-spin" : ""} />
-                                <span>{locatingGPS ? "Detecting GPS..." : "📍 Get My Location"}</span>
-                            </button>
                         </div>
-                    )}
+                        <button
+                            type="button"
+                            onClick={handleDetectGPS}
+                            disabled={locatingGPS}
+                            className="w-full sm:w-auto bg-[#5C2333] hover:bg-[#134b28] text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md shrink-0 active:scale-95"
+                        >
+                            <FaCrosshairs className={locatingGPS ? "animate-spin" : ""} />
+                            <span>{locatingGPS ? "Detecting..." : "Use Current Location"}</span>
+                        </button>
+                    </div>
 
-                    {/* Address & Contact Information Form */}
+                    {/* Standard E-Commerce Address Form */}
                     <form onSubmit={submitHandler} className="space-y-4">
                         {/* Name & Email Row */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -298,7 +227,7 @@ const Shipping: React.FC = () => {
                         <div>
                             <label className={labelClass}>Phone / WhatsApp Number <span className="text-red-500">*</span></label>
                             <input
-                                type="text"
+                                type="tel"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 className={inputClass}
@@ -307,10 +236,10 @@ const Shipping: React.FC = () => {
                             />
                         </div>
 
-                        {/* Address */}
+                        {/* Flat / House No. & Street Address */}
                         <div>
                             <label className={labelClass}>
-                                House / Flat No. & Street Address <span className="text-red-500">*</span>
+                                Flat, House No., Building & Street <span className="text-red-500">*</span>
                             </label>
                             <input
                                 type="text"
@@ -320,75 +249,77 @@ const Shipping: React.FC = () => {
                                 placeholder="House/Flat No., Building Name, Street"
                                 required
                             />
-                            {suggestedAddr && deliveryType === 'current_location' && (
-                                <p className="mt-1 text-xs text-gray-500 flex items-center gap-1">
-                                    <FaMap className="text-gray-400" /> Suggested: <button type="button" onClick={() => setAddress(suggestedAddr)} className="text-[#5C2333] underline hover:text-[#134b28] text-left">{suggestedAddr}</button>
-                                </p>
-                            )}
                         </div>
 
                         {/* Landmark Field */}
                         <div>
-                            <label className={labelClass}>
-                                Landmark / Delivery Notes {deliveryType === 'nearest_landmark' && <span className="text-red-500">*</span>}
-                            </label>
+                            <label className={labelClass}>Landmark (Optional)</label>
                             <input
                                 type="text"
                                 value={landmark}
                                 onChange={(e) => setLandmark(e.target.value)}
                                 className={inputClass}
-                                placeholder="e.g. Opposite SBI ATM, Gate No. 2"
-                                required={deliveryType === 'nearest_landmark'}
+                                placeholder="e.g. Near HDFC Bank, Opposite Park"
                             />
                         </div>
 
-                        {/* City, State & Pincode Row — only shown for Another Location */}
-                        {deliveryType === 'nearest_landmark' && (
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                <div>
-                                    <label className={labelClass}>City <span className="text-red-500">*</span></label>
-                                    <input
-                                        type="text"
-                                        value={city}
-                                        onChange={(e) => setCity(e.target.value)}
-                                        className={inputClass}
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label className={labelClass}>State <span className="text-red-500">*</span></label>
-                                    <select
-                                        value={state}
-                                        onChange={(e) => setState(e.target.value)}
-                                        className={inputClass}
-                                        required
-                                    >
-                                        <option value="">Select State</option>
-                                        {INDIAN_STATES.map((s) => (
-                                            <option key={s} value={s}>{s}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className={labelClass}>Pin Code <span className="text-red-500">*</span></label>
-                                    <input
-                                        type="text"
-                                        value={pinCode}
-                                        onChange={(e) => setPinCode(e.target.value)}
-                                        className={inputClass}
-                                        placeholder="6 digits"
-                                        required
-                                    />
-                                </div>
+                        {/* City, State & Pincode Row */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label className={labelClass}>City <span className="text-red-500">*</span></label>
+                                <input
+                                    type="text"
+                                    value={city}
+                                    onChange={(e) => setCity(e.target.value)}
+                                    className={inputClass}
+                                    placeholder="e.g. Hyderabad"
+                                    required
+                                />
                             </div>
-                        )}
+                            <div>
+                                <label className={labelClass}>State <span className="text-red-500">*</span></label>
+                                <select
+                                    value={state}
+                                    onChange={(e) => setState(e.target.value)}
+                                    className={inputClass}
+                                    required
+                                >
+                                    <option value="">Select State</option>
+                                    {INDIAN_STATES.map((s) => (
+                                        <option key={s} value={s}>{s}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <label className={labelClass}>Pincode <span className="text-red-500">*</span></label>
+                                <input
+                                    type="text"
+                                    value={pinCode}
+                                    onChange={(e) => setPinCode(e.target.value)}
+                                    className={inputClass}
+                                    placeholder="6-digit Pincode"
+                                    maxLength={6}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        {/* Security / Delivery Trust Info */}
+                        <div className="pt-2 flex items-center justify-between text-xs text-gray-500 border-t border-[#ede3cf]/60">
+                            <span className="flex items-center gap-1.5 text-[#5C2333] font-medium">
+                                <FaTruck /> Fast & Secure Pan-India Shipping
+                            </span>
+                            <span className="flex items-center gap-1 text-emerald-700 font-medium">
+                                <FaShieldAlt /> Safe Checkout
+                            </span>
+                        </div>
 
                         {/* Submit Button */}
                         <button
                             type="submit"
-                            className="w-full bg-[#5C2333] hover:bg-[#134b28] text-white font-bold py-3.5 px-4 rounded-full transition-colors shadow-md text-base mt-6 flex items-center justify-center gap-2"
+                            className="w-full bg-[#5C2333] hover:bg-[#134b28] text-white font-bold py-3.5 px-4 rounded-full transition-colors shadow-md text-base mt-4 flex items-center justify-center gap-2"
                         >
-                            <span>Proceed to Checkout ➔</span>
+                            <span>Proceed to Payment ➔</span>
                         </button>
                     </form>
                 </div>

@@ -104,7 +104,7 @@ const RazorpayCheckout: React.FC<RazorpayCheckoutProps> = ({
         order_id: orderResponse.order_id,
         name: 'Julina Candles & Melts',
         description: description,
-        image: '/images/logo.png',
+        image: 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png',
         customer_name: customer_name,
         customer_email: customer_email,
         customer_phone: customer_phone,

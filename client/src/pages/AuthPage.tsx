@@ -10,7 +10,7 @@ const AuthPage: React.FC = () => {
       <div className="flex w-full max-w-4xl bg-white rounded-3xl shadow-xl border border-[#ede3cf] overflow-hidden">
         {/* Left Side - Julina Candles & Melts Brand Showcase */}
         <div className="hidden md:flex flex-col md:w-1/2 items-center justify-center p-8 bg-gradient-to-br from-[#185e33]/5 to-[#e5c158]/10 border-r border-[#ede3cf]">
-          <img src="/images/logo.png" alt="Julina Candles & Melts Logo" className="h-12 w-auto mb-4" />
+          <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts Logo" className="h-12 w-auto mb-4" />
           <h1 className="text-3xl font-extrabold text-center mb-2 text-[#185e33] font-serif">
             Julina Candles & Melts
           </h1>

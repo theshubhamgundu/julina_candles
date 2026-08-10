@@ -1,6 +1,7 @@
 import React from 'react';
 import FeaturedSection from '../components/FeaturedSection';
 import PopularProducts from '../components/PopularProduct';
+import ProductCategories from '../components/ProductCategories';
 import { useLatestProductsQuery } from '../redux/api/product.api';
 import CustomerReviews from '../components/common/CustomerReviews';
 import { usePageSEO } from '../hooks/usePageSEO';
@@ -8,7 +9,7 @@ import { webPageSchema } from '../seo/schemas';
 import { FaHeadset, FaTruckFast, FaGift, FaAward } from 'react-icons/fa6';
 
 const HomePage: React.FC = () => {
-  const { data: productData, isLoading: productLoading, isError: productError } = useLatestProductsQuery('');
+  const { data: productData, isError: productError } = useLatestProductsQuery('');
   const products = productData?.products || [];
 
   usePageSEO({
@@ -29,17 +30,6 @@ const HomePage: React.FC = () => {
     ],
   });
 
-  if (productLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[80vh] bg-[#FBF6ED]">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-4 border-[#5C2333]/20 border-t-[#5C2333] rounded-full animate-spin"></div>
-          <p className="text-sm text-gray-600 font-sans tracking-wide">Loading candle collection…</p>
-        </div>
-      </div>
-    );
-  }
-
   if (productError) {
     return (
       <div className="flex items-center justify-center min-h-[80vh] bg-[#FBF6ED]">
@@ -57,21 +47,11 @@ const HomePage: React.FC = () => {
       {/* ─── Hero Section ─── */}
       <FeaturedSection />
 
+      {/* ─── Shop by Category ─── */}
+      <ProductCategories />
+
       {/* ─── Products Collection ─── */}
       <PopularProducts products={products} />
-
-      {/* ─── What Makes Us Unique Section (Graphic Image) ─── */}
-      <section className="py-8 bg-[#FAF6EE] border-y border-[#E6DACB]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex justify-center">
-          <div className="w-full rounded-2xl overflow-hidden shadow-xs border border-[#E6DACB] bg-white">
-            <img
-              src="/images/what_makes_us_unique.png"
-              alt="What Makes Us Unique - Candles That Complement Your Home"
-              className="w-full h-auto object-cover block"
-            />
-          </div>
-        </div>
-      </section>
 
       {/* ─── Customer Reviews ─── */}
       <CustomerReviews />

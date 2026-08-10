@@ -47,7 +47,7 @@ const AdminLoginGate: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
           <div className="w-14 h-14 rounded-full bg-[#185e33] flex items-center justify-center mb-4 shadow-md">
             <FaLock className="text-white text-xl" />
           </div>
-          <img src="/images/logo.png" alt="Julina Candles & Melts" className="h-8 w-auto mb-3" />
+          <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts" className="h-8 w-auto mb-3" />
           <h1 className="text-xl font-serif font-bold text-[#185e33]">Admin Access</h1>
           <p className="text-xs text-gray-500 mt-1 text-center">
             Enter the admin password to access the dashboard.

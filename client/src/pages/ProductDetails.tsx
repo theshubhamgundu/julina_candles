@@ -48,7 +48,7 @@ const SingleProduct: React.FC = () => {
             ? `Buy ${product.name} online. Handcrafted 100% natural soy wax candle from Julina Candles & Melts. Fast delivery across India.`
             : 'Buy Julina Candles & Melts handcrafted decorative, scented, and soy wax candles online.',
         canonical: `/product/${productId}`,
-        ogImage: product?.photo || 'https://julinacandlesandmelts.in/images/logo.png',
+        ogImage: product?.photo || 'https://julinacandlesandmelts.inhttps://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png',
         keywords: product
             ? `${product.name}, buy ${product.name} online, scented candle, soy wax candle, Julina Candles & Melts`
             : 'decorative candles, scented soy wax candles, urli candles',
@@ -67,7 +67,7 @@ const SingleProduct: React.FC = () => {
                 productSchema({
                     name: product.name,
                     description: product.description || 'Handcrafted 100% natural soy wax candle.',
-                    image: product.photo || 'https://julinacandlesandmelts.in/images/logo.png',
+                    image: product.photo || 'https://julinacandlesandmelts.inhttps://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png',
                     url: `/product/${productId}`,
                     sku: `JCM-${productId}`,
                     price: selectedVariant?.salePrice ?? product.price ?? 0,
@@ -162,7 +162,7 @@ const SingleProduct: React.FC = () => {
     };
 
     const getPhotoUrl = (photoUrl?: string) => {
-        if (!photoUrl) return '/images/logo.png';
+        if (!photoUrl) return 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png';
         let cleaned = photoUrl.replace('/images/products/', '/images/');
         if (!cleaned.startsWith('/') && !cleaned.startsWith('http')) {
             cleaned = '/' + cleaned;
@@ -179,11 +179,7 @@ const SingleProduct: React.FC = () => {
                 <div className="bg-white rounded-3xl p-5 sm:p-8 shadow-xl border border-[#ede3cf] flex flex-col md:flex-row gap-8 items-stretch">
                     {/* Left: Product Image */}
                     <div className="flex-1 bg-[#faf6ee] rounded-2xl p-6 flex items-center justify-center border border-[#ede3cf] relative min-h-[280px] sm:min-h-[380px]">
-                        {discountPercent > 0 && (
-                            <span className="bg-[#e5c158] text-[#144f2b] text-xs font-extrabold px-3 py-1 rounded-full absolute top-4 left-4 shadow-sm">
-                                {discountPercent}% OFF
-                            </span>
-                        )}
+
 
                         {/* Out of Stock overlay */}
                         {resolvedProduct.stock <= 0 && (
@@ -289,15 +285,39 @@ const SingleProduct: React.FC = () => {
                             </div>
 
                             {resolvedProduct.description && (
-                                <div className="bg-[#faf6ee] p-4 rounded-xl border border-[#ede3cf]">
-                                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Product Description</h3>
+                                <div className="bg-[#faf6ee] p-4 rounded-xl border border-[#ede3cf] space-y-2">
+                                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Product Description</h3>
                                     <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">{resolvedProduct.description}</p>
                                 </div>
                             )}
+
+                            {/* Features Highlights */}
+                            <div className="my-4 grid grid-cols-2 gap-2 text-[11px] font-semibold text-[#5C2333]">
+                                <div className="bg-[#5C2333]/5 p-2.5 rounded-xl border border-[#5C2333]/10 flex items-center gap-2">
+                                    <span>🌱 100% Natural Soy Wax</span>
+                                </div>
+                                <div className="bg-[#5C2333]/5 p-2.5 rounded-xl border border-[#5C2333]/10 flex items-center gap-2">
+                                    <span>✨ Clean soot-free burn</span>
+                                </div>
+                                <div className="bg-[#5C2333]/5 p-2.5 rounded-xl border border-[#5C2333]/10 flex items-center gap-2">
+                                    <span>🌸 Premium Essential Oils</span>
+                                </div>
+                                <div className="bg-[#5C2333]/5 p-2.5 rounded-xl border border-[#5C2333]/10 flex items-center gap-2">
+                                    <span>🎁 Gift & Customisation Ready</span>
+                                </div>
+                            </div>
                         </div>
 
-                        {/* Add to Cart Controls */}
-                        <div className="pt-4 border-t border-gray-100">
+                        {/* Bulk WhatsApp Inquiry & Add to Cart Controls */}
+                        <div className="space-y-3 pt-4 border-t border-gray-100">
+                            <a
+                                href={`https://wa.me/917304888197?text=${encodeURIComponent(`Hi Julina Candles, I am interested in bulk/custom order for "${resolvedProduct.name}"`)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold py-2.5 px-4 rounded-full text-xs transition-all flex items-center justify-center gap-2 shadow-xs"
+                            >
+                                <span>💬 Enquire for Bulk / Corporate Order on WhatsApp</span>
+                            </a>
                             {cartItem ? (
                                 <div className="flex flex-col sm:flex-row gap-3">
                                     <div className="flex items-center justify-between bg-[#faf6ee] border border-[#ede3cf] rounded-full px-4 py-2 flex-1">

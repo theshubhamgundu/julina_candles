@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaInstagram, FaWhatsapp, FaYoutube, FaEnvelope, FaPhone, FaLocationDot, FaShieldHalved } from 'react-icons/fa6';
+import { FaInstagram, FaWhatsapp, FaYoutube, FaEnvelope, FaPhone, FaLocationDot } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
         <div className="lg:col-span-4 space-y-6">
           <Link to="/" className="inline-block">
             <div className="w-24 h-24 rounded-2xl bg-[#FBF6ED] p-2.5 shadow-xl border-2 border-[#C79A56] flex items-center justify-center transform hover:scale-105 transition-transform duration-300">
-              <img src="/images/logo.png" alt="Julina Candles & Melts Logo" className="w-full h-full object-contain" />
+              <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts Logo" className="w-full h-full object-contain" />
             </div>
           </Link>
 
@@ -113,10 +113,7 @@ const Footer: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p>© 2026 Julina Candles & Melts. All rights reserved.</p>
 
-          <div className="flex items-center gap-2 text-[11px] text-[#C79A56]">
-            <FaShieldHalved />
-            <span>100% Secure Checkout via Razorpay & UPI</span>
-          </div>
+          {/* Secure badge removed */}
 
           <p className="text-[11px]">Crafted with ♥ in Maharashtra, India</p>
         </div>

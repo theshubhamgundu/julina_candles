@@ -65,7 +65,7 @@ const Cart: React.FC = () => {
   };
 
   const getPhotoUrl = (photoUrl?: string) => {
-    if (!photoUrl) return '/images/logo.png';
+    if (!photoUrl) return 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png';
     let cleaned = photoUrl.replace('/images/products/', '/images/');
     if (!cleaned.startsWith('/') && !cleaned.startsWith('http')) {
       cleaned = '/' + cleaned;
@@ -111,7 +111,7 @@ const Cart: React.FC = () => {
                             alt={item.name}
                             className="h-16 w-16 object-contain rounded-xl bg-white p-1 border border-[#E6DACB]"
                             onError={(e) => {
-                              (e.target as HTMLImageElement).src = '/images/logo.png';
+                              (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png';
                             }}
                           />
                         </Link>
@@ -175,7 +175,7 @@ const Cart: React.FC = () => {
                                 alt={item.name}
                                 className="h-14 w-14 object-contain rounded-xl bg-[#FBF6ED] p-1 border border-[#E6DACB]"
                                 onError={(e) => {
-                                  (e.target as HTMLImageElement).src = '/images/logo.png';
+                                  (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png';
                                 }}
                               />
                               <span className="font-bold text-sm text-[#5C2333] group-hover:underline">{item.name}</span>

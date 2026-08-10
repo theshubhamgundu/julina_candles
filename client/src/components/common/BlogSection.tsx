@@ -18,7 +18,7 @@ const mainArticle: BlogPost = {
   date: 'Feb 10, 2026',
   excerpt: 'Learn the essential candle care rituals that double the burn lifespan of your handcrafted soy wax jars and urlis, while ensuring clean, soot-free aromatics.',
   tags: ['Candle Care', 'Soy Wax Tips', 'Home Decor'],
-  image: '/images/products/scented glass jar.png',
+  image: '/images/productshttps://res.cloudinary.com/bzykgznp/image/upload/v1786389871/julina_candles/products/scented_glass_jar.png',
   content: [
     'Handcrafted soy wax candles are an investment in peace, warmth, and home ambiance. However, proper candle care is essential to ensure your candle burns evenly and lasts for dozens of hours.',
     '1. The First Burn is Critical: Always allow the top layer of wax to melt completely to the edges of the jar on your first burn (usually 2 to 3 hours). This creates a "wax memory" and prevents tunneling.',
@@ -34,7 +34,7 @@ const secondArticle: BlogPost = {
   date: 'Jan 28, 2026',
   excerpt: 'Discover how pairing rich espresso and caramel coffee candles with serene lotus and rose aromatics transforms living spaces into soothing retreats.',
   tags: ['Aromatherapy', 'Fragrance Layering', 'Luxury Decor'],
-  image: '/images/products/caramel coffee cream.png',
+  image: '/images/productshttps://res.cloudinary.com/bzykgznp/image/upload/v1786389834/julina_candles/products/caramel_coffee_cream.png',
   content: [
     'Aromatherapy has the power to transform mood, awaken productivity, and induce deep relaxation.',
     'Morning Vitality: Burn Caramel Coffee Cream or Coffee Beans candles near your workspace to stimulate mental clarity and warm focus.',
@@ -51,7 +51,7 @@ const sideArticles: BlogPost[] = [
     date: 'Dec 15, 2025',
     excerpt: 'Step-by-step styling tips for lotus pond urlis and peacock wax candles during Diwali, Ganesh Chaturthi, and weddings...',
     tags: ['Festive Decor', 'Urli Styling'],
-    image: '/images/products/peacock pink wax urli.png',
+    image: '/images/productshttps://res.cloudinary.com/bzykgznp/image/upload/v1786389862/julina_candles/products/peacock_pink_wax_urli.png',
     content: [
       'Traditional urlis are timeless Indian decor elements symbolizing abundance and light.',
       'Place our handcrafted Lotus Pond Urli on a brass tray floating with fresh marigold petals. Light the soy wax candle center for an unforgettable warm glow.'
@@ -64,7 +64,7 @@ const sideArticles: BlogPost[] = [
     date: 'Nov 02, 2025',
     excerpt: 'Understanding the clean, non-toxic benefits of eco-friendly soy wax vs petroleum byproduct paraffin candles...',
     tags: ['Eco-Friendly', 'Indoor Air Purity'],
-    image: '/images/products/soy wax concrete shankh.png',
+    image: '/images/productshttps://res.cloudinary.com/bzykgznp/image/upload/v1786389873/julina_candles/products/soy_wax_concrete_shankh.png',
     content: [
       'Paraffin wax is a refined byproduct of petroleum that emits toxic black soot and synthetic fumes when burned.',
       'Our 100% natural soy wax is renewable, biodegradable, and burns soot-free, keeping your indoor air pure and clean.'

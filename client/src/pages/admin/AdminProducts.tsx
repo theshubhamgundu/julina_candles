@@ -1,11 +1,11 @@
 import Papa from 'papaparse';
 import React, { useEffect, useMemo, useState } from 'react';
-import { FaArrowDown, FaArrowUp, FaEdit, FaFileCsv, FaPlus } from 'react-icons/fa';
+import { FaArrowDown, FaArrowUp, FaEdit, FaFileCsv, FaPlus, FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Cell, Column, HeaderGroup, Row, useSortBy, useTable } from 'react-table';
 import Pagination from '../../components/common/Pagination';
 import SkeletonLoader from '../../components/common/SkeletonLoader';
-import { useAllProductsQuery } from '../../redux/api/product.api';
+import { useAllProductsQuery, useDeleteProductMutation } from '../../redux/api/product.api';
 import { CustomError, Product } from '../../types/api-types';
 import { notify } from '../../utils/util';
 
@@ -15,7 +15,20 @@ const AdminProducts: React.FC = () => {
   const [limit] = useState(8); // Items per page
   const [sortBy, setSortBy] = useState<{ id: string; desc: boolean }>({ id: '', desc: false });
   const { data: productsData, isLoading, isError, error, refetch } = useAllProductsQuery({ page, limit, sortBy });
+  const [deleteProduct] = useDeleteProductMutation();
   const [data, setData] = useState<Product[]>([]);
+
+  const handleDelete = async (productId: string, productName: string) => {
+    if (window.confirm(`Are you sure you want to delete "${productName}"? This will immediately remove it from the home page and catalog.`)) {
+      try {
+        const res = await deleteProduct({ productId }).unwrap();
+        notify(res.message || 'Product deleted successfully', 'success');
+        refetch();
+      } catch (err: any) {
+        notify(err?.data?.message || 'Failed to delete product', 'error');
+      }
+    }
+  };
 
   useEffect(() => {
     if (productsData?.products) {
@@ -113,12 +126,20 @@ const AdminProducts: React.FC = () => {
       {
         Header: 'Actions',
         Cell: ({ row }: { row: Row<Product> }) => (
-          <button
-            onClick={() => navigate(`/admin/products/${row.original._id}`)}
-            className="text-secondary hover:bg-secondary/10 px-3 py-1.5 rounded-lg border border-secondary/20 font-medium text-sm transition flex items-center gap-1.5"
-          >
-            <FaEdit /> Manage
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => navigate(`/admin/products/${row.original._id}`)}
+              className="text-secondary hover:bg-secondary/10 px-3 py-1.5 rounded-lg border border-secondary/20 font-medium text-xs transition flex items-center gap-1.5"
+            >
+              <FaEdit /> Manage
+            </button>
+            <button
+              onClick={() => handleDelete(row.original._id, row.original.name)}
+              className="text-red-600 hover:bg-red-50 px-3 py-1.5 rounded-lg border border-red-200 font-medium text-xs transition flex items-center gap-1.5"
+            >
+              <FaTrash /> Delete
+            </button>
+          </div>
         ),
         disableSortBy: true,
       },

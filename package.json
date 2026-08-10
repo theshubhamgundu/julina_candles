@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
+    "cloudinary": "^2.10.0",
     "razorpay": "^2.9.8",
     "vite": "^8.2.0"
   }

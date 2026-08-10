@@ -94,7 +94,7 @@ const AboutPage: React.FC = () => {
               alt="Julina Candles & Melts Artisanal Collection"
               className="w-full h-80 object-cover"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = '/images/logo.png';
+                (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png';
               }}
             />
           </div>

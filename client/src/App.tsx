@@ -18,7 +18,7 @@ const CartPage = lazy(() => import('./pages/CartPage'));
 const ProductDetails = lazy(() => import('./pages/ProductDetails'));
 const CheckoutForm = lazy(() => import('./components/CheckoutForm'));
 const Shipping = lazy(() => import('./pages/Shipping'));
-const SearchPage = lazy(() => import('./pages/SearchPage'));
+
 const TermsAndConditions = lazy(() => import('./pages/TermsAndConditions'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const ShippingPolicy = lazy(() => import('./pages/ShippingPolicy'));
@@ -65,7 +65,7 @@ const App: React.FC = () => {
                                 <Route path="about" element={<AboutPage />} />
                                 <Route path="products" element={<ProductsPage />} />
                                 <Route path="product/:productId" element={<ProductDetails />} />
-                                <Route path="search" element={<SearchPage />} />
+                                <Route path="search" element={<Navigate to="/products" replace />} />
                                 <Route path="track-shipment" element={<TrackShipment />} />
                                 <Route path="terms" element={<TermsAndConditions />} />
                                 <Route path="privacy" element={<PrivacyPolicy />} />

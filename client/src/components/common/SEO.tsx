@@ -19,7 +19,7 @@ const DEFAULT_DESCRIPTION =
   'Julina Candles & Melts is a trusted exporter and supplier of handcrafted decorative candles, scented candles, soy wax candles, flower candles, urli candles, coffee candles and luxury gift candles from Maharashtra, India.';
 const DEFAULT_KEYWORDS =
   'decorative candle exporter india, scented candle supplier india, soy wax candle exporter, urli candle manufacturer india, flower candle supplier, coffee candle exporter, luxury candle exporter, gift candle supplier, handmade candle exporter india, premium candles manufacturer, candle exporter maharashtra, candle supplier india';
-const DEFAULT_OG_IMAGE = `${DOMAIN}/images/logo.png`;
+const DEFAULT_OG_IMAGE = `${DOMAIN}https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png`;
 
 export const SEO: React.FC<SEOProps> = ({
   title = DEFAULT_TITLE,

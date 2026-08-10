@@ -4,6 +4,7 @@ import { useNewProductMutation } from '../../redux/api/product.api';
 import { notify } from '../../utils/util';
 import { CustomError } from '../../types/api-types';
 import BackButton from '../common/BackBtn';
+import { uploadToCloudinary } from '../../utils/cloudinary';
 import { FaBoxOpen } from 'react-icons/fa';
 
 const AdminAddProduct: React.FC = () => {
@@ -39,6 +40,8 @@ const AdminAddProduct: React.FC = () => {
         }
     };
 
+    const [uploadingImage, setUploadingImage] = useState(false);
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!formData.name || !formData.category || !formData.stock || !formData.price || !photoFile || !formData.description) {
@@ -46,23 +49,26 @@ const AdminAddProduct: React.FC = () => {
             return;
         }
 
-        const productFormData = new FormData();
-        productFormData.append('name', formData.name);
-        productFormData.append('category', formData.category.toLowerCase());
-        productFormData.append('stock', formData.stock.toString());
-        productFormData.append('price', formData.price.toString());
-        productFormData.append('description', formData.description);
-        if (photoFile) {
-            productFormData.append('photo', photoFile);
-        }
-
         try {
+            setUploadingImage(true);
+            const { url: cloudinaryUrl } = await uploadToCloudinary(photoFile);
+
+            const productFormData = new FormData();
+            productFormData.append('name', formData.name);
+            productFormData.append('category', formData.category);
+            productFormData.append('stock', formData.stock.toString());
+            productFormData.append('price', formData.price.toString());
+            productFormData.append('description', formData.description);
+            productFormData.append('photo', cloudinaryUrl);
+
             await newProduct({ formData: productFormData }).unwrap();
             notify('Product added successfully', 'success');
             navigate('/admin/products');
-        } catch (err) {
+        } catch (err: any) {
             const customError = err as CustomError;
-            notify(customError.data.message, 'error');
+            notify(customError?.data?.message || err?.message || 'Failed to add product', 'error');
+        } finally {
+            setUploadingImage(false);
         }
     };
 
@@ -103,14 +109,21 @@ const AdminAddProduct: React.FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-1">
                             <label className="text-xs font-bold uppercase text-gray-500 tracking-wider">Category</label>
-                            <input
-                                type="text"
+                            <select
                                 name="category"
                                 value={formData.category}
-                                onChange={handleChange}
-                                placeholder="e.g. Fruits, Honey, Dairy"
-                                className="border border-[#efe9db] focus:border-[#1f5133] focus:ring-1 focus:ring-[#1f5133] focus:outline-none rounded-xl p-3 w-full text-sm placeholder-gray-300"
-                            />
+                                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                                className="border border-[#efe9db] focus:border-[#1f5133] focus:ring-1 focus:ring-[#1f5133] focus:outline-none rounded-xl p-3 w-full text-sm bg-white"
+                                required
+                            >
+                                <option value="">Select Category</option>
+                                <option value="Festive Urli Candles">Festive Urli Candles</option>
+                                <option value="Wooden Dough Bowl Candles">Wooden Dough Bowl Candles</option>
+                                <option value="Mithai Candles">Mithai Candles</option>
+                                <option value="Floral Candles">Floral Candles</option>
+                                <option value="Glass Jar Candles">Glass Jar Candles</option>
+                                <option value="Fragrances">Fragrances</option>
+                            </select>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-1">
@@ -180,10 +193,10 @@ const AdminAddProduct: React.FC = () => {
                         </button>
                         <button
                             type="submit"
-                            disabled={isLoading}
+                            disabled={isLoading || uploadingImage}
                             className="flex items-center bg-[#1f5133] hover:bg-[#163b26] text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition shadow-sm disabled:opacity-50"
                         >
-                            {isLoading ? 'Adding Product...' : 'Add Product'}
+                            {uploadingImage ? 'Uploading Image to Cloudinary...' : isLoading ? 'Adding Product...' : 'Add Product'}
                         </button>
                     </div>
                 </form>

@@ -35,7 +35,7 @@ const ProductInfographic: React.FC = () => {
                   alt="Julina Artisanal Candle Showcase"
                   className="h-56 sm:h-64 object-contain drop-shadow-md hover:scale-105 transition-transform duration-300"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/images/logo.png';
+                    (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png';
                   }}
                 />
               </div>

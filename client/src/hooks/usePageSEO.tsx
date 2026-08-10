@@ -12,7 +12,7 @@ interface SEOProps {
 }
 
 const BASE_URL = 'https://julinacandlesandmelts.in';
-const DEFAULT_IMAGE = `${BASE_URL}/images/logo.png`;
+const DEFAULT_IMAGE = `${BASE_URL}https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png`;
 
 /**
  * usePageSEO – sets <title>, all meta tags, canonical, and injects

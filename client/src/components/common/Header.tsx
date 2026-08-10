@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../../redux/store';
 
 const promoOffers = [
-  "✨ 100% Handcrafted Scented & Soy Wax Candles • Luxury Home Fragrance & Ambiance",
-  "🪔 Exquisite Decorative Urli & Festival Candles • Hand-poured with Premium Aromatherapy Oils",
-  "🚢 Trusted Exporter & Supplier of Premium Candles from Maharashtra, India",
-  "📦 Express Delivery & Worldwide Shipping Available",
-  "📞 Customer Care & Wholesale Inquiries: +91 7304888197",
+  "✨ 100% Hand-Poured Natural Soy Wax Candles • Pure Aromatherapy Fragrances",
+  "🪔 Exquisite Decorative Urli & Festival Candles • Handcrafted Artisanal Designs",
+  "🌸 Flower Embed Jars & Modak Mithai Candles • Perfect for Gifting & Home Decor",
+  "📦 Express Shipping Across India • Secure & Careful Packaging Guaranteed",
 ];
 
 const Header: React.FC = () => {
@@ -26,7 +25,7 @@ const Header: React.FC = () => {
   return (
     <>
       {/* ─── Top Offer & Promo Announcement Marquee Bar ─── */}
-      <div className="w-full bg-[#e5c158] text-primaryDark font-bold text-xs py-1.5 px-4 overflow-hidden relative z-50 border-b border-black/10">
+      <div className="w-full bg-[#5C2333] text-white font-medium text-xs py-2 px-4 overflow-hidden relative z-50 border-b border-[#C79A56]/30">
         <div className="relative w-full flex overflow-hidden">
           <div className="animate-marquee flex items-center gap-12 whitespace-nowrap">
             {[...promoOffers, ...promoOffers].map((offer, idx) => (
@@ -44,7 +43,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" onClick={closeMobileMenu} className="flex items-center gap-2.5">
-              <img src="/images/logo.png" alt="Julina Candles & Melts Logo" className="h-9 md:h-12 w-auto object-contain" />
+              <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts Logo" className="h-9 md:h-12 w-auto object-contain" />
               <span className="text-lg md:text-2xl font-serif font-bold tracking-wide text-[#5C2333]">Julina Candles & Melts</span>
             </Link>
           </div>
@@ -115,7 +114,7 @@ const Header: React.FC = () => {
             <div>
               <div className="flex justify-between items-center pb-5 border-b border-white/15 mb-6">
                 <div className="flex items-center gap-2.5">
-                  <img src="/images/logo.png" alt="Logo" className="h-9 w-auto" />
+                  <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Logo" className="h-9 w-auto" />
                   <span className="font-serif font-bold text-lg text-cream">Julina Candles & Melts</span>
                 </div>
                 <button
