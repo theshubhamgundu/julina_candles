@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, incrementCartItem, decrementCartItem } from '../redux/reducers/cart.reducer';
 import { RootState } from '../redux/store';
 import { Product } from '../types/api-types';
+import { FaShoppingBag, FaStar } from 'react-icons/fa';
 
 interface ProductCardProps {
   product: Product;
@@ -16,30 +17,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
 
-  // Prices come directly from DB — no hardcoded values
   let displayPrice = product.price;
-  let originalPrice = product.price;
   let priceLabel = '';
 
   if (hasVariants) {
     const prices = product.variants.map((v: any) => v.salePrice || v.price || 0).filter((p: number) => p > 0);
-    const mrps = product.variants.map((v: any) => v.mrp || v.salePrice || v.price || 0).filter((p: number) => p > 0);
     if (prices.length > 0) {
       const minPrice = Math.min(...prices);
       const maxPrice = Math.max(...prices);
       displayPrice = minPrice;
-      originalPrice = mrps.length > 0 ? Math.max(...mrps) : maxPrice;
       priceLabel = minPrice !== maxPrice ? `₹${minPrice} – ₹${maxPrice}` : `₹${minPrice}`;
     }
   }
 
-  const discountPercent = originalPrice > displayPrice
-    ? Math.round(((originalPrice - displayPrice) / originalPrice) * 100)
-    : 0;
-
-  // Stock from DB
   const isOutOfStock = product.stock <= 0;
-
   const cartItem = cartItems.find(item => item.productId === product._id);
 
   const handleAddToCart = (event: React.MouseEvent) => {
@@ -47,7 +38,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     if (isOutOfStock) return;
 
     if (hasVariants) {
-      // Redirect to product page to select variant
       navigate(`/product/${product._id}`);
       return;
     }
@@ -80,97 +70,78 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div
       onClick={() => navigate(`/product/${product._id}`)}
-      className="bg-white rounded-3xl p-4 sm:p-6 border-2 border-[#185e33]/15 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full group relative cursor-pointer"
+      className="bg-white rounded-3xl p-5 border border-[#E6DACB] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between h-full group relative cursor-pointer overflow-hidden"
     >
       {/* Top Image Container */}
-      <div className="relative bg-[#faf6ee] rounded-2xl p-4 flex items-center justify-center h-56 sm:h-72 md:h-80 mb-4 border border-[#ede3cf] overflow-hidden">
-        {/* Discount / Variant Badge */}
-        {hasVariants ? (
-          <span className="bg-[#185e33] text-white text-[10px] sm:text-xs font-bold px-2.5 py-0.5 sm:py-1 rounded-full absolute top-2.5 left-2.5 z-10 shadow-xs">
-            {product.variants!.length} Weight Options
-          </span>
-        ) : discountPercent > 0 ? (
-          <span className="bg-[#e5c158] text-[#144f2b] text-[10px] sm:text-xs font-bold px-2.5 py-0.5 sm:py-1 rounded-full absolute top-2.5 left-2.5 z-10 shadow-xs">
-            {discountPercent}% OFF
-          </span>
-        ) : null}
+      <div className="relative bg-[#FBF6ED] rounded-2xl p-4 flex items-center justify-center h-60 md:h-72 mb-4 border border-[#E6DACB]/60 overflow-hidden group-hover:bg-[#F8EFE0] transition-colors">
+        {/* Category Badge */}
+        <span className="bg-[#5C2333] text-[#FBF6ED] text-[10px] font-bold px-3 py-1 rounded-full absolute top-3 left-3 z-10 shadow-xs uppercase tracking-wider">
+          {product.category || 'Soy Wax Candle'}
+        </span>
+
+        {/* Rating Badge */}
+        <div className="bg-white/80 backdrop-blur-md text-[#C79A56] text-[10px] font-bold px-2.5 py-1 rounded-full absolute top-3 right-3 z-10 shadow-xs flex items-center gap-1 border border-[#E6DACB]">
+          <FaStar className="text-xs" />
+          <span>4.9</span>
+        </div>
 
         {/* Out of Stock Overlay */}
         {isOutOfStock && (
-          <div className="absolute inset-0 bg-white/60 z-10 flex items-center justify-center rounded-2xl">
-            <span className="bg-red-100 text-red-700 text-xs font-bold px-4 py-2 rounded-full border border-red-200">
+          <div className="absolute inset-0 bg-white/75 backdrop-blur-xs z-20 flex items-center justify-center rounded-2xl">
+            <span className="bg-red-100 text-red-700 text-xs font-bold px-4 py-2 rounded-full border border-red-200 shadow-sm">
               Out of Stock
             </span>
           </div>
         )}
 
         <img
-          src={product.photo || '/images/mainImage.png'}
+          src={product.photo || '/images/logo.png'}
           alt={product.name}
-          className="w-full h-full object-contain p-1.5 group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-contain p-2 group-hover:scale-108 transition-transform duration-500 drop-shadow-md"
         />
       </div>
 
       {/* Product Details */}
-      <div className="flex flex-col flex-1 px-0.5">
-        <h3 className="text-sm sm:text-base md:text-lg font-serif font-bold text-[#185e33] text-center mb-1 line-clamp-2 group-hover:text-primary transition-colors">
+      <div className="flex flex-col flex-1">
+        <h3 className="text-base md:text-lg font-serif font-bold text-[#2A1C22] text-center mb-1.5 line-clamp-2 group-hover:text-[#5C2333] transition-colors leading-snug">
           {product.name}
         </h3>
 
-        {/* Category Badge */}
-        <div className="text-center mb-2">
-          <span className="inline-block bg-[#185e33]/10 text-[#185e33] text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full capitalize">
-            {product.category}
-          </span>
-        </div>
-
         {/* Price Row */}
-        <div className="flex items-center justify-center gap-2 mb-3 min-h-[32px]">
+        <div className="flex items-center justify-center gap-2 mb-4">
           {hasVariants ? (
-            <span className="text-xs sm:text-sm font-bold text-[#185e33] bg-[#185e33]/10 px-3 py-1 rounded-full border border-[#185e33]/20">
+            <span className="text-xs font-bold text-[#5C2333] bg-[#5C2333]/10 px-3 py-1 rounded-full border border-[#5C2333]/20">
               {priceLabel}
             </span>
           ) : (
-            <>
-              <span className="text-base sm:text-lg md:text-xl font-bold text-ink">₹ {displayPrice}</span>
-              {discountPercent > 0 && (
-                <span className="text-xs sm:text-sm text-gray-400 line-through">₹ {originalPrice}</span>
-              )}
-            </>
+            <span className="text-lg md:text-xl font-bold text-[#5C2333] font-serif">
+              ₹ {displayPrice}
+            </span>
           )}
         </div>
 
-        {/* Stock indicator for low stock */}
-        {!isOutOfStock && product.stock <= 10 && product.stock > 0 && (
-          <div className="text-center mb-2">
-            <span className="text-[10px] font-bold text-red-600">
-              Only {product.stock} left!
-            </span>
-          </div>
-        )}
-
-        {/* Actions */}
+        {/* Action Button */}
         <div className="mt-auto">
           {!hasVariants && cartItem ? (
             <div className="flex flex-col gap-2" onClick={(e) => e.stopPropagation()}>
-              <div className="flex items-center justify-between bg-white border border-[#185e33]/30 rounded-full px-3 py-1 sm:py-1.5">
+              <div className="flex items-center justify-between bg-[#FBF6ED] border border-[#E6DACB] rounded-full px-3 py-1.5">
                 <button
                   onClick={handleDecrement}
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-100 text-[#185e33] font-bold flex items-center justify-center hover:bg-gray-200 text-sm"
+                  className="w-7 h-7 rounded-full bg-white text-[#5C2333] font-bold flex items-center justify-center hover:bg-[#5C2333] hover:text-white transition-colors shadow-xs text-sm"
                 >
                   −
                 </button>
-                <span className="text-xs sm:text-sm font-bold text-ink">{cartItem.quantity} in Cart</span>
+                <span className="text-xs font-bold text-[#2A1C22]">{cartItem.quantity} in Cart</span>
                 <button
                   onClick={handleIncrement}
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-100 text-[#185e33] font-bold flex items-center justify-center hover:bg-gray-200 text-sm"
+                  className="w-7 h-7 rounded-full bg-white text-[#5C2333] font-bold flex items-center justify-center hover:bg-[#5C2333] hover:text-white transition-colors shadow-xs text-sm"
                 >
                   +
                 </button>
               </div>
               <button
                 onClick={handleGoToCart}
-                className="w-full bg-[#185e33] hover:bg-[#134b28] text-white font-bold text-xs sm:text-sm py-2.5 sm:py-3 rounded-full transition-colors shadow-xs"
+                className="w-full bg-[#5C2333] hover:bg-[#3E1622] text-white font-bold text-xs py-3 rounded-full transition-all shadow-md"
               >
                 Go to Cart
               </button>
@@ -179,17 +150,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <button
               onClick={handleAddToCart}
               disabled={isOutOfStock}
-              className={`w-full font-bold text-xs sm:text-sm py-2.5 sm:py-3 rounded-full transition-colors shadow-xs flex items-center justify-center gap-2 ${
+              className={`w-full font-bold text-xs py-3 rounded-full transition-all shadow-md flex items-center justify-center gap-2 uppercase tracking-wider ${
                 isOutOfStock
-                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                  : 'bg-[#185e33] hover:bg-[#134b28] text-white'
+                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none'
+                  : 'bg-[#5C2333] hover:bg-[#3E1622] text-[#FBF6ED] hover:shadow-lg'
               }`}
             >
+              <FaShoppingBag className="text-sm text-[#C79A56]" />
               <span>
                 {isOutOfStock
                   ? 'Out of Stock'
                   : hasVariants
-                    ? 'Select Options ➔'
+                    ? 'Select Options'
                     : 'Add to Cart'}
               </span>
             </button>

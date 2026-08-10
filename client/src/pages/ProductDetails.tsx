@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import BackButton from '../components/common/BackBtn';
 import Banner from '../components/common/Banner';
-import ProductInfographic from '../components/ProductInfographic';
 import { useProductDetailsQuery } from '../redux/api/product.api';
 import { addToCart, decrementCartItem, incrementCartItem } from '../redux/reducers/cart.reducer';
 import { RootState } from '../redux/store';
@@ -41,25 +40,25 @@ const SingleProduct: React.FC = () => {
 
     const product = data?.product;
 
-    // ─── Dynamic per-page SEO / AEO / GEO ───
+    // ─── Dynamic per-page SEO ───
     usePageSEO({
         title: product
-            ? `${product.name} – Artisanal Candles GI 51 | Buy Online | Julina Candles & Melts`
-            : 'Artisanal Candles | Julina Candles & Melts',
+            ? `${product.name} | Julina Candles & Melts`
+            : 'Luxury Decorative Candle | Julina Candles & Melts',
         description: product
-            ? `Buy ${product.name} online. ICAR-certified GI 51 rice — doctor-guided, hand-pounded, 100% pesticide-free. Available in multiple packs. Fast delivery across India.`
-            : 'Buy Julina Candles & Melts certified Artisanal Candles (GI 51) online — doctor-guided nutrition for diabetes & metabolic health.',
+            ? `Buy ${product.name} online. Handcrafted 100% natural soy wax candle from Julina Candles & Melts. Fast delivery across India.`
+            : 'Buy Julina Candles & Melts handcrafted decorative, scented, and soy wax candles online.',
         canonical: `/product/${productId}`,
-        ogImage: product?.photo || 'https://julinacandles.in/images/julinacandles.png',
+        ogImage: product?.photo || 'https://julinacandlesandmelts.in/images/logo.png',
         keywords: product
-            ? `${product.name}, Artisanal Candles, buy ${product.name} online, GI 51 rice, diabetic rice India, organic rice`
-            : 'Artisanal Candles, GI 51 rice, diabetic rice',
+            ? `${product.name}, buy ${product.name} online, scented candle, soy wax candle, Julina Candles & Melts`
+            : 'decorative candles, scented soy wax candles, urli candles',
         schema: product
             ? [
                 webPageSchema({
                     url: `/product/${productId}`,
-                    name: `${product.name} – Artisanal Candles GI 51 | Julina Candles & Melts`,
-                    description: `Buy ${product.name} online. ICAR-certified GI 51 rice — hand-pounded, pesticide-free.`,
+                    name: `${product.name} | Julina Candles & Melts`,
+                    description: `Buy ${product.name} online — handcrafted soy wax candle.`,
                     breadcrumb: [
                         { name: 'Home', url: '/' },
                         { name: 'Products', url: '/products' },
@@ -68,10 +67,10 @@ const SingleProduct: React.FC = () => {
                 }),
                 productSchema({
                     name: product.name,
-                    description: product.description || 'ICAR-IIRR certified Artisanal Candles (GI 51) — hand-pounded, pesticide-free, doctor-guided.',
-                    image: product.photo || 'https://julinacandles.in/images/mainImage.png',
+                    description: product.description || 'Handcrafted 100% natural soy wax candle.',
+                    image: product.photo || 'https://julinacandlesandmelts.in/images/logo.png',
                     url: `/product/${productId}`,
-                    sku: `VH-${productId}`,
+                    sku: `JCM-${productId}`,
                     price: selectedVariant?.salePrice ?? product.price ?? 0,
                     mrp: selectedVariant?.mrp,
                     availability: product.stock > 0
@@ -340,8 +339,6 @@ const SingleProduct: React.FC = () => {
                 <div className="mt-8">
                     <Banner />
                 </div>
-
-                <ProductInfographic />
             </div>
         </div>
     );

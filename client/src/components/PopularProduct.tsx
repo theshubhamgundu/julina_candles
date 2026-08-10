@@ -7,31 +7,27 @@ interface PopularProductsProps {
 }
 
 const PopularProducts: React.FC<PopularProductsProps> = ({ products }) => {
-  const isCombo = (p: Product) => p.category?.toLowerCase().includes('combo') || p.name?.toLowerCase().includes('combo');
-
-  // Ensure exactly 2 catalog products: 1 Single Unit & 1 Combo Pack
-  const singleUnit = products.find(p => !isCombo(p)) || products[0];
-  const comboUnit = products.find(p => isCombo(p));
-
-  const displayProducts: Product[] = [];
-  if (singleUnit) displayProducts.push(singleUnit);
-  if (comboUnit) displayProducts.push(comboUnit);
+  // Take up to 6 products to display in a grid
+  const displayProducts = products && products.length > 0 ? products.slice(0, 6) : [];
 
   return (
-    <section className="py-16 md:py-20 bg-[#f6f1e7]">
-      <div className="max-w-5xl mx-auto px-6">
+    <section className="py-16 md:py-24 bg-[#FBF6ED]">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Section header */}
-        <div className="text-center mb-12">
-          <p className="text-xs font-sans font-semibold text-secondary uppercase tracking-[0.2em] mb-2">
-            Clinically Formulated
-          </p>
-          <h2 className="text-3xl lg:text-4xl font-serif font-bold text-primary">
-            Our premium Products
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-xs font-bold text-[#C79A56] uppercase tracking-[0.2em] block mb-2">
+            ARTISANAL HAND-POURED CREATIONS
+          </span>
+          <h2 className="text-3xl lg:text-4xl font-serif font-bold text-[#2A1C22]">
+            Popular Candle & Urli Collections
           </h2>
+          <p className="text-xs md:text-sm text-gray-600 mt-3 font-light leading-relaxed">
+            Discover our bestselling 100% soy wax candles, coffee aromatics, lotus pond urlis, and festive gift boxes.
+          </p>
         </div>
 
-        {/* Product grid - 2 Centered Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {/* Product Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayProducts.map((product) => (
             <ProductCard product={product} key={product._id} />
           ))}
@@ -42,4 +38,3 @@ const PopularProducts: React.FC<PopularProductsProps> = ({ products }) => {
 };
 
 export default PopularProducts;
-

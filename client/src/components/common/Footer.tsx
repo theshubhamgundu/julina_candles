@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
           <div className="flex gap-3.5 mb-6">
             {[
               { icon: <FaInstagram className="text-[#E1306C]" />, href: 'https://instagram.com/julinacandles.in', label: 'Instagram' },
-              { icon: <FaWhatsapp className="text-[#25D366]" />, href: 'https://wa.me/917032987770', label: 'WhatsApp' },
+              { icon: <FaWhatsapp className="text-[#25D366]" />, href: 'https://wa.me/917304888197', label: 'WhatsApp' },
               { icon: <FaYoutube className="text-[#FF0000]" />, href: 'http://www.youtube.com/@julinacandles.1', label: 'YouTube' },
             ].map((social, i) => (
               <a
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
 
           <p className="text-sm text-cream/90 leading-relaxed">
             Copyright 2026 Julina Candles & Melts.<br />
-            Handcrafted Artisanal Candles & Melts
+            Luxury Decorative & Scented Candle Exporter
           </p>
         </div>
 
@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold text-white text-lg font-serif">Location:</h4>
             <p className="leading-relaxed text-cream/90 mt-1">
-              8-3-1/14, Road No 2B, Virat Nagar, Hyderabad, Telangana - 500097
+              Room No. 28, Sai Shraddha Apartment, Sai Nagari, Ashelegaon, Ulhasnagar, Maharashtra - 421004
             </p>
           </div>
         </div>

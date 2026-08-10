@@ -21,21 +21,22 @@ const ShippingPolicy: React.FC = () => {
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">1. Shipping Locations</h2>
             <p>
-              Julina Candles & Melts provides express delivery for Artisanal Candles products across Hyderabad and surrounding regions.
+              Julina Candles & Melts provides express delivery across India as well as worldwide export shipments for wholesale and bulk orders.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">2. Processing & Dispatch Time</h2>
             <p>
-              All orders are processed and dispatched within <strong>24 hours</strong> (excluding Sundays and national holidays) after payment confirmation.
+              All orders are processed and dispatched within <strong>24 to 48 hours</strong> (excluding Sundays and national holidays) after order confirmation.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">3. Delivery Timelines</h2>
             <ul className="list-disc pl-5 space-y-1 text-xs text-muted">
-              <li><strong>Hyderabad & Surrounding Regions:</strong> Same day to 1-2 business days.</li>
+              <li><strong>Domestic Orders (India):</strong> 3 to 5 business days.</li>
+              <li><strong>International Export Shipments:</strong> Coordinated with express air/sea freight logistics.</li>
             </ul>
           </section>
 

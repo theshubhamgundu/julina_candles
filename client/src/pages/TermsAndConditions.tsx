@@ -15,49 +15,49 @@ const TermsAndConditions: React.FC = () => {
         <div className="mb-8 border-b border-gray-100 pb-6">
           <span className="text-xs font-semibold text-secondary uppercase tracking-widest">LEGAL & COMPLIANCE</span>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mt-1">Terms & Conditions</h1>
-          <p className="text-xs text-muted mt-2">Last Updated: July 24, 2026 • Julina Candles & Melts (Myotrixnutrition LLP)</p>
+          <p className="text-xs text-muted mt-2">Last Updated: August 10, 2026 • Julina Candles & Melts</p>
         </div>
 
         <div className="space-y-6 text-sm text-ink leading-relaxed">
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">1. Overview & Agreement</h2>
             <p>
-              Welcome to <strong>Julina Candles & Melts</strong> (operated by <strong>Myotrixnutrition LLP</strong>). By accessing our website, purchasing our Artisanal Candles products, or utilizing our services, you agree to be bound by these Terms and Conditions. Please read them carefully before making a purchase.
+              Welcome to <strong>Julina Candles & Melts</strong>. By accessing our website, purchasing our handcrafted decorative candles & melts, or utilizing our services, you agree to be bound by these Terms and Conditions. Please read them carefully before making a purchase.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">2. Product Disclaimer</h2>
             <p>
-              Julina Candles & Melts handcrafted artisanal candles are premium home décor and ambiance products. Our products are not intended for medical use or therapeutic treatment. Always ensure proper ventilation when using candles and keep away from children and pets.
+              Julina Candles & Melts handcrafted artisanal candles are premium home décor and ambiance products. Always ensure proper ventilation when burning candles and keep away from flammable items, children, and pets. Never leave a burning candle unattended.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">3. Product & Pricing Information</h2>
             <p>
-              All prices listed on our website are in Indian Rupees (INR) and inclusive of applicable GST taxes. We reserve the right to update product prices, promotional discounts, and availability without prior notice.
+              All prices listed on our website are in Indian Rupees (INR) and inclusive of applicable GST taxes. We reserve the right to update product prices, wholesale bulk discounts, and availability without prior notice.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">4. Orders & Payment Processing</h2>
             <p>
-              Orders placed through our website are subject to acceptance and stock availability. Payments are securely processed via authorized payment gateways (Stripe, UPI, Net Banking, Credit/Debit Cards). Upon order confirmation, you will receive an invoice via email or SMS.
+              Orders placed through our website are subject to acceptance and stock availability. Payments are securely processed via authorized payment gateways (Razorpay, UPI, Net Banking, Credit/Debit Cards). Upon order confirmation, you will receive an invoice via email or SMS.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">5. Intellectual Property</h2>
             <p>
-              All trademarks, product designs, logos, images, and content on this website are the exclusive property of Myotrixnutrition LLP. Unauthorized reproduction or commercial distribution is strictly prohibited.
+              All trademarks, product designs, logos, images, and content on this website are the exclusive property of Julina Candles & Melts. Unauthorized reproduction or commercial distribution is strictly prohibited.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">6. Governing Law & Jurisdiction</h2>
             <p>
-              These Terms and Conditions shall be governed by and construed in accordance with the laws of India. Any disputes arising hereunder shall be subject to the exclusive jurisdiction of the courts in Hyderabad, Telangana.
+              These Terms and Conditions shall be governed by and construed in accordance with the laws of India. Any disputes arising hereunder shall be subject to the exclusive jurisdiction of the courts in Maharashtra, India.
             </p>
           </section>
 

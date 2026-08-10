@@ -14,7 +14,7 @@ const RefundPolicy: React.FC = () => {
         <div className="mb-8 border-b border-gray-100 pb-6">
           <span className="text-xs font-semibold text-secondary uppercase tracking-widest">RETURNS & GUARANTEE</span>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mt-1">Refund & Return Policy</h1>
-          <p className="text-xs text-muted mt-2">Last Updated: July 24, 2026 • Julina Candles & Melts (Myotrixnutrition LLP)</p>
+          <p className="text-xs text-muted mt-2">Last Updated: August 10, 2026 • Julina Candles & Melts</p>
         </div>
 
         <div className="space-y-6 text-sm text-ink leading-relaxed">

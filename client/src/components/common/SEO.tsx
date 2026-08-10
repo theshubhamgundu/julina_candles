@@ -12,14 +12,14 @@ interface SEOProps {
   jsonLd?: object | object[];
 }
 
-const DOMAIN = 'https://julinacandles.in';
+const DOMAIN = 'https://julinacandlesandmelts.in';
 
-const DEFAULT_TITLE = 'Julina Candles & Melts – Doctor-Backed Artisanal Candles | GI 51 Certified | Hyderabad';
+const DEFAULT_TITLE = 'Julina Candles & Melts | Luxury Decorative, Scented & Urli Candle Exporter & Supplier from India';
 const DEFAULT_DESCRIPTION =
-  'Julina Candles & Melts delivers ICAR-IIRR certified Artisanal Candles (GI 51) — hand-pounded, pesticide-free, and doctor-guided for diabetes management, weight control & metabolic health. Trusted by thousands of Indian families. Order online across India.';
+  'Julina Candles & Melts is a trusted exporter and supplier of handcrafted decorative candles, scented candles, soy wax candles, flower candles, urli candles, coffee candles and luxury gift candles from Maharashtra, India.';
 const DEFAULT_KEYWORDS =
-  'low glycemic index rice, Artisanal Candles India, GI 51 rice, diabetic rice, diabetes friendly rice, ICAR certified rice, organic rice Hyderabad, hand pounded rice, pesticide free rice, Julina Candles & Melts, Myotrix Nutrition';
-const DEFAULT_OG_IMAGE = `${DOMAIN}/images/julinacandles.png`;
+  'decorative candle exporter india, scented candle supplier india, soy wax candle exporter, urli candle manufacturer india, flower candle supplier, coffee candle exporter, luxury candle exporter, gift candle supplier, handmade candle exporter india, premium candles manufacturer, candle exporter maharashtra, candle supplier india';
+const DEFAULT_OG_IMAGE = `${DOMAIN}/images/logo.png`;
 
 export const SEO: React.FC<SEOProps> = ({
   title = DEFAULT_TITLE,

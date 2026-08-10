@@ -16,8 +16,8 @@ const SearchPage: React.FC = () => {
     const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
 
     usePageSEO({
-        title: 'Search premium Products | Julina Candles & Melts',
-        description: 'Search for certified Artisanal Candles (GI 51), organic grains and doctor-formulated nutrition products on Julina Candles & Melts. Find your ideal pack by weight and category.',
+        title: 'Search Handcrafted Candles | Julina Candles & Melts',
+        description: 'Search for decorative candles, scented soy wax jars, lotus pond urlis, and festive gift sets on Julina Candles & Melts.',
         canonical: '/search',
         noIndex: true, // search result pages should not be indexed
     });
@@ -133,7 +133,7 @@ const SearchPage: React.FC = () => {
                             <div className="bg-white p-8 rounded-3xl shadow-sm text-center border border-[#ede3cf] space-y-3">
                                 <p className="text-4xl">🔍</p>
                                 <h3 className="text-lg font-bold text-gray-700 font-serif">No products match your search</h3>
-                                <p className="text-xs text-gray-500">Try searching for "Rice", "premium", or adjusting your price filters.</p>
+                                <p className="text-xs text-gray-500">Try searching for "Lotus", "Coffee", "Urli", or adjusting your price filters.</p>
                                 <button onClick={clearFilters} className="bg-[#185e33] text-white px-5 py-2 rounded-full text-xs font-bold shadow-xs">
                                     Clear All Filters
                                 </button>

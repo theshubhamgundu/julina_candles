@@ -1,76 +1,49 @@
 import React from 'react';
-import { FaUserMd, FaAward, FaHeartbeat, FaLeaf, FaShieldAlt } from 'react-icons/fa';
+import { FaFire, FaGlobe, FaHeart, FaLeaf } from 'react-icons/fa';
 import { usePageSEO } from '../hooks/usePageSEO';
 import { webPageSchema, breadcrumbSchema } from '../seo/schemas';
 
-const founders = [
+const craftsmanshipPillars = [
   {
-    name: 'Dr. K. Sriharsha',
-    title: 'Founder & Partner',
-    company: 'Julina Candles & Melts',
-    image: '/founders/dr-k-sriharsha.jpeg',
+    icon: <FaLeaf className="w-6 h-6 text-[#C79A56]" />,
+    title: '100% Eco-Friendly Soy Wax',
     description:
-      'Co-founder of Julina Candles & Melts. Dedicated to advancing healthcare and nutrition standards with scientific precision and quality excellence.',
+      'We handcraft all our candles using pure natural soy wax, ensuring a clean, non-toxic, and soot-free burn for your home and family.',
   },
   {
-    name: 'Dr. K. Siddarth',
-    title: 'Founder & Partner',
-    company: 'Julina Candles & Melts',
-    image: '/founders/dr-k-siddarth.jpeg',
+    icon: <FaFire className="w-6 h-6 text-[#C79A56]" />,
+    title: 'Artisanal Hand-Pouring',
     description:
-      'Co-founder of Julina Candles & Melts. Passionate about empowering healthy lifestyles through research-backed dietary formulations.',
+      'Every single candle, urli, and melt is hand-poured in small batches by master candle artisans in Maharashtra, India with meticulous care.',
   },
   {
-    name: 'Dr. T. Aditya',
-    title: 'Founder & Partner',
-    company: 'Julina Candles & Melts',
-    image: '/founders/dr-t-aditya.jpeg',
+    icon: <FaHeart className="w-6 h-6 text-[#C79A56]" />,
+    title: 'Aromatherapy Fragrances',
     description:
-      'Co-founder of Julina Candles & Melts. Driving innovation in preventive health and high-potency nutritional supplements.',
-  },
-];
-
-const values = [
-  {
-    icon: <FaUserMd className="w-6 h-6 text-green-600" />,
-    title: 'Doctor Formulated',
-    description:
-      'Our products are conceptualized and formulated by medical doctors to ensure peak safety, bio-availability, and real results.',
+      'Infused with premium therapeutic essential oils and delicate floral extracts that elevate mood, reduce stress, and scent your living space.',
   },
   {
-    icon: <FaLeaf className="w-6 h-6 text-green-600" />,
-    title: 'Pure & Organic Ingredients',
+    icon: <FaGlobe className="w-6 h-6 text-[#C79A56]" />,
+    title: 'Global Export Excellence',
     description:
-      'We source only the cleanest, highest-grade raw ingredients free from unnecessary fillers, toxins, or artificial additives.',
-  },
-  {
-    icon: <FaShieldAlt className="w-6 h-6 text-green-600" />,
-    title: 'Rigorous Quality Assurance',
-    description:
-      'Every batch undergoes stringent testing for purity, safety, and nutritional concentration before reaching your hands.',
-  },
-  {
-    icon: <FaHeartbeat className="w-6 h-6 text-green-600" />,
-    title: 'Holistic Wellness',
-    description:
-      'We aim to bridge the gap between clinical science and daily lifestyle nutrition for sustainable long-term health.',
+      'We supply luxury decorative candles to wholesalers, retailers, event planners, and international importers with custom bulk packaging.',
   },
 ];
 
 const AboutPage: React.FC = () => {
   usePageSEO({
-    title: 'About Julina Candles & Melts – Meet Our Doctor Founders | Julina Candles & Melts',
+    title: 'About Julina Candles & Melts | Luxury Decorative & Scented Candle Exporter',
     description:
-      'Julina Candles & Melts is built by Dr. K. Sriharsha, Dr. K. Siddarth & Dr. T. Aditya — three doctor-founders of Julina Candles & Melts who created clinically tested Artisanal Candles (GI 51) to combat India\'s diabetes epidemic. Learn our story.',
+      'Julina Candles & Melts is a trusted exporter and supplier of handcrafted decorative candles, soy wax urli candles, coffee collection candles, and luxury gift sets from Maharashtra, India.',
     canonical: '/about',
     keywords:
-      'Julina Candles & Melts founders, Julina Candles & Melts, Dr K Sriharsha, Dr K Siddarth, Dr T Aditya, doctor backed nutrition, ICAR rice India, Artisanal Candles founders, about Julina Candles & Melts',
+      'Julina Candles & Melts about us, decorative candle exporter india, scented candle supplier, soy wax candles manufacturer, luxury candle exporter maharashtra',
     schema: [
       webPageSchema({
         url: '/about',
-        name: 'About Julina Candles & Melts – Doctor Founders | Julina Candles & Melts',
+        name: 'About Julina Candles & Melts',
         description:
-          'Meet the three doctor-founders of Julina Candles & Melts — Dr. K. Sriharsha, Dr. K. Siddarth & Dr. T. Aditya — and learn how they created ICAR-tested Artisanal Candles (GI 51) to fight India\'s diabetes epidemic.',
+          'Learn about Julina Candles & Melts — handcrafted decorative, scented, and soy wax candle exporter and supplier from Maharashtra, India.',
         breadcrumb: [
           { name: 'Home', url: '/' },
           { name: 'About Us', url: '/about' },
@@ -80,126 +53,79 @@ const AboutPage: React.FC = () => {
         { name: 'Home', url: '/' },
         { name: 'About Us', url: '/about' },
       ]),
-      {
-        '@context': 'https://schema.org',
-        '@type': 'AboutPage',
-        url: 'https://julinacandles.in/about',
-        name: 'About Julina Candles & Melts',
-        description: 'About Julina Candles & Melts and the doctor-founders of Julina Candles & Melts Artisanal Candles.',
-        about: {
-          '@type': 'Organization',
-          name: 'Julina Candles & Melts',
-          foundingDate: '2024',
-          founders: [
-            { '@type': 'Person', name: 'Dr. K. Sriharsha', jobTitle: 'Founder & Partner' },
-            { '@type': 'Person', name: 'Dr. K. Siddarth', jobTitle: 'Founder & Partner' },
-            { '@type': 'Person', name: 'Dr. T. Aditya', jobTitle: 'Founder & Partner' },
-          ],
-        },
-      },
     ],
   });
 
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <div className="bg-[#FBF6ED] min-h-screen text-[#2A1C22]">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-emerald-900 via-green-800 to-emerald-900 text-white py-16 px-4 sm:px-6 lg:px-8 shadow-inner">
-        <div className="max-w-5xl mx-auto text-center">
-          <span className="inline-block px-3 py-1 bg-emerald-700/60 rounded-full text-xs font-semibold uppercase tracking-wider text-emerald-200 mb-4 border border-emerald-500/30">
+      <section className="bg-gradient-to-r from-[#2A1C22] via-[#5C2333] to-[#3E1622] text-white py-20 px-4 sm:px-6 lg:px-8 shadow-inner">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="inline-block px-4 py-1.5 bg-[#C79A56]/20 text-[#F2C879] rounded-full text-xs font-semibold uppercase tracking-widest mb-4 border border-[#C79A56]/40">
             About Julina Candles & Melts
           </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
-            Pioneering Science-Backed Wellness
+          <h1 className="text-4xl sm:text-5xl font-serif font-bold tracking-tight mb-4 leading-tight">
+            Handcrafted Luxury & Fragrance Artistry
           </h1>
-          <p className="text-lg sm:text-xl text-emerald-100 max-w-3xl mx-auto font-light leading-relaxed">
-            At Julina Candles & Melts by Julina Candles & Melts, we blend medical expertise with premium nutrition to create clean, effective, and trustworthy health products for your daily vitality.
+          <p className="text-base sm:text-lg text-[#E6DACB] max-w-2xl mx-auto font-light leading-relaxed">
+            Julina Candles & Melts is a premier exporter and supplier of handcrafted decorative candles, scented soy wax jars, lotus urli candles, and bespoke gift collections from Ulhasnagar, Maharashtra, India.
           </p>
         </div>
       </section>
 
-      {/* Founders Section */}
-      <section className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 text-green-700 font-semibold text-sm uppercase tracking-wider mb-2">
-            <FaAward className="w-4 h-4" /> Leadership & Vision
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
-            Meet Our Founders
-          </h2>
-          <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
-            The visionary doctors and founders driving Julina Candles & Melts towards excellence in medical-grade nutrition.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
-          {founders.map((founder, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 overflow-hidden border border-gray-100 flex flex-col"
-            >
-              <div className="relative pt-[100%] overflow-hidden bg-gray-100 group">
-                <img
-                  src={founder.image}
-                  alt={founder.name}
-                  className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  onError={(e) => {
-                    // Fallback to placeholder if image fails to load
-                    (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                      founder.name
-                    )}&background=10b981&color=fff&size=500`;
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <span className="inline-block px-2.5 py-0.5 bg-emerald-600/90 rounded-md text-xs font-semibold tracking-wide">
-                    {founder.company}
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
-                    {founder.name}
-                  </h3>
-                  <p className="text-green-700 font-medium text-sm mb-3">
-                    {founder.title}
-                  </p>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {founder.description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Our Values Section */}
-      <section className="bg-white py-16 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold text-gray-900">
-              Why Choose Myotrix Nutrition?
+      {/* Brand Story Section */}
+      <section className="max-w-5xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-xs font-bold text-[#C79A56] uppercase tracking-widest block mb-2">Our Essence & Vision</span>
+            <h2 className="text-3xl font-serif font-bold text-[#2A1C22] mb-4">
+              Illuminating Spaces with Elegance & Tradition
             </h2>
-            <p className="mt-2 text-gray-600 max-w-2xl mx-auto">
-              Built on clinical trust, purity, and scientific integrity.
+            <p className="text-gray-700 leading-relaxed mb-4 text-sm">
+              At Julina Candles & Melts, candle making is an artisanal ritual. We blend traditional Indian heritage motifs—such as lotus ponds, peacocks, modaks, and festive urlis—with contemporary aromatherapy scents like espresso, caramel, Bulgarian rose, and wild jasmine.
+            </p>
+            <p className="text-gray-700 leading-relaxed text-sm">
+              Whether you are looking to elevate your home decor, host festive celebrations, or source premium candles for wholesale export across the globe, Julina Candles & Melts delivers exceptional craftsmanship and pure, sustainable burn quality.
+            </p>
+          </div>
+          <div className="relative rounded-2xl overflow-hidden shadow-xl border-4 border-white">
+            <img
+              src="/images/products/julina candles melts artisanal rituals 1.png"
+              alt="Julina Candles & Melts Artisanal Collection"
+              className="w-full h-80 object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = '/images/logo.png';
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Pillars of Excellence */}
+      <section className="bg-white py-16 border-t border-[#E6DACB]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-serif font-bold text-[#2A1C22]">
+              Why Choose Julina Candles & Melts?
+            </h2>
+            <p className="mt-2 text-gray-600 max-w-xl mx-auto text-sm">
+              Crafted with passion, pure ingredients, and international export standards.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((item, idx) => (
+            {craftsmanshipPillars.map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-xl bg-slate-50 border border-slate-100 hover:border-green-200 transition-colors"
+                className="p-6 rounded-2xl bg-[#FBF6ED] border border-[#E6DACB] hover:border-[#C79A56] transition-colors shadow-sm"
               >
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-4 shadow-xs">
                   {item.icon}
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
+                <h3 className="text-base font-bold text-[#2A1C22] mb-2 font-serif">
                   {item.title}
                 </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-xs text-gray-600 leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -208,51 +134,27 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Research & Institutional Partners Section */}
-      <section className="bg-amber-50/50 py-12 border-t border-amber-100">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-xs font-bold text-amber-800 uppercase tracking-widest mb-1">
-            - Official Partner with IIRR - ICAR -
-          </p>
-          <h3 className="text-xl font-serif font-bold text-gray-900 mb-6">
-            Institutional Research Partnerships
-          </h3>
-          <div className="flex items-center justify-center gap-8 sm:gap-12">
-            {/* IRRI Badge */}
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-16 h-16 bg-white rounded-full p-2.5 shadow-sm border border-emerald-100 flex items-center justify-center">
-                <svg className="w-full h-full text-emerald-800" viewBox="0 0 100 100" fill="currentColor">
-                  <circle cx="50" cy="50" r="45" fill="#185e33" />
-                  <text x="50" y="58" fontSize="22" fontWeight="bold" fill="white" textAnchor="middle">IRRI</text>
-                </svg>
-              </div>
-              <span className="text-xs font-semibold text-gray-700">IRRI Partner</span>
-            </div>
-
-            {/* ICAR Badge */}
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-16 h-16 bg-white rounded-full p-2 shadow-sm border border-emerald-100 flex items-center justify-center">
-                <img src="/images/icar-logo.png" alt="ICAR Logo" className="w-full h-full object-contain" />
-              </div>
-              <span className="text-xs font-semibold text-gray-700">ICAR - IIRR</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer Callout */}
-      <section className="py-12 bg-emerald-900 text-white text-center px-4">
+      {/* Callout Section */}
+      <section className="py-14 bg-[#5C2333] text-white text-center px-4">
         <div className="max-w-3xl mx-auto">
-          <h3 className="text-2xl font-bold mb-3">Experience Doctor-Backed Wellness</h3>
-          <p className="text-emerald-100 text-sm mb-6">
-            Discover our premium range of natural products crafted by Julina Candles & Melts.
+          <h3 className="text-2xl font-serif font-bold mb-3">Looking for Bulk & Export Inquiries?</h3>
+          <p className="text-[#E6DACB] text-sm mb-6">
+            We partner with global importers, hotel chains, corporate gifting experts, and retailers.
           </p>
-          <a
-            href="/products"
-            className="inline-block px-8 py-3 bg-white text-emerald-900 font-semibold rounded-lg hover:bg-emerald-50 transition-colors shadow-md"
-          >
-            Explore Products
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="mailto:pranita311096@gmail.com"
+              className="px-6 py-3 bg-[#C79A56] text-white font-bold text-sm rounded-full hover:bg-[#A97D3F] transition-colors shadow-md"
+            >
+              Request a Quote
+            </a>
+            <a
+              href="tel:+917304888197"
+              className="px-6 py-3 bg-white text-[#2A1C22] font-bold text-sm rounded-full hover:bg-gray-100 transition-colors shadow-md"
+            >
+              Call +91 7304888197
+            </a>
+          </div>
         </div>
       </section>
     </div>
@@ -260,4 +162,3 @@ const AboutPage: React.FC = () => {
 };
 
 export default AboutPage;
-

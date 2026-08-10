@@ -8,28 +8,28 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: 'What makes Julina Candles & Melts Rice different from regular white rice?',
-    answer: 'Julina Candles & Melts Artisanal Candles is clinically certified with a low Glycemic Index of 51, whereas regular polished white rice ranges between 70-80. Our grains are cold-milled to retain the natural bran layer, making them rich in bioavailable zinc, dietary fiber, and plant-based protein for slow-release energy without sugar spikes.'
+    question: 'What makes Julina Candles & Melts special?',
+    answer: 'Julina Candles & Melts is a trusted exporter and supplier of handcrafted decorative candles, scented soy wax candles, and traditional urli candles from Maharashtra, India. We use 100% natural soy wax, therapeutic essential oils, lead-free cotton wicks, and hand-poured floral embeds.'
   },
   {
-    question: 'Is Julina Candles & Melts Artisanal Candles suitable for diabetic and pre-diabetic individuals?',
-    answer: 'Yes, absolutely. Because of its premium-51 rating, it releases glucose slowly into the bloodstream over 3-4 hours. This prevents the sudden post-meal insulin surges and glucose spikes, making it highly recommended by doctors for diabetes management and pre-diabetic care.'
+    question: 'Are your candles safe and non-toxic?',
+    answer: 'Yes, 100%. Our candles are made with pure, eco-friendly soy wax which burns soot-free and non-toxic. They are completely safe for indoor air quality around children and pets.'
   },
   {
-    question: 'What weight options are available for purchase?',
-    answer: 'We provide flexible options to suit every household: 1 kg (trial pack), 5 kg, 10 kg, and 25 kg bags. You can select your preferred weight variant directly on the product details page.'
+    question: 'Do you accept bulk, wholesale, and global export orders?',
+    answer: 'Yes! We supply wholesalers, retailers, event planners, and international buyers. We offer custom branding, bulk price tier discounts, and export-compliant sturdy packaging. Contact us at pranita311096@gmail.com or +91 7304888197 for bulk quotes.'
   },
   {
-    question: 'Are your products tested for pesticides and heavy metals?',
-    answer: 'Yes, 100%. Quality assurance is our highest priority. Every batch is rigorously tested in accredited laboratories and certified free of harmful chemical residues, heavy metals, and pesticides under global US and European quality standards.'
+    question: 'How long do your scented soy wax candles burn?',
+    answer: 'Our jar and urli candles offer extended burn times ranging from 25 to 50+ hours depending on the candle size. For maximum burn efficiency, trim the wick to 1/4 inch before each burn.'
   },
   {
-    question: 'How long does delivery take and how can I track my order?',
-    answer: 'We dispatch all orders within 24 hours. Delivery across India typically takes 3 to 5 business days. Once shipped, you will receive a tracking link and automated delivery status updates directly on your WhatsApp number.'
+    question: 'How long does shipping take across India and globally?',
+    answer: 'Orders within India are dispatched within 24–48 hours and delivered in 3 to 5 business days. International export shipments are coordinated via express air or sea freight with real-time tracking.'
   },
   {
-    question: 'How can I contact support if I have queries about my order?',
-    answer: 'You can reach our dedicated customer support team directly via WhatsApp support at +91 7032987770. We are available 7 days a week to help resolve shipping, delivery, or product queries.'
+    question: 'How can I contact support regarding my order or custom request?',
+    answer: 'You can connect with our customer support team directly on WhatsApp or phone at +91 7304888197 or email us at pranita311096@gmail.com. We are available Monday to Saturday, 10 AM to 7 PM.'
   }
 ];
 
@@ -41,18 +41,18 @@ const FAQSection: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-[#faf6ee] border-t border-[#ede3cf]">
+    <section className="py-16 bg-[#FBF6ED] border-t border-[#E6DACB]">
       <div className="max-w-4xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <span className="inline-flex items-center gap-2 text-xs font-sans font-bold text-secondary uppercase tracking-[0.2em] mb-3">
-            <FaQuestionCircle className="text-[#185e33]" /> Help & Support
+          <span className="inline-flex items-center gap-2 text-xs font-sans font-bold text-[#C79A56] uppercase tracking-[0.2em] mb-3">
+            <FaQuestionCircle className="text-[#5C2333]" /> Help & Support
           </span>
-          <h2 className="text-3xl lg:text-4xl font-serif font-bold text-primary">
+          <h2 className="text-3xl lg:text-4xl font-serif font-bold text-[#2A1C22]">
             Frequently Asked Questions
           </h2>
           <p className="text-sm text-gray-500 mt-2">
-            Have questions about our premium products or shipping? We have answers.
+            Have questions about our handcrafted candles, bulk orders, or global export?
           </p>
         </div>
 
@@ -63,17 +63,17 @@ const FAQSection: React.FC = () => {
             return (
               <div
                 key={index}
-                className="bg-white rounded-2xl border border-[#ede3cf] overflow-hidden shadow-xs hover:shadow-md transition-all duration-300"
+                className="bg-white rounded-2xl border border-[#E6DACB] overflow-hidden shadow-xs hover:shadow-md transition-all duration-300"
               >
                 <button
                   onClick={() => toggleFAQ(index)}
                   className="w-full flex items-center justify-between p-5 text-left focus:outline-none"
                 >
-                  <span className="font-serif font-bold text-gray-800 text-sm sm:text-base pr-4">
+                  <span className="font-serif font-bold text-[#2A1C22] text-sm sm:text-base pr-4">
                     {faq.question}
                   </span>
                   <FaChevronDown
-                    className={`text-[#185e33] transition-transform duration-300 shrink-0 text-sm ${
+                    className={`text-[#5C2333] transition-transform duration-300 shrink-0 text-sm ${
                       isOpen ? 'rotate-180' : 'rotate-0'
                     }`}
                   />
@@ -81,7 +81,7 @@ const FAQSection: React.FC = () => {
 
                 <div
                   className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                    isOpen ? 'max-h-40 border-t border-gray-100' : 'max-h-0'
+                    isOpen ? 'max-h-48 border-t border-gray-100' : 'max-h-0'
                   }`}
                 >
                   <p className="p-5 text-xs sm:text-sm text-gray-600 leading-relaxed font-sans bg-gray-50/50">
@@ -98,4 +98,3 @@ const FAQSection: React.FC = () => {
 };
 
 export default FAQSection;
-

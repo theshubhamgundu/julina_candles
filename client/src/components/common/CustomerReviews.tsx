@@ -2,81 +2,46 @@ import React from 'react';
 
 const customerReviews = [
   {
-    name: 'Shridhar Reddy',
-    location: 'Hayathnagar, Hyderabad',
-    metric: 'Fasting sugar: 210 → 138',
-    review: 'My fasting blood sugar dropped significantly in three months. Eating real rice again without anxiety!',
-    avatar: '/images/avatars/Shridhar_Reddy.webp',
+    name: 'Priya Sharma',
+    location: 'Mumbai, Maharashtra',
+    metric: '⭐ Verified Homeowner',
+    review: 'The Lotus Pond Urli Candle elevated our Diwali decor completely! The fragrance is soothing and lasts for hours without any smoke.',
+    avatar: 'https://ui-avatars.com/api/?name=Priya+Sharma&background=5C2333&color=fff',
   },
   {
-    name: 'Sai Kiran',
-    location: 'BN Reddy, Hyderabad',
-    metric: 'HbA1c: 8.2 → 6.7',
-    review: 'Giving up rice felt like losing my culture. Julina Candles & Melts gave me back my staple food while improving my HbA1c.',
-    avatar: '/images/avatars/Sai Kiran.webp',
+    name: 'Rahul Mehta',
+    location: 'Pune, Maharashtra',
+    metric: '⭐ Wholesale Buyer',
+    review: 'Ordered Caramel Coffee Cream & Coffee Beans candles in bulk for corporate gifting. Everyone loved the realistic coffee aroma!',
+    avatar: 'https://ui-avatars.com/api/?name=Rahul+Mehta&background=C79A56&color=fff',
   },
   {
-    name: 'Harshini Katta',
-    location: 'LB Nagar, Hyderabad',
-    metric: 'Post-meal sugar < 150',
-    review: 'Bought this for my diabetic father. He was skeptical, but the taste won him over! Cooks just like Sona Masoori.',
-    avatar: '/images/avatars/Harshini katta.webp',
+    name: 'Ananya Roy',
+    location: 'Dubai, UAE',
+    metric: '⭐ International Importer',
+    review: 'Julina Candles & Melts delivered our bulk export order on time with exquisite custom packaging. Premium Indian soy wax quality!',
+    avatar: 'https://ui-avatars.com/api/?name=Ananya+Roy&background=2A1C22&color=fff',
   },
   {
-    name: 'Avinash Rao',
-    location: 'Madhapur, Hyderabad',
-    metric: 'Medication dosage reduced',
-    review: 'As a software engineer with erratic sugar levels, switching to this Artisanal Candles helped stabilize my readings completely.',
-    avatar: '/images/avatars/Avinash.webp',
+    name: 'Kavita Patel',
+    location: 'Surat, Gujarat',
+    metric: '⭐ Verified Homeowner',
+    review: 'The Peacock Pink Wax Urli Candle is a masterpiece. The floral fragrance fills the living room beautifully.',
+    avatar: 'https://ui-avatars.com/api/?name=Kavita+Patel&background=5C2333&color=fff',
   },
   {
-    name: 'Pavani Sharma',
-    location: 'Gachibowli, Hyderabad',
-    metric: 'Weight: -4.5 kg in 2 mos',
-    review: 'Excellent Artisanal Candles! Perfect for weight management and keeps us full without feeling heavy or sluggish.',
-    avatar: '/images/avatars/Pavani.webp',
+    name: 'Vikram Joshi',
+    location: 'Delhi NCR',
+    metric: '⭐ Event Decorator',
+    review: 'We used Julina Modak and Shankh candles for a luxury wedding event. The guests were enchanted by the fragrance and craftsmanship.',
+    avatar: 'https://ui-avatars.com/api/?name=Vikram+Joshi&background=C79A56&color=fff',
   },
   {
-    name: 'Prafful Kumar',
-    location: 'Kukatpally, Hyderabad',
-    metric: 'Sugar spike controlled',
-    review: 'Doctor recommended Artisanal Candles for my mother. Julina Candles & Melts taste is premium and 100% natural.',
-    avatar: '/images/avatars/Prafful.webp',
-  },
-  {
-    name: 'Bhargavi R.',
-    location: 'Jubilee Hills, Hyderabad',
-    metric: 'Energy levels improved',
-    review: 'No afternoon sluggishness after lunch! The rice is light, fragrant, and genuine doctor-backed quality.',
-    avatar: '/images/avatars/Bhargavi.webp',
-  },
-  {
-    name: 'Jalender V.',
-    location: 'Dilsukhnagar, Hyderabad',
-    metric: 'Fasting sugar: 185 → 124',
-    review: 'Best health decision for our entire household. Great texture and delicious with sambar and curry.',
-    avatar: '/images/avatars/Jalender.webp',
-  },
-  {
-    name: 'Amulya K.',
-    location: 'Banjara Hills, Hyderabad',
-    metric: 'HbA1c: 7.9 → 6.5',
-    review: 'Organic, pesticide-free, and recommended by our clinical nutritionist. My family loves it!',
-    avatar: '/images/avatars/Amulaya.webp',
-  },
-  {
-    name: 'Ajay Reddy',
-    location: 'Ameerpet, Hyderabad',
-    metric: 'Post-meal sugar stable',
-    review: 'Super fast delivery and authentic Artisanal Candles. ICAR partnership gives total confidence in quality.',
-    avatar: '/images/avatars/Ajay_Reddy.webp',
-  },
-  {
-    name: 'Suma Latha',
-    location: 'Secunderabad, Hyderabad',
-    metric: 'Sugar levels consistent',
-    review: 'Finally a healthy rice option that doesn\'t compromise on traditional Indian taste and texture!',
-    avatar: '/images/avatars/Suma.webp',
+    name: 'Sneha Kulkarni',
+    location: 'Thane, Maharashtra',
+    metric: '⭐ Verified Homeowner',
+    review: 'Love the Daisy Scented Soy Wax Jars! Clean burn with zero soot. Will definitely order again.',
+    avatar: 'https://ui-avatars.com/api/?name=Sneha+Kulkarni&background=2A1C22&color=fff',
   },
 ];
 
@@ -85,13 +50,13 @@ const marqueeItems = [...customerReviews, ...customerReviews];
 
 const CustomerReviews: React.FC = () => {
   return (
-    <section className="py-8 bg-cream/30 border-y border-cream2/60 overflow-hidden w-full">
-      <div className="max-w-6xl mx-auto px-6 mb-5 text-center">
-        <p className="text-[11px] font-sans font-semibold text-secondary uppercase tracking-[0.25em]">
-          REAL RESULTS & IMPACT
+    <section className="py-12 bg-[#FBF6ED] border-y border-[#E6DACB] overflow-hidden w-full">
+      <div className="max-w-6xl mx-auto px-6 mb-8 text-center">
+        <p className="text-[11px] font-sans font-bold text-[#C79A56] uppercase tracking-[0.25em]">
+          CLIENT TESTIMONIALS
         </p>
-        <h2 className="text-2xl font-serif font-bold text-primary mt-0.5">
-          What Families Say About Julina Candles & Melts
+        <h2 className="text-2xl font-serif font-bold text-[#2A1C22] mt-1">
+          What Customers & Exporters Say About Julina Candles & Melts
         </h2>
       </div>
 
@@ -101,13 +66,13 @@ const CustomerReviews: React.FC = () => {
           {marqueeItems.map((customer, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl p-5 border border-gray-100 shadow-xs flex flex-col justify-between w-[300px] md:w-[340px] flex-shrink-0 hover:shadow-md transition-shadow"
+              className="bg-white rounded-2xl p-5 border border-[#E6DACB] shadow-xs flex flex-col justify-between w-[300px] md:w-[340px] flex-shrink-0 hover:shadow-md transition-shadow"
             >
               <div>
-                <span className="inline-block text-[11px] font-semibold text-primary bg-primary/8 px-2.5 py-1 rounded-md mb-3">
+                <span className="inline-block text-[11px] font-semibold text-[#5C2333] bg-[#5C2333]/10 px-2.5 py-1 rounded-md mb-3">
                   {customer.metric}
                 </span>
-                <p className="text-xs text-ink leading-relaxed line-clamp-3">
+                <p className="text-xs text-gray-700 leading-relaxed line-clamp-3 italic">
                   "{customer.review}"
                 </p>
               </div>
@@ -116,11 +81,11 @@ const CustomerReviews: React.FC = () => {
                 <img
                   src={customer.avatar}
                   alt={customer.name}
-                  className="w-10 h-10 rounded-full object-cover border border-primary/20 flex-shrink-0"
+                  className="w-10 h-10 rounded-full object-cover border border-[#C79A56] flex-shrink-0"
                 />
                 <div>
-                  <p className="text-xs font-semibold text-ink leading-snug">{customer.name}</p>
-                  <p className="text-[10px] text-muted">{customer.location}</p>
+                  <p className="text-xs font-bold text-[#2A1C22] leading-snug">{customer.name}</p>
+                  <p className="text-[10px] text-gray-500">{customer.location}</p>
                 </div>
               </div>
             </div>
@@ -132,4 +97,3 @@ const CustomerReviews: React.FC = () => {
 };
 
 export default CustomerReviews;
-

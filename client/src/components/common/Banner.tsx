@@ -2,21 +2,21 @@ import React from 'react';
 
 const Banner: React.FC = () => {
     const highlights = [
-        { icon: '🌾', title: 'GI 51 Certified', desc: 'Clinically tested low glycemic index' },
-        { icon: '🌿', title: '100% Pesticide Free', desc: 'Pure, unadulterated organic harvest' },
-        { icon: '❤️', title: 'Diabetes & Heart Friendly', desc: 'Doctor-guided metabolic nutrition' },
-        { icon: '🔬', title: 'ICAR-IIRR Partner', desc: 'Backed by national research' },
-        { icon: '🍚', title: 'Hand-Pounded Grains', desc: 'Preserves natural bran & vitamins' },
-        { icon: '⚡', title: 'Slow-Release Carbs', desc: 'Prevents post-meal blood sugar spikes' },
-        { icon: '🛡️', title: 'Zero Preservatives', desc: 'Fresh & 100% natural processing' },
-        { icon: '🌱', title: 'Sustained Energy', desc: 'Keeps you full & energetic longer' },
+        { icon: '✨', title: '100% Soy Wax', desc: 'Eco-friendly, soot-free clean burn' },
+        { icon: '🪔', title: 'Decorative Urli Candles', desc: 'Hand-poured traditional lotus & peacock designs' },
+        { icon: '☕', title: 'Coffee Collection', desc: 'Espresso & caramel aroma candles' },
+        { icon: '🌸', title: 'Floral Embeds', desc: 'Real dried flower petals & botanical scents' },
+        { icon: '🚢', title: 'Global Exporter', desc: 'Supplying wholesalers & retailers worldwide' },
+        { icon: '🎁', title: 'Luxury Gift Sets', desc: 'Perfect for festivals, weddings & events' },
+        { icon: '🕯️', title: 'Long Burn Time', desc: '25 to 50+ hours of lingering fragrance' },
+        { icon: '🇮🇳', title: 'Made in India', desc: 'Handcrafted in Ulhasnagar, Maharashtra' },
     ];
 
     // Double the array for seamless infinite marquee loop
     const marqueeList = [...highlights, ...highlights];
 
     return (
-        <section className="hidden md:block w-full bg-[#185e33] py-4 overflow-hidden border-y border-white/10 shadow-inner">
+        <section className="hidden md:block w-full bg-[#5C2333] py-4 overflow-hidden border-y border-white/10 shadow-inner">
             <div className="relative w-full flex overflow-hidden">
                 <div className="animate-marquee flex items-center gap-12 whitespace-nowrap">
                     {marqueeList.map((item, i) => (
@@ -24,7 +24,7 @@ const Banner: React.FC = () => {
                             <span className="text-2xl flex-shrink-0">{item.icon}</span>
                             <div className="flex flex-col text-left">
                                 <span className="text-sm font-bold text-white leading-tight tracking-wide">{item.title}</span>
-                                <span className="text-[11px] text-cream/80 mt-0.5">{item.desc}</span>
+                                <span className="text-[11px] text-[#E6DACB] mt-0.5">{item.desc}</span>
                             </div>
                         </div>
                     ))}
@@ -35,4 +35,3 @@ const Banner: React.FC = () => {
 };
 
 export default Banner;
-

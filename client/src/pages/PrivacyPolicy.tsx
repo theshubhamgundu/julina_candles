@@ -15,14 +15,14 @@ const PrivacyPolicy: React.FC = () => {
         <div className="mb-8 border-b border-gray-100 pb-6">
           <span className="text-xs font-semibold text-secondary uppercase tracking-widest">DATA PRIVACY & SAFETY</span>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-primary mt-1">Privacy Policy</h1>
-          <p className="text-xs text-muted mt-2">Last Updated: July 24, 2026 • Julina Candles & Melts (Myotrixnutrition LLP)</p>
+          <p className="text-xs text-muted mt-2">Last Updated: August 10, 2026 • Julina Candles & Melts</p>
         </div>
 
         <div className="space-y-6 text-sm text-ink leading-relaxed">
           <section>
             <h2 className="text-lg font-serif font-bold text-primary mb-2">1. Introduction</h2>
             <p>
-              At <strong>Julina Candles & Melts</strong> (operated by <strong>Myotrixnutrition LLP</strong>), we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or make purchases.
+              At <strong>Julina Candles & Melts</strong>, we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or make purchases.
             </p>
           </section>
 

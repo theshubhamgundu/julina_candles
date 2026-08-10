@@ -11,8 +11,8 @@ interface SEOProps {
   schema?: object | object[];
 }
 
-const BASE_URL = 'https://julinacandles.in';
-const DEFAULT_IMAGE = `${BASE_URL}/images/julinacandles.png`;
+const BASE_URL = 'https://julinacandlesandmelts.in';
+const DEFAULT_IMAGE = `${BASE_URL}/images/logo.png`;
 
 /**
  * usePageSEO – sets <title>, all meta tags, canonical, and injects
@@ -95,7 +95,7 @@ export function usePageSEO({
 
     // Cleanup on unmount — restore defaults
     return () => {
-      document.title = 'Julina Candles & Melts – Doctor-Backed Artisanal Candles | GI 51 Certified | Hyderabad';
+      document.title = 'Julina Candles & Melts | Luxury Decorative, Scented & Urli Candle Exporter';
       document.querySelectorAll('script[data-page-schema]').forEach((el) => el.remove());
     };
   }, [title, description, canonical, ogType, ogImage, keywords, noIndex, schema]);

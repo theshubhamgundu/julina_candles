@@ -31,6 +31,14 @@ CREATE TABLE IF NOT EXISTS public.users (
   CONSTRAINT users_pkey PRIMARY KEY (id)
 );
 
+-- Safely add columns if users table already existed
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS uid VARCHAR(255);
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS photo_url TEXT;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS provider VARCHAR(50) DEFAULT 'email';
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS role VARCHAR(50) DEFAULT 'user';
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS gender VARCHAR(50);
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS dob DATE;
+
 -- Ensure users trigger
 DROP TRIGGER IF EXISTS update_users_updated_at ON public.users;
 CREATE TRIGGER update_users_updated_at
@@ -56,6 +64,13 @@ CREATE TABLE IF NOT EXISTS public.products (
 );
 
 -- Safely add columns if products table already existed
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS name VARCHAR(255);
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS category VARCHAR(100) DEFAULT 'General';
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS description TEXT DEFAULT '';
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS price NUMERIC(10, 2) DEFAULT 0;
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS stock INTEGER DEFAULT 0;
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS photo TEXT DEFAULT '';
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS photo_public_id VARCHAR(255);
 ALTER TABLE public.products ADD COLUMN IF NOT EXISTS featured BOOLEAN DEFAULT false;
 ALTER TABLE public.products ADD COLUMN IF NOT EXISTS variants JSONB DEFAULT '[]'::jsonb;
 
@@ -96,6 +111,19 @@ CREATE TABLE IF NOT EXISTS public.orders (
   CONSTRAINT orders_pkey PRIMARY KEY (id)
 );
 
+-- Safely add columns if orders table already existed
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS short_id VARCHAR(50);
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES public.users(id) ON DELETE SET NULL;
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS user_uid VARCHAR(255);
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS shipping_info JSONB DEFAULT '{}'::jsonb;
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS order_items JSONB DEFAULT '[]'::jsonb;
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS subtotal NUMERIC(10, 2) DEFAULT 0;
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS tax NUMERIC(10, 2) DEFAULT 0;
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS shipping_charges NUMERIC(10, 2) DEFAULT 0;
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS discount NUMERIC(10, 2) DEFAULT 0;
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS total NUMERIC(10, 2) DEFAULT 0;
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS status VARCHAR(50) DEFAULT 'Pending';
+
 DROP TRIGGER IF EXISTS update_orders_updated_at ON public.orders;
 CREATE TRIGGER update_orders_updated_at
   BEFORE UPDATE ON public.orders
@@ -131,6 +159,32 @@ CREATE POLICY "Public Read Products" ON public.products
 DROP POLICY IF EXISTS "Public Read Coupons" ON public.coupons;
 CREATE POLICY "Public Read Coupons" ON public.coupons
   FOR SELECT USING (true);
+
+-- Allow public insert, select & update for orders (guest checkout & payment updates)
+DROP POLICY IF EXISTS "Public Insert Orders" ON public.orders;
+CREATE POLICY "Public Insert Orders" ON public.orders
+  FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public Select Orders" ON public.orders;
+CREATE POLICY "Public Select Orders" ON public.orders
+  FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public Update Orders" ON public.orders;
+CREATE POLICY "Public Update Orders" ON public.orders
+  FOR UPDATE USING (true);
+
+-- Allow public insert, select & update for users (guest user registration)
+DROP POLICY IF EXISTS "Public Insert Users" ON public.users;
+CREATE POLICY "Public Insert Users" ON public.users
+  FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public Select Users" ON public.users;
+CREATE POLICY "Public Select Users" ON public.users
+  FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public Update Users" ON public.users;
+CREATE POLICY "Public Update Users" ON public.users
+  FOR UPDATE USING (true);
 
 -- ─── MIGRATION: Fix orders status constraint to include 'Pending' ───
 -- Run this in Supabase SQL Editor if the orders table already exists

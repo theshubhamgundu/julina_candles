@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../../redux/store';
 
 const promoOffers = [
-  "🌾 100% Doctor-Backed GI 51 Certified Rice • Ideal for Diabetic & Health-Conscious Lifestyles",
-  "🌱 Pure, Natural & 100% Pesticide-Free Nutrition • Fresh Harvest Quality",
-  "🩺 Formulated & Trusted by Medical Doctors at Julina Candles & Melts",
-  "🚚 Fast & Reliable Express Delivery Across Hyderabad",
-  "📞 Customer Care & Support: +91 70329 67775",
+  "✨ 100% Handcrafted Scented & Soy Wax Candles • Luxury Home Fragrance & Ambiance",
+  "🪔 Exquisite Decorative Urli & Festival Candles • Hand-poured with Premium Aromatherapy Oils",
+  "🚢 Trusted Exporter & Supplier of Premium Candles from Maharashtra, India",
+  "📦 Express Delivery & Worldwide Shipping Available",
+  "📞 Customer Care & Wholesale Inquiries: +91 7304888197",
 ];
 
 const Header: React.FC = () => {
@@ -185,7 +185,7 @@ const Header: React.FC = () => {
             {/* Bottom Drawer Footer */}
             <div className="pt-6 border-t border-white/15 flex flex-col gap-3">
               <a
-                href="https://wa.me/917032987770"
+                href="https://wa.me/917304888197"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 rounded-full flex items-center justify-center gap-2 text-sm shadow-md transition-colors"
@@ -195,7 +195,7 @@ const Header: React.FC = () => {
               </a>
 
               <p className="text-[11px] text-cream/70 text-center mt-1">
-                Julina Candles & Melts © 2026 • Doctor-Backed Nutrition
+                Julina Candles & Melts © 2026 • Luxury Decorative & Scented Candle Exporter
               </p>
             </div>
           </div>
