@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FaBars, FaBox, FaHome, FaSearch, FaShoppingCart, FaTimes, FaWhatsapp } from 'react-icons/fa';
+import React from 'react';
+import { FaBox, FaHome, FaShoppingCart } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../redux/store';
@@ -12,13 +12,8 @@ const promoOffers = [
 ];
 
 const Header: React.FC = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   const linkClass = "flex flex-col items-center gap-1 text-[#5C2333] hover:text-[#c4633c] transition duration-300";
 
@@ -42,7 +37,7 @@ const Header: React.FC = () => {
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" onClick={closeMobileMenu} className="flex items-center gap-2.5">
+            <Link to="/" className="flex items-center gap-2.5">
               <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Julina Candles & Melts Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover border border-[#E6DACB]" />
               <span className="text-lg md:text-2xl font-serif font-bold tracking-wide text-[#5C2333]">Julina Candles & Melts</span>
             </Link>
@@ -55,10 +50,7 @@ const Header: React.FC = () => {
               <span className="text-xs font-sans">Home</span>
             </Link>
 
-            <Link to="/products" className={linkClass}>
-              <FaSearch />
-              <span className="text-xs">Search</span>
-            </Link>
+
 
             <Link to="/products" className={linkClass}>
               <FaBox />
@@ -78,9 +70,7 @@ const Header: React.FC = () => {
 
           {/* Mobile Quick Action Buttons */}
           <div className="md:hidden flex items-center gap-4">
-            <Link to="/products" className="text-[#5C2333] hover:text-[#c4633c] transition-colors p-1" aria-label="Search">
-              <FaSearch className="text-lg" />
-            </Link>
+
 
             <Link to="/cart" className="text-[#5C2333] hover:text-[#c4633c] transition-colors p-1 relative" aria-label="Cart">
               <FaShoppingCart className="text-lg" />
@@ -90,103 +80,6 @@ const Header: React.FC = () => {
                 </span>
               )}
             </Link>
-
-            <button onClick={toggleMobileMenu} className="text-xl focus:outline-none p-1 ml-1 text-[#5C2333]" aria-label="Toggle Menu">
-              {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation Drawer */}
-        <div
-          className={`md:hidden fixed inset-0 bg-black/60 backdrop-blur-xs z-50 transition-opacity duration-300 ${
-            isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-          }`}
-          onClick={closeMobileMenu}
-        >
-          <div
-            className={`fixed top-0 right-0 w-full h-full bg-gradient-to-b from-[#144f2b] to-[#185e33] text-white shadow-2xl p-6 flex flex-col justify-between transition-transform duration-300 ease-out ${
-              isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-            }`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Top Drawer Header */}
-            <div>
-              <div className="flex justify-between items-center pb-5 border-b border-white/15 mb-6">
-                <div className="flex items-center gap-2.5">
-                  <img src="https://res.cloudinary.com/bzykgznp/image/upload/v1786389852/julina_candles/products/logo.png" alt="Logo" className="h-9 w-auto" />
-                  <span className="font-serif font-bold text-lg text-cream">Julina Candles & Melts</span>
-                </div>
-                <button
-                  onClick={closeMobileMenu}
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-base transition-colors"
-                >
-                  <FaTimes />
-                </button>
-              </div>
-
-              {/* Mobile Navigation Items */}
-              <div className="flex flex-col space-y-2">
-                <Link
-                  to="/"
-                  onClick={closeMobileMenu}
-                  className="flex items-center gap-3.5 px-4 py-3 rounded-xl hover:bg-white/10 text-white font-medium text-base transition-colors"
-                >
-                  <FaHome className="text-[#e5c158]" />
-                  <span>Home</span>
-                </Link>
-
-                <Link
-                  to="/products"
-                  onClick={closeMobileMenu}
-                  className="flex items-center gap-3.5 px-4 py-3 rounded-xl hover:bg-white/10 text-white font-medium text-base transition-colors"
-                >
-                  <FaBox className="text-[#e5c158]" />
-                  <span>All Products</span>
-                </Link>
-
-                <Link
-                  to="/about"
-                  onClick={closeMobileMenu}
-                  className="flex items-center gap-3.5 px-4 py-3 rounded-xl hover:bg-white/10 text-white font-medium text-base transition-colors"
-                >
-                  <span className="text-[#e5c158] font-bold text-lg leading-none">🌾</span>
-                  <span>Our Story & Mission</span>
-                </Link>
-
-
-
-                <Link
-                  to="/cart"
-                  onClick={closeMobileMenu}
-                  className="flex items-center gap-3.5 px-4 py-3 rounded-xl hover:bg-white/10 text-white font-medium text-base transition-colors justify-between"
-                >
-                  <div className="flex items-center gap-3.5">
-                    <FaShoppingCart className="text-[#e5c158]" />
-                    <span>Shopping Cart</span>
-                  </div>
-                  {cartCount > 0 && (
-                    <span className="bg-[#e5c158] text-primaryDark font-bold text-xs px-2.5 py-0.5 rounded-full">
-                      {cartCount}
-                    </span>
-                  )}
-                </Link>
-              </div>
-            </div>
-
-            {/* Bottom Drawer Footer */}
-            <div className="pt-6 border-t border-white/15 flex flex-col gap-3">
-              <a
-                href="https://wa.me/917304888197"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 rounded-full flex items-center justify-center gap-2 text-sm shadow-md transition-colors"
-              >
-                <FaWhatsapp className="text-lg" />
-                <span>WhatsApp Support</span>
-              </a>
-
-            </div>
           </div>
         </div>
       </header>
