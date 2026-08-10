@@ -1,0 +1,14 @@
+{
+  "name": "julina-candles-melts",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix client run dev",
+    "build": "npm --prefix client install --production=false && npm --prefix client run build"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "vite": "^8.2.0"
+  }
+}
+
