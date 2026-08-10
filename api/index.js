@@ -267,11 +267,15 @@ async function handleOrderSuccess(orderId) {
         subject: `Julina Candles & Melts — Order Confirmed #${order.id}`,
         html: emailHtml
       });
-        try {
-          // Extract base product ID (remove variant suffix like "_1kg")
-          const baseProductId = item.productId.includes('_') 
-            ? item.productId.split('_')[0] 
-            : item.productId;
+    }
+
+    // 3. Decrement stock for purchased items
+    for (const item of (orderItems || [])) {
+      try {
+        // Extract base product ID (remove variant suffix like "_1kg")
+        const baseProductId = item.productId.includes('_') 
+          ? item.productId.split('_')[0] 
+          : item.productId;
 
           // Get current stock
           const { data: product, error: productError } = await supabase
@@ -314,7 +318,6 @@ async function handleOrderSuccess(orderId) {
       }
 
       console.log(`✅ Order ${orderId} completed with stock updates`);
-    }
   } catch (err) {
     console.error('Error during handleOrderSuccess processing:', err);
   }
@@ -1544,7 +1547,7 @@ export default async function handler(req, res) {
       if (!error && data && data.length > 0) {
         productsList = data.map(mapProduct);
       } else {
-        productsList = [];
+        productsList = JULINA_CANDLE_PRODUCTS.slice(0, 6);
       }
 
       const resBody = {
