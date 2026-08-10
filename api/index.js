@@ -46,8 +46,8 @@ function generateShipperToken() {
 
 // ─── Razorpay Payment Gateway Configuration ───
 const RAZORPAY_CONFIG = {
-  get KEY_ID() { return process.env.RAZORPAY_KEY_ID || 'rzp_test_TO0ThkJfCuEUj1'; },
-  get KEY_SECRET() { return process.env.RAZORPAY_KEY_SECRET || '6xP6d7KSkclsv7M50V7cUl2D'; },
+  get KEY_ID() { return process.env.RAZORPAY_KEY_ID || 'rzp_live_TO2LV3iKTZwDBr'; },
+  get KEY_SECRET() { return process.env.RAZORPAY_KEY_SECRET || 'xOuCM6SrTk8osjd36VvRwHpE'; },
 };
 
 // Initialize Razorpay instance
@@ -132,148 +132,141 @@ async function handleOrderSuccess(orderId) {
       return;
     }
 
+    // 1. Update order status to Processing if Pending
     if (order.status === 'Pending') {
-      // 1. Update order status to Processing
-      const { error: updateError } = await supabase
+      await supabase
         .from('orders')
         .update({ status: 'Processing', updated_at: new Date().toISOString() })
         .eq('id', orderId);
+    }
 
-      if (updateError) {
-        console.error('Failed to update status to Processing:', updateError);
-        return;
-      }
+    console.log(`Order ${orderId} triggering confirmation email...`);
 
-      console.log(`Order ${orderId} status set to Processing. Triggering email...`);
+    // 2. Fetch user details to get email
+    const { data: userRow } = await supabase
+      .from('users')
+      .select('email, name')
+      .eq('id', order.user_uid)
+      .maybeSingle();
 
-      // 2. Fetch user details to get email
-      const { data: userRow } = await supabase
-        .from('users')
-        .select('email, name')
-        .eq('id', order.user_uid)
-        .maybeSingle();
+    const shippingInfo = typeof order.shipping_info === 'string' ? JSON.parse(order.shipping_info) : order.shipping_info;
+    const recipientEmail = userRow?.email || shippingInfo?.email;
+    const customerName = userRow?.name || shippingInfo?.name || 'Customer';
 
-      const shippingInfo = typeof order.shipping_info === 'string' ? JSON.parse(order.shipping_info) : order.shipping_info;
-      const recipientEmail = userRow?.email || shippingInfo?.email || 'shubhamvasantgundu@gmail.com';
-      const customerName = userRow?.name || shippingInfo?.name || 'Customer';
+    const baseUrl = 'https://julinacandles.in';
 
-      const baseUrl = 'https://julinacandles.in';
+    const orderItems = typeof order.order_items === 'string' ? JSON.parse(order.order_items) : order.order_items;
+    const itemsListHtml = (orderItems || []).map(item => `
+      <tr>
+        <td style="padding: 12px; border-bottom: 1px solid #efe9db; font-size: 14px; color: #24291f; font-family: sans-serif;">
+          <div style="font-weight: bold;">${item.name}</div>
+          <div style="font-size: 12px; color: #5f6455; margin-top: 2px;">Qty: ${item.quantity}</div>
+        </td>
+        <td style="padding: 12px; border-bottom: 1px solid #efe9db; text-align: right; font-size: 14px; font-weight: bold; color: #24291f; font-family: sans-serif;">
+          ₹${(item.price * item.quantity).toFixed(2)}
+        </td>
+      </tr>
+    `).join('');
 
-      const orderItems = typeof order.order_items === 'string' ? JSON.parse(order.order_items) : order.order_items;
-      const itemsListHtml = (orderItems || []).map(item => `
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #efe9db; font-size: 14px; color: #24291f; font-family: sans-serif;">
-            <div style="font-weight: bold;">${item.name}</div>
-            <div style="font-size: 12px; color: #5f6455; margin-top: 2px;">Qty: ${item.quantity}</div>
-          </td>
-          <td style="padding: 12px; border-bottom: 1px solid #efe9db; text-align: right; font-size: 14px; font-weight: bold; color: #24291f; font-family: sans-serif;">
-            ₹${(item.price * item.quantity).toFixed(2)}
-          </td>
-        </tr>
-      `).join('');
+    const formattedDate = new Date(order.created_at || Date.now()).toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      dateStyle: 'medium',
+      timeStyle: 'short'
+    });
 
-      const formattedDate = new Date(order.created_at || Date.now()).toLocaleString('en-IN', {
-        timeZone: 'Asia/Kolkata',
-        dateStyle: 'medium',
-        timeStyle: 'short'
-      });
-
-      const emailHtml = `
-        <div style="background-color: #f7f4ec; padding: 30px; font-family: 'Plus Jakarta Sans', Arial, sans-serif; color: #24291f; line-height: 1.6;">
-          <div style="max-width: 600px; margin: 0 auto; background: #ffffff; padding: 40px; border-radius: 20px; border: 1px solid #efe9db; box-shadow: 0 4px 20px rgba(22, 59, 38, 0.04);">
-            
-            <!-- Header Logo -->
-            <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid #efe9db; padding-bottom: 20px;">
-              <h1 style="color: #1f5133; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">Julina Candles & Melts</h1>
-              <span style="font-size: 10px; color: #c4633c; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px;">Pure & Organic</span>
-            </div>
-
-            <!-- Greeting -->
-            <h2 style="color: #1f5133; font-size: 20px; font-family: Garamond, serif; margin-top: 0; font-weight: bold;">Order Confirmed! 🌿</h2>
-            <p style="font-size: 14px; color: #24291f; margin-bottom: 20px;">Dear ${customerName},</p>
-            <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">Thank you for shopping with Julina Candles & Melts. Your payment was successful, and our team is preparing your products for shipment. Below are your order and transaction details.</p>
-            
-            <!-- Status Card -->
-            <div style="background-color: #f7f4ec; border-radius: 12px; padding: 20px; margin-bottom: 30px; border: 1px solid #efe9db;">
-              <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-                <tr>
-                  <td style="padding: 4px 0; color: #5f6455;"><strong>Order ID:</strong></td>
-                  <td style="padding: 4px 0; font-family: monospace; text-align: right; color: #24291f;">${order.id}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 4px 0; color: #5f6455;"><strong>Status:</strong></td>
-                  <td style="padding: 4px 0; text-align: right; color: #c4633c; font-weight: bold; text-transform: uppercase;">Processing</td>
-                </tr>
-                <tr>
-                  <td style="padding: 4px 0; color: #5f6455;"><strong>Date:</strong></td>
-                  <td style="padding: 4px 0; text-align: right; color: #24291f;">${formattedDate}</td>
-                </tr>
-              </table>
-            </div>
-
-            <!-- Purchase Summary -->
-            <h3 style="color: #1f5133; font-size: 16px; font-family: Garamond, serif; margin-bottom: 12px; border-bottom: 2px solid #1f5133; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Summary of Items</h3>
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
-              <thead>
-                <tr style="background-color: #f7f4ec; text-align: left;">
-                  <th style="padding: 10px; font-size: 11px; color: #5f6455; font-weight: bold; uppercase tracking-wider;">Product</th>
-                  <th style="padding: 10px; font-size: 11px; color: #5f6455; font-weight: bold; uppercase tracking-wider; text-align: right;">Total Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${itemsListHtml}
-              </tbody>
-            </table>
-
-            <!-- Totals Breakdown -->
-            <div style="border-top: 1px solid #efe9db; padding-top: 15px; margin-bottom: 30px;">
-              <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-                <tr>
-                  <td style="padding: 6px 0; color: #5f6455;">Subtotal</td>
-                  <td style="padding: 6px 0; text-align: right; color: #24291f;">₹${Number(order.subtotal || 0).toFixed(2)}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 6px 0; color: #5f6455;">Tax & Shipping</td>
-                  <td style="padding: 6px 0; text-align: right; color: #24291f;">₹${Number((order.tax || 0) + (order.shipping_charges || 0)).toFixed(2)}</td>
-                </tr>
-                ${order.discount ? `
-                <tr>
-                  <td style="padding: 6px 0; color: #c4633c; font-weight: bold;">Discount Applied</td>
-                  <td style="padding: 6px 0; text-align: right; color: #c4633c; font-weight: bold;">-₹${Number(order.discount).toFixed(2)}</td>
-                </tr>
-                ` : ''}
-                <tr style="font-size: 16px; font-weight: bold; color: #1f5133;">
-                  <td style="padding: 12px 0 0 0; border-top: 1px solid #efe9db;">Total Amount Paid</td>
-                  <td style="padding: 12px 0 0 0; border-top: 1px solid #efe9db; text-align: right;">₹${Number(order.total).toFixed(2)}</td>
-                </tr>
-              </table>
-            </div>
-
-            <!-- View Button -->
-            <div style="text-align: center; margin-bottom: 20px;">
-              <a href="${baseUrl}/order/${order.id}" style="background-color: #1f5133; color: #ffffff; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px; display: inline-block; box-shadow: 0 4px 10px rgba(31, 81, 51, 0.15);">View Order Details</a>
-            </div>
-
-            <!-- Footer Notes -->
-            <div style="border-top: 1px solid #efe9db; padding-top: 20px; text-align: center; font-size: 11px; color: #5f6455; line-height: 1.5;">
-              <p style="margin: 0 0 5px 0;">If you have any questions, reply to this email or contact support.</p>
-              <p style="margin: 0;">© ${new Date().getFullYear()} Julina Candles & Melts. All rights reserved.</p>
-            </div>
-
+    const emailHtml = `
+      <div style="background-color: #f7f4ec; padding: 30px; font-family: 'Plus Jakarta Sans', Arial, sans-serif; color: #24291f; line-height: 1.6;">
+        <div style="max-width: 600px; margin: 0 auto; background: #ffffff; padding: 40px; border-radius: 20px; border: 1px solid #efe9db; box-shadow: 0 4px 20px rgba(92, 35, 51, 0.08);">
+          
+          <!-- Header Logo -->
+          <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid #efe9db; padding-bottom: 20px;">
+            <h1 style="color: #5C2333; font-size: 26px; font-weight: bold; font-family: Garamond, serif; margin: 0; letter-spacing: 2px; text-transform: uppercase;">Julina Candles & Melts</h1>
+            <span style="font-size: 10px; color: #C79A56; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 5px;">Handcrafted Luxury & Essential Oils</span>
           </div>
-        </div>
-      `;
 
+          <!-- Greeting -->
+          <h2 style="color: #5C2333; font-size: 20px; font-family: Garamond, serif; margin-top: 0; font-weight: bold;">Order Confirmed! 🕯️</h2>
+          <p style="font-size: 14px; color: #24291f; margin-bottom: 20px;">Dear ${customerName},</p>
+          <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">Thank you for shopping with Julina Candles & Melts. Your payment was successful, and our team is preparing your handcrafted candles for shipment. Below are your order details.</p>
+          
+          <!-- Status Card -->
+          <div style="background-color: #f7f4ec; border-radius: 12px; padding: 20px; margin-bottom: 30px; border: 1px solid #efe9db;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+              <tr>
+                <td style="padding: 4px 0; color: #5f6455;"><strong>Order ID:</strong></td>
+                <td style="padding: 4px 0; font-family: monospace; text-align: right; color: #24291f;">${order.id}</td>
+              </tr>
+              <tr>
+                <td style="padding: 4px 0; color: #5f6455;"><strong>Status:</strong></td>
+                <td style="padding: 4px 0; text-align: right; color: #5C2333; font-weight: bold; text-transform: uppercase;">Processing</td>
+              </tr>
+              <tr>
+                <td style="padding: 4px 0; color: #5f6455;"><strong>Date:</strong></td>
+                <td style="padding: 4px 0; text-align: right; color: #24291f;">${formattedDate}</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Purchase Summary -->
+          <h3 style="color: #5C2333; font-size: 16px; font-family: Garamond, serif; margin-bottom: 12px; border-bottom: 2px solid #5C2333; padding-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Summary of Items</h3>
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
+            <thead>
+              <tr style="background-color: #f7f4ec; text-align: left;">
+                <th style="padding: 10px; font-size: 11px; color: #5f6455; font-weight: bold; text-transform: uppercase; tracking-wider;">Product</th>
+                <th style="padding: 10px; font-size: 11px; color: #5f6455; font-weight: bold; text-transform: uppercase; tracking-wider; text-align: right;">Total Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${itemsListHtml}
+            </tbody>
+          </table>
+
+          <!-- Totals Breakdown -->
+          <div style="border-top: 1px solid #efe9db; padding-top: 15px; margin-bottom: 30px;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+              <tr>
+                <td style="padding: 6px 0; color: #5f6455;">Subtotal</td>
+                <td style="padding: 6px 0; text-align: right; color: #24291f;">₹${Number(order.subtotal || 0).toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; color: #5f6455;">Tax & Shipping</td>
+                <td style="padding: 6px 0; text-align: right; color: #24291f;">₹${Number((order.tax || 0) + (order.shipping_charges || 0)).toFixed(2)}</td>
+              </tr>
+              ${order.discount ? `
+              <tr>
+                <td style="padding: 6px 0; color: #5C2333; font-weight: bold;">Discount Applied</td>
+                <td style="padding: 6px 0; text-align: right; color: #5C2333; font-weight: bold;">-₹${Number(order.discount).toFixed(2)}</td>
+              </tr>
+              ` : ''}
+              <tr style="font-size: 16px; font-weight: bold; color: #5C2333;">
+                <td style="padding: 12px 0 0 0; border-top: 1px solid #efe9db;">Total Amount Paid</td>
+                <td style="padding: 12px 0 0 0; border-top: 1px solid #efe9db; text-align: right;">₹${Number(order.total).toFixed(2)}</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- View Button -->
+          <div style="text-align: center; margin-bottom: 20px;">
+            <a href="${baseUrl}/my-orders?orderId=${order.id}" style="background-color: #5C2333; color: #ffffff; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px; display: inline-block; box-shadow: 0 4px 10px rgba(92, 35, 51, 0.2);">View Order Details</a>
+          </div>
+
+          <!-- Footer Notes -->
+          <div style="border-top: 1px solid #efe9db; padding-top: 20px; text-align: center; font-size: 11px; color: #5f6455; line-height: 1.5;">
+            <p style="margin: 0 0 5px 0;">If you have any questions, contact support at +91 7304888197 or pranita311096@gmail.com.</p>
+            <p style="margin: 0;">© ${new Date().getFullYear()} Julina Candles & Melts. All rights reserved.</p>
+          </div>
+
+        </div>
+      </div>
+    `;
+
+    // Send confirmation email to customer (if email present)
+    if (recipientEmail && recipientEmail.includes('@')) {
       await sendEmail({
         to: recipientEmail,
         subject: `Julina Candles & Melts — Order Confirmed #${order.id}`,
         html: emailHtml
       });
-
-      // ✅ CRITICAL FIX: Decrement stock for ordered items
-      console.log(`✅ Decrementing stock for order ${orderId}...`);
-      
-      for (const item of orderItems || []) {
         try {
           // Extract base product ID (remove variant suffix like "_1kg")
           const baseProductId = item.productId.includes('_') 
@@ -599,7 +592,7 @@ export default async function handler(req, res) {
     }
 
     // ─── PAYMENTS: Razorpay Create Order ───
-    if (url.includes('/api/v1/payments/razorpay/create-order')) {
+    if (url.includes('/api/v1/payments/razorpay/create-order') || url.includes('/api/create-order')) {
       if (req.method !== 'POST') {
         return res.status(405).json({ success: false, message: 'Method not allowed' });
       }
@@ -609,6 +602,10 @@ export default async function handler(req, res) {
         const { amount, currency, receipt, description, customer_name, customer_email, customer_phone } = body;
 
         const amountInPaise = parseInt(amount, 10) || 49900;
+        if (amountInPaise < 100) {
+          return res.status(400).json({ success: false, message: 'Minimum amount must be at least 100 paise (₹1)' });
+        }
+
         const orderReceipt = receipt || `order_${Date.now()}`;
 
         try {
@@ -646,30 +643,28 @@ export default async function handler(req, res) {
         }
       } catch (error) {
         console.error('❌ Razorpay order handler error:', error?.message || error);
-        return res.status(200).json({
-          success: true,
-          order_id: `order_test_${Date.now()}`,
-          amount: 49900,
-          currency: 'INR',
-          receipt: `order_${Date.now()}`,
+        return res.status(500).json({
+          success: false,
+          message: 'Failed to create Razorpay order',
+          error: error?.message || error,
         });
       }
     }
 
     // ─── PAYMENTS: Razorpay Verify Signature ───
-    if (url.includes('/api/v1/payments/razorpay/verify-payment')) {
+    if (url.includes('/api/v1/payments/razorpay/verify-payment') || url.includes('/api/verify-payment')) {
       if (req.method !== 'POST') {
         return res.status(405).json({ success: false, message: 'Method not allowed' });
       }
 
       try {
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body || {};
 
         // Validate required fields
         if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
           return res.status(400).json({
             success: false,
-            message: 'Missing payment verification details',
+            message: 'Missing payment verification details: razorpay_order_id, razorpay_payment_id, and razorpay_signature required',
           });
         }
 
@@ -945,11 +940,14 @@ export default async function handler(req, res) {
         });
       }
 
-      return res.status(201).json({
-        success: true,
-        message: 'Order placed successfully',
-        order: mapOrder(inserted),
-      });
+        // Trigger order confirmation email & stock update
+        handleOrderSuccess(inserted.id).catch(e => console.error('Order confirmation email error:', e));
+
+        return res.status(201).json({
+          success: true,
+          message: 'Order placed successfully',
+          order: mapOrder(inserted),
+        });
     }
 
     // ─── ORDERS: Get User / All Orders ───

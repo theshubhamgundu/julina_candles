@@ -89,7 +89,7 @@ const CheckoutForm: React.FC = () => {
 
       // 2. Launch Razorpay Modal Popup
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_TO0ThkJfCuEUj1',
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_TO2LV3iKTZwDBr',
         amount: rzpData.amount,
         currency: rzpData.currency || 'INR',
         name: 'Julina Candles & Melts',

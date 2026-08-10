@@ -61,13 +61,15 @@ const HomePage: React.FC = () => {
       <PopularProducts products={products} />
 
       {/* ─── What Makes Us Unique Section (Graphic Image) ─── */}
-      <section className="py-10 bg-[#FAF6EE] border-y border-[#E6DACB]">
+      <section className="py-8 bg-[#FAF6EE] border-y border-[#E6DACB]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex justify-center">
-          <img
-            src="/images/what_makes_us_unique.png"
-            alt="What Makes Us Unique - Candles That Complement Your Home"
-            className="w-full max-w-5xl h-auto object-contain rounded-2xl shadow-xs"
-          />
+          <div className="w-full rounded-2xl overflow-hidden shadow-xs border border-[#E6DACB] bg-white">
+            <img
+              src="/images/what_makes_us_unique.png"
+              alt="What Makes Us Unique - Candles That Complement Your Home"
+              className="w-full h-auto object-cover block"
+            />
+          </div>
         </div>
       </section>
 
