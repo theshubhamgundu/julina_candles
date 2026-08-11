@@ -15,7 +15,7 @@ const AuthPage: React.FC = () => {
             Julina Candles & Melts
           </h1>
           <p className="text-gray-600 text-center text-sm mb-6 max-w-xs leading-relaxed font-medium">
-            Doctor-backed clinically tested premium (50) rice & nutrition for your family.
+            Hand-poured artisanal soy wax candles to illuminate your space with warmth and elegance.
           </p>
           <div className="relative group max-w-xs">
             <img
@@ -25,7 +25,7 @@ const AuthPage: React.FC = () => {
             />
           </div>
           <div className="mt-6 flex items-center gap-2 bg-white/80 backdrop-blur px-4 py-2 rounded-full border border-amber-200 text-xs font-semibold text-amber-900 shadow-sm">
-            <span>🌾 100% Pesticide-Free • ICAR-IIRR Certified</span>
+            <span>🕯️ 100% Pure Soy Wax • Hand-poured</span>
           </div>
         </div>
 

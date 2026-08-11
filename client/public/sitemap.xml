@@ -4,120 +4,50 @@
 
   <url>
     <loc>https://julinacandles.in/</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-11</lastmod>
     <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://julinacandles.in/about</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://julinacandles.in/products</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://julinacandles.in/track-shipment</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://julinacandles.in/terms</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://julinacandles.in/privacy</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://julinacandles.in/shipping-policy</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://julinacandles.in/refund-policy</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://julinacandles.in/product/dd54664c-aa62-4e39-9fba-d1b850048402</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>/images/mainImage.png</image:loc>
-      <image:title>Julina Candles & Melts Artisanal Candles – Combo Pack (2 x 5Kg)</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://julinacandles.in/product/63be3230-1450-4682-95df-37accc88a7da</loc>
-    <lastmod>2026-08-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>/images/Lowgrain.png</image:loc>
-      <image:title>Julina Candles & Melts Artisanal Candles</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://julinacandles.in/blog/clinical-evaluation-low-gi-rice</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>/images/blogs/article1.png</image:loc>
-      <image:title>Clinical Evaluation of Certified premium (GI-51) Rice in Post-Prandial Glycemic Control &amp; Diabetes Management</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://julinacandles.in/blog/glycemic-index-masterclass</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>/images/blogs/article2.png</image:loc>
-      <image:title>The Glycemic Index Masterclass: Why Regular White Rice Spikes Blood Glucose Faster Than Sugar</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://julinacandles.in/blog/circadian-metabolic-health</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>/images/blogs/article3.png</image:loc>
-      <image:title>Circadian Metabolic Health: How Evening Glycemic Stability Restores Sleep Architecture &amp; Regulates Stress</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://julinacandles.in/blog/nutrient-retention-traditional-grains</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>/images/blogs/article4.png</image:loc>
-      <image:title>Nutrient Retention in Traditional Grains: A Comparative Study of vs High-Friction Polished Rice</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://julinacandles.in/blog/monsoon-metabolic-resilience</loc>
-    <lastmod>2026-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>/images/blogs/article5.png</image:loc>
-      <image:title>Monsoon Metabolic Resilience: Optimizing Immunity, Gut Microbiota &amp; Insulin Response</image:title>
-    </image:image>
   </url>
 </urlset>

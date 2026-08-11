@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
         <div className="lg:col-span-5 grid grid-cols-2 gap-6">
           {/* Company Links */}
           <div className="space-y-4">
-            <h4 className="font-serif font-bold text-white text-sm sm:text-base border-b border-[#C79A56]/30 pb-2">
+            <h4 className="font-serif font-bold text-white text-sm sm:text-base pb-2 underline decoration-wavy decoration-[#C79A56]/50 underline-offset-8">
               Company
             </h4>
             <ul className="space-y-2 text-xs text-[#F4EADA]/80 font-medium">
@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
 
           {/* Customer Care & Policies Links */}
           <div className="space-y-4">
-            <h4 className="font-serif font-bold text-white text-sm sm:text-base border-b border-[#C79A56]/30 pb-2">
+            <h4 className="font-serif font-bold text-white text-sm sm:text-base pb-2 underline decoration-wavy decoration-[#C79A56]/50 underline-offset-8">
               Customer Care & Policies
             </h4>
             <ul className="space-y-2 text-xs text-[#F4EADA]/80 font-medium">
@@ -83,7 +83,7 @@ const Footer: React.FC = () => {
 
         {/* Column 4: Contact & Global Export Desk (3 cols) */}
         <div className="lg:col-span-3 space-y-4 text-xs text-[#F4EADA]/80">
-          <h4 className="font-serif font-bold text-white text-base border-b border-[#C79A56]/30 pb-2">
+          <h4 className="font-serif font-bold text-white text-base pb-2 underline decoration-wavy decoration-[#C79A56]/50 underline-offset-8">
             Get in Touch
           </h4>
 
