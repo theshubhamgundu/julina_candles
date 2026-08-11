@@ -1,6 +1,7 @@
 import React from 'react';
 import FeaturedSection from '../components/FeaturedSection';
 import PopularProducts from '../components/PopularProduct';
+import FeaturedVariants from '../components/FeaturedVariants';
 import ProductCategories from '../components/ProductCategories';
 import { useLatestProductsQuery } from '../redux/api/product.api';
 import CustomerReviews from '../components/common/CustomerReviews';
@@ -49,6 +50,9 @@ const HomePage: React.FC = () => {
 
       {/* ─── Shop by Category ─── */}
       <ProductCategories />
+
+      {/* ─── Design Spotlight (multi-variant & featured) ─── */}
+      <FeaturedVariants products={products} />
 
       {/* ─── Products Collection ─── */}
       <PopularProducts products={products} />

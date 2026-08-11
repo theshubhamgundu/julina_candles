@@ -1,5 +1,6 @@
 {
   "name": "julina-candles-melts",
+  "type": "module",
   "version": "1.0.1",
   "private": true,
   "scripts": {
@@ -9,6 +10,8 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
     "cloudinary": "^2.10.0",
+    "pdf-parse": "^2.4.5",
+    "pdfjs-dist": "^6.2.108",
     "razorpay": "^2.9.8",
     "vite": "^8.2.0"
   }

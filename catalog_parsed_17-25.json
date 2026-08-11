@@ -1,0 +1,104 @@
+[
+  {
+    "id": 17,
+    "category": "Floral Candles",
+    "name": "Daisy Candle",
+    "pack": "Pack of 4",
+    "size": "5.8cm width, 1.2cm height",
+    "singlePrice": 119,
+    "bulkPrice": 99,
+    "bulkMOQ": 15,
+    "notes": "Customisation available"
+  },
+  {
+    "id": 18,
+    "category": "Floral Candles",
+    "name": "Rose Bud Candle",
+    "pack": "Pack of 4",
+    "size": "4cm width, 5cm height",
+    "singlePrice": 100,
+    "bulkPrice": 80,
+    "bulkMOQ": 12,
+    "notes": "Customisation available"
+  },
+  {
+    "id": 19,
+    "category": "Floral Candles",
+    "name": "Rose Heart Candles",
+    "pack": "Pack of 2",
+    "size": "6.5cm width, 4.5cm height",
+    "singlePrice": 109,
+    "bulkPrice": 89,
+    "bulkMOQ": 15,
+    "notes": "Customisation available"
+  },
+  {
+    "id": 20,
+    "category": "Floral Candles",
+    "name": "Kumud Jyot",
+    "pack": "Single piece",
+    "size": "9cm width, 4.5cm height",
+    "singlePrice": 129,
+    "bulkPrice": 109,
+    "bulkMOQ": 12,
+    "notes": "Customisation available"
+  },
+  {
+    "id": 21,
+    "category": "Glass Jar Candles",
+    "name": "Sunflower Blossom Candle",
+    "pack": "Single piece",
+    "size": "8.5cm diameter, 4.5cm height",
+    "singlePrice": 209,
+    "bulkPrice": 189,
+    "bulkMOQ": 12,
+    "notes": "Customisation available"
+  },
+  {
+    "id": 22,
+    "category": "Glass Jar Candles",
+    "name": "Daisy Bloom Candles",
+    "pack": "Single piece",
+    "size": "8.5cm diameter, 4.5cm height",
+    "singlePrice": 209,
+    "bulkPrice": 189,
+    "bulkMOQ": 12,
+    "notes": "Customisation available"
+  },
+  {
+    "id": 23,
+    "category": "Glass Jar Candles",
+    "name": "Frost Glass Candles",
+    "pack": "Single piece",
+    "size": "220ml",
+    "singlePrice": 199,
+    "bulkPrice": 159,
+    "bulkMOQ": 15,
+    "notes": "Customisation available"
+  },
+  {
+    "id": 24,
+    "category": "Glass Jar Candles",
+    "name": "Tinted Jar Candle",
+    "pack": "Single piece",
+    "size": "150ml",
+    "singlePrice": 129,
+    "bulkPrice": 99,
+    "bulkMOQ": 12,
+    "notes": "Customisation available"
+  },
+  {
+    "id": 25,
+    "category": "Available Fragrances",
+    "name": "Fragrances",
+    "options": [
+      "Sandalwood & Saffron",
+      "Lavender",
+      "Mogra",
+      "Jasmine",
+      "Bouquet",
+      "Vanilla",
+      "Coffee"
+    ]
+  }
+]

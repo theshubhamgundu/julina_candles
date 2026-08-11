@@ -16,6 +16,8 @@ const AdminAddProduct: React.FC = () => {
         price: 0,
         description: '',
     });
+
+    const [variants, setVariants] = useState<Array<any>>([]);
     const [photoFile, setPhotoFile] = useState<File | null>(null);
     const [photoPreview, setPhotoPreview] = useState<string>('');
 
@@ -40,12 +42,54 @@ const AdminAddProduct: React.FC = () => {
         }
     };
 
+    const addVariant = () => {
+        setVariants(prev => ([...prev, { id: Date.now().toString(), name: '', price: 0, bulkPrice: 0, bulkMOQ: 0, pack: '' }]));
+    };
+
+    const SIZE_PRESETS: Record<string, Array<any>> = {
+        'Festive Urli Candles': [
+            { name: 'Single', price: 250 },
+            { name: 'Medium (250g)', price: 450 },
+            { name: 'Pack of 12', price: 4800, bulkPrice: 4000, bulkMOQ: 12 },
+        ],
+        'Floral Candles': [
+            { name: 'Single', price: 199 },
+            { name: 'Pair', price: 350 },
+        ],
+        'Glass Jar Candles': [
+            { name: 'Small', price: 299 },
+            { name: 'Large', price: 599 },
+        ],
+    };
+
+    const loadPresetForCategory = () => {
+        const cat = formData.category;
+        const presets = SIZE_PRESETS[cat] || [];
+        if (presets.length === 0) {
+            notify('No presets available for this category', 'error');
+            return;
+        }
+        const toAdd = presets.map(p => ({ id: Date.now().toString() + Math.random().toString(36).slice(2,6), ...p }));
+        setVariants(prev => ([...prev, ...toAdd]));
+    };
+
+    const updateVariant = (id: string, field: string, value: any) => {
+        setVariants(prev => prev.map(v => v.id === id ? { ...v, [field]: value } : v));
+    };
+
+    const removeVariant = (id: string) => {
+        setVariants(prev => prev.filter(v => v.id !== id));
+    };
+
     const [uploadingImage, setUploadingImage] = useState(false);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!formData.name || !formData.category || !formData.stock || !formData.price || !photoFile || !formData.description) {
-            notify('Please fill all the fields', 'error');
+        // Require either a top-level price or at least one variant with price
+        const hasValidVariant = variants.length > 0 && variants.some(v => Number(v.price) > 0);
+
+        if (!formData.name || !formData.category || !formData.stock || (!formData.price && !hasValidVariant) || !photoFile || !formData.description) {
+            notify('Please fill all the fields and provide either a main price or one variant with price', 'error');
             return;
         }
 
@@ -57,9 +101,10 @@ const AdminAddProduct: React.FC = () => {
                 name: formData.name,
                 category: formData.category,
                 stock: Number(formData.stock),
-                price: Number(formData.price),
+                price: Number(formData.price || 0),
                 description: formData.description,
                 photo: cloudinaryUrl,
+                variants: variants.map((v: any) => ({ name: v.name, price: Number(v.price), bulkPrice: v.bulkPrice ? Number(v.bulkPrice) : undefined, bulkMOQ: v.bulkMOQ ? Number(v.bulkMOQ) : undefined, pack: v.pack }))
             };
 
             await newProduct({ productData }).unwrap();
@@ -182,6 +227,47 @@ const AdminAddProduct: React.FC = () => {
                                 />
                             </label>
                         </div>
+                    </div>
+
+                    {/* Variants Section */}
+                    <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                            <label className="text-xs font-bold uppercase text-gray-500 tracking-wider">Variants / Sizes</label>
+                            <div className="flex items-center gap-2">
+                                <button type="button" onClick={addVariant} className="text-xs px-3 py-1 rounded-lg bg-white border border-[#efe9db] hover:bg-[#f7f4ec]">Add Variant</button>
+                                <button type="button" onClick={loadPresetForCategory} className="text-xs px-3 py-1 rounded-lg bg-white border border-[#efe9db] hover:bg-[#f7f4ec]">Load Preset Sizes</button>
+                            </div>
+                        </div>
+
+                        {variants.length === 0 ? (
+                            <div className="text-sm text-gray-500">No variants added — you can keep a single price or add multiple sizes/packs with individual rates and MOQ.</div>
+                        ) : (
+                            <div className="space-y-3">
+                                {variants.map((v) => (
+                                    <div key={v.id} className="grid grid-cols-1 md:grid-cols-6 gap-3 items-end bg-white p-3 border border-[#efe9db] rounded-xl">
+                                        <div className="md:col-span-2">
+                                            <label className="text-[10px] font-semibold text-gray-500">Size / Label</label>
+                                            <input type="text" value={v.name} onChange={(e) => updateVariant(v.id, 'name', e.target.value)} className="w-full p-2 rounded-xl border border-[#efe9db] text-sm" placeholder="e.g. 250g, Single, Pack of 12" />
+                                        </div>
+                                        <div>
+                                            <label className="text-[10px] font-semibold text-gray-500">Price (₹)</label>
+                                            <input type="number" value={v.price} onChange={(e) => updateVariant(v.id, 'price', e.target.value)} className="w-full p-2 rounded-xl border border-[#efe9db] text-sm" />
+                                        </div>
+                                        <div>
+                                            <label className="text-[10px] font-semibold text-gray-500">Bulk Price (₹)</label>
+                                            <input type="number" value={v.bulkPrice} onChange={(e) => updateVariant(v.id, 'bulkPrice', e.target.value)} className="w-full p-2 rounded-xl border border-[#efe9db] text-sm" />
+                                        </div>
+                                        <div>
+                                            <label className="text-[10px] font-semibold text-gray-500">MOQ</label>
+                                            <input type="number" value={v.bulkMOQ} onChange={(e) => updateVariant(v.id, 'bulkMOQ', e.target.value)} className="w-full p-2 rounded-xl border border-[#efe9db] text-sm" />
+                                        </div>
+                                        <div className="flex items-center gap-2 md:col-span-1">
+                                            <button type="button" onClick={() => removeVariant(v.id)} className="text-xs px-3 py-2 rounded-lg bg-red-50 text-red-600 border border-red-100">Remove</button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     <div className="flex justify-end gap-3 pt-4 border-t border-[#efe9db]">

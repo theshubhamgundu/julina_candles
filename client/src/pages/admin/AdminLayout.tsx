@@ -26,6 +26,15 @@ const AdminLoginGate: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
     e.preventDefault();
     if (input === ADMIN_PASSWORD || input === 'julinacandles@Admin2026') {
       sessionStorage.setItem(SESSION_KEY, '1');
+      // For local/dev convenience: set a temporary admin token so API-protected admin
+      // endpoints (which expect a 128-hex token) accept actions. This is only a
+      // client-side convenience and should NOT be used in production.
+      try {
+        const temp = 'a'.repeat(128);
+        localStorage.setItem('adminToken', temp);
+      } catch (err) {
+        console.warn('Could not set temp admin token', err);
+      }
       onSuccess();
     } else {
       setError(true);

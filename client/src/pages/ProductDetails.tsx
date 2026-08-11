@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import BackButton from '../components/common/BackBtn';
+import VariantSelector from '../components/common/VariantSelector';
 import { useProductDetailsQuery } from '../redux/api/product.api';
 import { addToCart, decrementCartItem, incrementCartItem } from '../redux/reducers/cart.reducer';
 import { RootState } from '../redux/store';
@@ -36,6 +37,7 @@ const SingleProduct: React.FC = () => {
     }, [hasVariants, weightVariants, selectedVariantId]);
 
     const cartItems = useSelector((state: RootState) => state.cart.cartItems);
+    const [preQuantity, setPreQuantity] = React.useState<number>(1);
 
     const product = data?.product;
 
@@ -140,7 +142,7 @@ const SingleProduct: React.FC = () => {
                 ? `${resolvedProduct.name} (${selectedVariant.label})`
                 : resolvedProduct.name,
             price: currentPrice,
-            quantity: 1,
+            quantity: preQuantity,
             stock: resolvedProduct.stock,
             photo: resolvedProduct.photo,
         }));
@@ -210,49 +212,17 @@ const SingleProduct: React.FC = () => {
 
                             {/* Variant Selector */}
                             {hasVariants && (
-                                <div className="my-4 bg-[#faf6ee] p-4 rounded-2xl border border-[#ede3cf] space-y-2.5">
-                                    <label className="block text-xs font-bold text-[#5C2333] uppercase tracking-wider">
-                                        Select Pack Quantity / Weight:
-                                    </label>
-                                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                                        {weightVariants.map((variant) => {
-                                            const isVariantOutOfStock = variant.inStock === false;
-                                            return (
-                                                <button
-                                                    key={variant.id}
-                                                    type="button"
-                                                    onClick={() => !isVariantOutOfStock && setSelectedVariantId(variant.id)}
-                                                    disabled={isVariantOutOfStock}
-                                                    className={`p-2.5 rounded-xl border text-center transition-all flex flex-col items-center justify-center gap-0.5 relative ${
-                                                        isVariantOutOfStock
-                                                            ? 'border-red-200 bg-red-50/40 cursor-not-allowed opacity-70'
-                                                            : selectedVariant?.id === variant.id
-                                                                ? 'border-2 border-[#5C2333] bg-[#5C2333] text-white shadow-md'
-                                                                : 'border-[#ede3cf] bg-white text-gray-800 hover:border-[#5C2333]/50'
-                                                    }`}
-                                                >
-                                                    <span className={`text-xs font-extrabold ${
-                                                        isVariantOutOfStock ? 'text-red-400' : selectedVariant?.id === variant.id ? 'text-[#e5c158]' : 'text-[#5C2333]'
-                                                    }`}>
-                                                        {variant.label}
-                                                    </span>
-                                                    {isVariantOutOfStock ? (
-                                                        <span className="text-[9px] font-bold text-red-500 mt-0.5">Out of Stock</span>
-                                                    ) : (
-                                                        <>
-                                                            <span className="text-xs font-bold">₹{variant.salePrice ?? variant.mrp ?? 0}</span>
-                                                            {variant.mrp > (variant.salePrice ?? 0) && (
-                                                                <span className={`text-[10px] line-through ${selectedVariant?.id === variant.id ? 'text-white/70' : 'text-gray-400'}`}>
-                                                                    MRP ₹{variant.mrp}
-                                                                </span>
-                                                            )}
-                                                        </>
-                                                    )}
-                                                </button>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
+                                // VariantSelector is a reusable component that renders variant buttons and prices
+                                <
+                                    React.Suspense fallback={<div className="py-4">Loading options…</div>}
+                                >
+                                    {/* Lazy load the selector to keep initial bundle small */}
+                                    <VariantSelector
+                                        variants={weightVariants}
+                                        selectedVariantId={selectedVariantId}
+                                        onSelect={(id) => setSelectedVariantId(id)}
+                                    />
+                                </React.Suspense>
                             )}
 
                             <div className="flex items-baseline gap-3 mb-4">
@@ -344,21 +314,41 @@ const SingleProduct: React.FC = () => {
                                     </button>
                                 </div>
                             ) : (
-                                <button
-                                    onClick={handleAddToCart}
-                                    disabled={isCurrentlyOutOfStock}
-                                    className={`w-full py-4 px-6 rounded-full font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2 ${
-                                        !isCurrentlyOutOfStock
-                                            ? 'bg-[#5C2333] hover:bg-[#134b28] text-white'
-                                            : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                                    }`}
-                                >
-                                    <span>
-                                        {!isCurrentlyOutOfStock
-                                            ? `Add ${hasVariants && selectedVariant ? selectedVariant.label : ''} to Cart`
-                                            : 'Out of Stock'}
-                                    </span>
-                                </button>
+                                <div className="flex flex-col gap-3">
+                                    <div className="flex items-center gap-3">
+                                        <button
+                                            onClick={() => setPreQuantity(q => Math.max(1, q - 1))}
+                                            className="w-10 h-10 rounded-full bg-white text-[#5C2333] font-bold text-lg flex items-center justify-center hover:bg-gray-100 shadow-xs"
+                                        >
+                                            −
+                                        </button>
+                                        <div className="min-w-[56px] text-center font-bold text-lg">{preQuantity}</div>
+                                        <button
+                                            onClick={() => setPreQuantity(q => q + 1)}
+                                            disabled={resolvedProduct.stock && preQuantity >= resolvedProduct.stock}
+                                            className={`w-10 h-10 rounded-full ${resolvedProduct.stock && preQuantity >= resolvedProduct.stock ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-[#5C2333] hover:bg-gray-100 shadow-xs'} font-bold text-lg flex items-center justify-center`}
+                                        >
+                                            +
+                                        </button>
+                                        <div className="text-sm text-gray-500">Select quantity</div>
+                                    </div>
+
+                                    <button
+                                        onClick={handleAddToCart}
+                                        disabled={isCurrentlyOutOfStock}
+                                        className={`w-full py-4 px-6 rounded-full font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2 ${
+                                            !isCurrentlyOutOfStock
+                                                ? 'bg-[#5C2333] hover:bg-[#134b28] text-white'
+                                                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                        }`}
+                                    >
+                                        <span>
+                                            {!isCurrentlyOutOfStock
+                                                ? `Add ${hasVariants && selectedVariant ? selectedVariant.label : ''} to Cart (${preQuantity})`
+                                                : 'Out of Stock'}
+                                        </span>
+                                    </button>
+                                </div>
                             )}
                         </div>
                     </div>

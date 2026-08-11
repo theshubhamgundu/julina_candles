@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, incrementCartItem, decrementCartItem } from '../redux/reducers/cart.reducer';
 import { RootState } from '../redux/store';
@@ -17,6 +17,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
 
   const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
+
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   let displayPrice = product.price;
   let priceLabel = '';
@@ -108,18 +111,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {product.name}
         </h3>
 
-        {/* Price Row */}
-        <div className="flex items-center justify-center gap-1.5 mb-2.5">
-          {hasVariants ? (
-            <span className="text-[10px] sm:text-xs font-bold text-[#5C2333] bg-[#5C2333]/10 px-2 py-0.5 rounded-full border border-[#5C2333]/20">
-              {priceLabel}
-            </span>
-          ) : (
-            <span className="text-sm sm:text-lg font-bold text-[#5C2333] font-serif">
-              ₹ {displayPrice}
-            </span>
-          )}
-        </div>
+        {/* Price Row (hidden on homepage) */}
+        {!isHomePage && (
+          <div className="flex items-center justify-center gap-1.5 mb-2.5">
+            {hasVariants ? (
+              <span className="text-[10px] sm:text-xs font-bold text-[#5C2333] bg-[#5C2333]/10 px-2 py-0.5 rounded-full border border-[#5C2333]/20">
+                {priceLabel}
+              </span>
+            ) : (
+              <span className="text-sm sm:text-lg font-bold text-[#5C2333] font-serif">
+                ₹ {displayPrice}
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Action Button */}
         <div className="mt-auto">

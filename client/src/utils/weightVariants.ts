@@ -1,11 +1,18 @@
 export interface WeightVariant {
     id: string;
     label: string;
+    name?: string;
     weightKg: number;
     mrp: number;
     salePrice: number;
+    price?: number;
     stock: number; // individual stock for this variant
     inStock?: boolean; // undefined = in stock (default), false = out of stock
+    // Optional bulk pricing and minimum order quantity
+    bulkPrice?: number;
+    bulkMOQ?: number;
+    // Optional pack descriptor (e.g., "Pack of 4")
+    pack?: string;
 }
 
 export const DEFAULT_WEIGHT_VARIANTS: WeightVariant[] = [
