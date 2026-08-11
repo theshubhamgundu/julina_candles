@@ -52,7 +52,8 @@ const RAZORPAY_CONFIG = {
 
 // Initialize Razorpay instance
 function getRazorpayInstance() {
-  return new Razorpay({
+  const RazorpayConstructor = Razorpay.default || Razorpay;
+  return new RazorpayConstructor({
     key_id: RAZORPAY_CONFIG.KEY_ID,
     key_secret: RAZORPAY_CONFIG.KEY_SECRET,
   });
@@ -724,14 +725,10 @@ export default async function handler(req, res) {
             receipt: order.receipt,
           });
         } catch (sdkError) {
-          console.warn('⚠️ Razorpay SDK Order creation fallback:', sdkError?.description || sdkError?.message || sdkError);
-          const fallbackOrderId = `order_test_${Date.now()}`;
-          return res.status(200).json({
-            success: true,
-            order_id: fallbackOrderId,
-            amount: amountInPaise,
-            currency: currency || 'INR',
-            receipt: orderReceipt,
+          console.error('❌ Razorpay SDK Order creation error:', sdkError?.description || sdkError?.message || sdkError);
+          return res.status(500).json({
+            success: false,
+            message: sdkError?.description || sdkError?.message || 'Failed to create Razorpay order',
           });
         }
       } catch (error) {
