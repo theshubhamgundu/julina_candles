@@ -361,230 +361,12 @@ function mapProduct(row) {
     photo: row.photo,
     photoPublicId: row.photo_public_id,
     featured: Boolean(row.featured),
+    isActive: row.is_active !== false,
     variants,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
 }
-
-const JULINA_CANDLE_PRODUCTS = [
-  {
-    _id: "1", id: "1",
-    name: "Kesari Kripa Urli Candle", category: "Festive Urli Candles",
-    description: "Inspired by vibrant hues of Marigold flowers. Handcrafted natural soy wax candle in brass-style decorative urli. Customisation available.",
-    price: 299, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389845/julina_candles/products/handicraf_lotus_pond.png", featured: true,
-    variants: [
-      { id: "1_45", name: "4.5 inch", label: "4.5 inch", price: 299, salePrice: 299, mrp: 350, stock: 50, inStock: true },
-      { id: "1_55", name: "5.5 inch", label: "5.5 inch", price: 339, salePrice: 339, mrp: 399, stock: 50, inStock: true },
-      { id: "1_65", name: "6.5 inch", label: "6.5 inch", price: 379, salePrice: 379, mrp: 449, stock: 50, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "2", id: "2",
-    name: "Sakora Bloom Urli Candle", category: "Festive Urli Candles",
-    description: "Handcrafted decorative urli candle topped with vibrant floral blooms and leaves. Customisation available.",
-    price: 289, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389855/julina_candles/products/lotus_pond_urli.png", featured: true,
-    variants: [
-      { id: "2_45", name: "4.5 inch", label: "4.5 inch", price: 289, salePrice: 289, mrp: 330, stock: 50, inStock: true },
-      { id: "2_55", name: "5.5 inch", label: "5.5 inch", price: 329, salePrice: 329, mrp: 380, stock: 50, inStock: true },
-      { id: "2_65", name: "6.5 inch", label: "6.5 inch", price: 369, salePrice: 369, mrp: 420, stock: 50, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "3", id: "3",
-    name: "Vasant Leela Urli Candle", category: "Festive Urli Candles",
-    description: "Traditional urli candle embellished with handcrafted daisy flowers and pearl beads. Customisation available.",
-    price: 289, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389857/julina_candles/products/lotus_urli_scented.png", featured: true,
-    variants: [
-      { id: "3_45", name: "4.5 inch", label: "4.5 inch", price: 289, salePrice: 289, mrp: 330, stock: 50, inStock: true },
-      { id: "3_55", name: "5.5 inch", label: "5.5 inch", price: 329, salePrice: 329, mrp: 380, stock: 50, inStock: true },
-      { id: "3_65", name: "6.5 inch", label: "6.5 inch", price: 369, salePrice: 369, mrp: 420, stock: 50, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "4", id: "4",
-    name: "Sunflower Bliss Urli Candle", category: "Festive Urli Candles",
-    description: "Golden sunflower urli candle adorned with hand-poured sunflower embeds and golden sparkle.",
-    price: 149, stock: 60, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389880/julina_candles/products/soy_wax_sunflower_urli.png", featured: true,
-    variants: [
-      { id: "4_35", name: "3.5 inch", label: "3.5 inch", price: 149, salePrice: 149, mrp: 180, stock: 60, inStock: true },
-      { id: "4_45", name: "4.5 inch", label: "4.5 inch", price: 199, salePrice: 199, mrp: 240, stock: 60, inStock: true },
-      { id: "4_55", name: "5.5 inch", label: "5.5 inch", price: 259, salePrice: 259, mrp: 300, stock: 60, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "5", id: "5",
-    name: "Peacock Urli Candle", category: "Festive Urli Candles",
-    description: "Royal peacock decorative urli frame filled with scented soy wax and floral highlights. Customisation available.",
-    price: 279, stock: 40, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389862/julina_candles/products/peacock_pink_wax_urli.png", featured: true,
-    variants: [
-      { id: "5_6", name: "6 inch", label: "6 inch", price: 279, salePrice: 279, mrp: 320, stock: 40, inStock: true },
-      { id: "5_8", name: "8 inch", label: "8 inch", price: 319, salePrice: 319, mrp: 370, stock: 40, inStock: true },
-      { id: "5_10", name: "10 inch", label: "10 inch", price: 359, salePrice: 359, mrp: 420, stock: 40, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "6", id: "6",
-    name: "Round Urli Candles", category: "Festive Urli Candles",
-    description: "Classic round metallic urli candle embedded with vibrant orange marigolds. Customisation available.",
-    price: 359, stock: 45, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389884/julina_candles/products/sunflower_decorative_urli.png", featured: false,
-    variants: [
-      { id: "6_4", name: "4 inch", label: "4 inch", price: 359, salePrice: 359, mrp: 400, stock: 45, inStock: true },
-      { id: "6_5", name: "5 inch", label: "5 inch", price: 399, salePrice: 399, mrp: 450, stock: 45, inStock: true },
-      { id: "6_6", name: "6 inch", label: "6 inch", price: 449, salePrice: 449, mrp: 500, stock: 45, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "7", id: "7",
-    name: "Diya Urli Candle", category: "Festive Urli Candles",
-    description: "Multi-diya urli candle featuring a centerpiece of white flowers framed by golden wax diyas. Customisation available.",
-    price: 249, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389889/julina_candles/products/sunflower_urli_candle.png", featured: false,
-    variants: [
-      { id: "7_8", name: "8 inch", label: "8 inch", price: 249, salePrice: 249, mrp: 299, stock: 50, inStock: true },
-      { id: "7_10", name: "10 inch", label: "10 inch", price: 329, salePrice: 329, mrp: 399, stock: 50, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "8", id: "8",
-    name: "Moon Sun Urli Candle", category: "Festive Urli Candles",
-    description: "Artistic brass bowl candle featuring sculpted celestial Sun & Moon design with gold leaf accents.",
-    price: 199, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389866/julina_candles/products/peacock_white_wax_urli.png", featured: true,
-    variants: [
-      { id: "8_35", name: "3.5 inch", label: "3.5 inch", price: 199, salePrice: 199, mrp: 249, stock: 50, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "9", id: "9",
-    name: "Laksh Siddhi Urli Candles", category: "Festive Urli Candles",
-    description: "Set of 2 golden glass jar candles featuring Lord Ganesha and Goddess Lakshmi motifs. Customisation available.",
-    price: 299, stock: 40, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389849/julina_candles/products/laddu_shot_glass.png", featured: true,
-    variants: [
-      { id: "9_2", name: "Pack of 2 (3.5 inch)", label: "Pack of 2", price: 299, salePrice: 299, mrp: 350, stock: 40, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "10", id: "10",
-    name: "Wooden Dough Bowl Candle", category: "Wooden Dough Bowl Candles",
-    description: "Rustic hand-carved wooden bowl filled with natural soy wax and scented spices like cinnamon & dried orange slice. Customisation available.",
-    price: 229, stock: 40, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389873/julina_candles/products/soy_wax_concrete_shankh.png", featured: true,
-    variants: [
-      { id: "10_4", name: "4 inch", label: "4 inch", price: 229, salePrice: 229, mrp: 280, stock: 40, inStock: true },
-      { id: "10_5", name: "5 inch", label: "5 inch", price: 269, salePrice: 269, mrp: 320, stock: 40, inStock: true },
-      { id: "10_6", name: "6 inch", label: "6 inch", price: 309, salePrice: 309, mrp: 360, stock: 40, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "11", id: "11",
-    name: "Mithai Candles", category: "Mithai Candles",
-    description: "Dessert-inspired candles shaped like Motichoor Laddus and Modaks with silver leaf detailing. Available in Pack of 4 & Pack of 6.",
-    price: 119, stock: 60, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389859/julina_candles/products/modak_shaped_scented.png", featured: true,
-    variants: [
-      { id: "11_4", name: "Pack of 4", label: "Pack of 4", price: 119, salePrice: 119, mrp: 150, stock: 60, inStock: true },
-      { id: "11_6", name: "Pack of 6", label: "Pack of 6", price: 279, salePrice: 279, mrp: 330, stock: 60, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "12", id: "12",
-    name: "Peony Candles", category: "Floral Candles",
-    description: "Sculpted peony flower candles infused with delicate floral aromatherapy notes. Size: 8.5cm width, 4.5cm height.",
-    price: 109, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389843/julina_candles/products/daisy_scented_soy_wax.png", featured: true,
-    variants: [
-      { id: "12_1", name: "Single piece", label: "Single piece", price: 109, salePrice: 109, mrp: 140, stock: 50, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "13", id: "13",
-    name: "Daisy Candle", category: "Floral Candles",
-    description: "Pack of 4 vibrant daisy flower candles. Size: 5.8cm width, 1.2cm height. Customisation available.",
-    price: 119, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389840/julina_candles/products/daisy_flower_jar.png", featured: false,
-    variants: [
-      { id: "13_4", name: "Pack of 4", label: "Pack of 4", price: 119, salePrice: 119, mrp: 150, stock: 50, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "14", id: "14",
-    name: "Rose Bud Candle", category: "Floral Candles",
-    description: "Pack of 4 rose bud candles infused with romantic rose essential oil. Size: 4cm width, 5cm height.",
-    price: 100, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389869/julina_candles/products/rose_heart_candle.png", featured: true,
-    variants: [
-      { id: "14_4", name: "Pack of 4", label: "Pack of 4", price: 100, salePrice: 100, mrp: 130, stock: 50, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "15", id: "15",
-    name: "Rose Heart Candles", category: "Floral Candles",
-    description: "Pack of 2 heart-shaped rose candles. Size: 6.5cm width, 4.5cm height. Customisation available.",
-    price: 109, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389871/julina_candles/products/scented_glass_jar.png", featured: true,
-    variants: [
-      { id: "15_2", name: "Pack of 2", label: "Pack of 2", price: 109, salePrice: 109, mrp: 140, stock: 50, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "16", id: "16",
-    name: "Kumud Jyot", category: "Floral Candles",
-    description: "Lotus flower candle set on a traditional brass stand. Size: 9cm width, 4.5cm height. Customisation available.",
-    price: 129, stock: 45, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389834/julina_candles/products/caramel_coffee_cream.png", featured: false,
-    variants: [
-      { id: "16_1", name: "Single piece", label: "Single piece", price: 129, salePrice: 129, mrp: 160, stock: 45, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "17", id: "17",
-    name: "Sunflower Blossom Candle", category: "Glass Jar Candles",
-    description: "Ribbed glass bowl filled with natural soy wax and a hand-poured sunflower top. Size: 8.5cm diameter, 4.5cm height.",
-    price: 209, stock: 40, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389837/julina_candles/products/coffee_beans_candles.png", featured: true,
-    variants: [
-      { id: "17_1", name: "Single piece", label: "Single piece", price: 209, salePrice: 209, mrp: 260, stock: 40, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "18", id: "18",
-    name: "Daisy Bloom Candles", category: "Glass Jar Candles",
-    description: "Clear glass jar with lid containing a blooming daisy candle. Size: 8.5cm diameter, 4.5cm height.",
-    price: 209, stock: 40, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389840/julina_candles/products/daisy_flower_jar.png", featured: true,
-    variants: [
-      { id: "18_1", name: "Single piece", label: "Single piece", price: 209, salePrice: 209, mrp: 260, stock: 40, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "19", id: "19",
-    name: "Frost Glass Candles", category: "Glass Jar Candles",
-    description: "Luxury matte frost glass jar candle (220ml) with custom label & box. Customisation available.",
-    price: 199, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389871/julina_candles/products/scented_glass_jar.png", featured: true,
-    variants: [
-      { id: "19_220", name: "220ml", label: "220ml", price: 199, salePrice: 199, mrp: 250, stock: 50, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  },
-  {
-    _id: "20", id: "20",
-    name: "Tinted Jar Candle", category: "Glass Jar Candles",
-    description: "Cut-glass tinted jar candle (150ml) with matching glass lid. Customisation available.",
-    price: 129, stock: 50, photo: "https://res.cloudinary.com/bzykgznp/image/upload/v1786389840/julina_candles/products/daisy_flower_jar.png", featured: false,
-    variants: [
-      { id: "20_150", name: "150ml", label: "150ml", price: 129, salePrice: 129, mrp: 160, stock: 50, inStock: true }
-    ],
-    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
-  }
-];
 
 // Map Supabase row → order object
 function mapOrder(row) {
@@ -886,13 +668,6 @@ export default async function handler(req, res) {
 
             if (!productError && dbProduct) {
               product = dbProduct;
-            } else {
-              const fallback = JULINA_CANDLE_PRODUCTS.find(
-                p => p.id === String(baseProductId) || p._id === String(baseProductId) || p.name.toLowerCase() === String(item.name || '').toLowerCase()
-              );
-              if (fallback) {
-                product = { stock: fallback.stock, name: fallback.name };
-              }
             }
 
             if (!product) {
@@ -1584,6 +1359,9 @@ export default async function handler(req, res) {
 
       let query = supabase.from('products').select('*', { count: 'exact' });
 
+      // Storefront search only shows active products
+      query = query.neq('is_active', false);
+
       if (search) {
         query = query.ilike('name', `%${search}%`);
       }
@@ -1611,44 +1389,6 @@ export default async function handler(req, res) {
 
       let products = (data || []).map(mapProduct);
       let totalCount = count || 0;
-
-      // Fallback to hardcoded products when Supabase is empty or errors
-      if ((!data || data.length === 0) && !search && !category && !price) {
-        // No filters applied and no data — use fallback
-        let fallback = [...JULINA_CANDLE_PRODUCTS];
-
-        if (sort === 'asc') {
-          fallback.sort((a, b) => a.price - b.price);
-        } else if (sort === 'desc') {
-          fallback.sort((a, b) => b.price - a.price);
-        }
-
-        totalCount = fallback.length;
-        const fromIdx = (page - 1) * limit;
-        const toIdx = fromIdx + limit;
-        products = fallback.slice(fromIdx, toIdx);
-      } else if ((!data || data.length === 0) && (search || category)) {
-        // Filters applied — try filtering fallback data
-        let fallback = [...JULINA_CANDLE_PRODUCTS];
-
-        if (search) {
-          fallback = fallback.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
-        }
-        if (category) {
-          fallback = fallback.filter(p => p.category === category);
-        }
-        if (sort === 'asc') {
-          fallback.sort((a, b) => a.price - b.price);
-        } else if (sort === 'desc') {
-          fallback.sort((a, b) => b.price - a.price);
-        }
-
-        totalCount = fallback.length;
-        const fromIdx = (page - 1) * limit;
-        const toIdx = fromIdx + limit;
-        products = fallback.slice(fromIdx, toIdx);
-      }
-
       const totalPage = Math.ceil(totalCount / limit);
 
       return res.status(200).json({
@@ -1664,13 +1404,12 @@ export default async function handler(req, res) {
       const { data, error } = await supabase
         .from('products')
         .select('*')
+        .neq('is_active', false)
         .order('created_at', { ascending: false })
         .limit(50);
 
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         productsList = data.map(mapProduct);
-      } else {
-        productsList = JULINA_CANDLE_PRODUCTS;
       }
 
       const resBody = {
@@ -1682,24 +1421,20 @@ export default async function handler(req, res) {
       return res.status(200).json(resBody);
     }
 
-    // ─── PRODUCTS: Get All Products (with pagination) ───
+    // ─── PRODUCTS: Get All Products (Admin view shows all, public shows active) ───
     if (url.includes('/api/v1/products/all')) {
       const urlObj = new URL(url, 'http://localhost');
       const page = parseInt(urlObj.searchParams.get('page') || '1', 10);
       const limit = parseInt(urlObj.searchParams.get('limit') || '50', 10);
-      const sortByRaw = urlObj.searchParams.get('sortBy');
 
       let productsList = [];
       let totalProducts = 0;
 
-      const { data, error, count } = await supabase.from('products').select('*', { count: 'exact' });
+      const { data, error, count } = await supabase.from('products').select('*', { count: 'exact' }).order('created_at', { ascending: false });
 
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         productsList = data.map(mapProduct);
         totalProducts = count || data.length;
-      } else {
-        productsList = JULINA_CANDLE_PRODUCTS;
-        totalProducts = JULINA_CANDLE_PRODUCTS.length;
       }
 
       const totalPages = Math.ceil(totalProducts / limit);
@@ -1718,14 +1453,25 @@ export default async function handler(req, res) {
 
     // ─── PRODUCTS: Get Categories ───
     if (url.includes('/api/v1/products/categories')) {
-      const categories = [
-        'Festive Urli Candles',
-        'Wooden Dough Bowl Candles',
-        'Mithai Candles',
-        'Floral Candles',
-        'Glass Jar Candles',
-        'Fragrances'
-      ];
+      const { data, error } = await supabase
+        .from('products')
+        .select('category')
+        .neq('is_active', false);
+
+      let categories = [];
+      if (!error && data && data.length > 0) {
+        categories = Array.from(new Set(data.map(p => p.category).filter(Boolean)));
+      }
+      if (categories.length === 0) {
+        categories = [
+          'Festive Urli Candles',
+          'Wooden Dough Bowl Candles',
+          'Mithai Candles',
+          'Floral Candles',
+          'Glass Jar Candles',
+          'Fragrances'
+        ];
+      }
 
       const resBody = {
         success: true,
@@ -1742,12 +1488,11 @@ export default async function handler(req, res) {
       const { data, error } = await supabase
         .from('products')
         .select('*')
-        .eq('featured', true);
+        .eq('featured', true)
+        .neq('is_active', false);
 
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         productsList = data.map(mapProduct);
-      } else {
-        productsList = JULINA_CANDLE_PRODUCTS.filter(p => p.featured);
       }
 
       const resBody = {
@@ -1766,7 +1511,8 @@ export default async function handler(req, res) {
         return res.status(401).json({ success: false, message: 'Unauthorized: Admin authentication required' });
       }
 
-      const { name, category, price, stock, description, photo, variants } = req.body || {};
+      const body = req.body || {};
+      const { name, category, price, stock, description, photo, variants } = body;
 
       if (!name || !category || price === undefined || stock === undefined || !description) {
         return res.status(400).json({ success: false, message: 'Please provide name, category, price, stock, and description' });
@@ -1774,13 +1520,15 @@ export default async function handler(req, res) {
 
       const insertData = {
         name,
-        category: category.toLowerCase(),
+        category: category,
         price: Number(price),
         stock: Number(stock),
         description,
         photo: photo || '/images/mainImage.png',
         variants: variants || [],
         featured: false,
+        is_active: true,
+        event_id: req.body?.event_id || '00000000-0000-0000-0000-000000000000',
       };
 
       const { data: newProduct, error } = await supabase
@@ -1800,6 +1548,47 @@ export default async function handler(req, res) {
         success: true,
         message: 'Product created successfully',
         product: mapProduct(newProduct),
+      });
+    }
+
+    // ─── PRODUCTS: Toggle Active Status (Enable/Disable) ───
+    if (url.match(/\/api\/v1\/products\/toggle-active\/[^/]+$/) && req.method === 'PATCH') {
+      const token = req.headers.authorization?.replace('Bearer ', '');
+      if (!token || token.length !== 128 || !/^[a-f0-9]+$/i.test(token)) {
+        return res.status(401).json({ success: false, message: 'Unauthorized: Admin authentication required' });
+      }
+
+      const productId = url.split('/').pop();
+
+      const { data: product, error: fetchError } = await supabase
+        .from('products')
+        .select('is_active')
+        .eq('id', productId)
+        .single();
+
+      if (fetchError || !product) {
+        return res.status(404).json({ success: false, message: 'Product not found' });
+      }
+
+      const newStatus = product.is_active === false ? true : false;
+
+      const { data: updated, error: updateError } = await supabase
+        .from('products')
+        .update({ is_active: newStatus, updated_at: new Date().toISOString() })
+        .eq('id', productId)
+        .select()
+        .single();
+
+      if (updateError) {
+        return res.status(500).json({ success: false, message: updateError.message });
+      }
+
+      if (global.fastApiCache) global.fastApiCache.clear();
+
+      return res.status(200).json({
+        success: true,
+        message: `Product ${updated.is_active !== false ? 'enabled' : 'disabled'} successfully`,
+        product: mapProduct(updated),
       });
     }
 
@@ -1888,16 +1677,6 @@ export default async function handler(req, res) {
         return res.status(200).json(resBody);
       }
 
-      // Fallback for numeric IDs matching default items
-      const mockProduct = JULINA_CANDLE_PRODUCTS.find(p => p.id === id || p._id === id);
-      if (mockProduct) {
-        const resBody = {
-          success: true,
-          product: mapProduct(mockProduct),
-        };
-        return res.status(200).json(resBody);
-      }
-
       return res.status(404).json({ success: false, message: 'Product not found' });
     }
 
@@ -1965,442 +1744,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // ─── SHIPPERS: Admin Create Shipper ───
-    if (url.includes('/api/v1/shippers/create') && req.method === 'POST') {
-      // ✅ ADMIN PROTECTION: Create shipper requires authentication
-      const token = req.headers.authorization?.replace('Bearer ', '');
-      
-      if (!token || token.length !== 128 || !/^[a-f0-9]+$/i.test(token)) {
-        return res.status(401).json({ 
-          success: false, 
-          message: 'Unauthorized: Admin authentication required' 
-        });
-      }
 
-      const { name, email, phone, company_name, address } = req.body || {};
-      
-      if (!name || !email) {
-        return res.status(400).json({ success: false, message: 'Name and email are required' });
-      }
-
-      // Check if shipper already exists
-      const { data: existing } = await supabase
-        .from('shippers')
-        .select('id')
-        .eq('email', email.toLowerCase())
-        .maybeSingle();
-
-      if (existing) {
-        return res.status(400).json({ success: false, message: 'Shipper with this email already exists' });
-      }
-
-      // Generate easy password based on name (e.g., "john@123")
-      const firstName = name.trim().split(' ')[0].toLowerCase();
-      const generatedPassword = `${firstName}@123`;
-      const passwordHash = hashPassword(generatedPassword);
-
-      const { data: newShipper, error } = await supabase
-        .from('shippers')
-        .insert({
-          name,
-          email: email.toLowerCase(),
-          password_hash: passwordHash,
-          phone: phone || null,
-          company_name: company_name || null,
-          address: address || null,
-          status: 'active'
-        })
-        .select()
-        .single();
-
-      if (error) {
-        console.error('Shipper creation error:', error);
-        return res.status(500).json({ success: false, message: error.message });
-      }
-
-      // Send credentials email to shipper
-      try {
-        const credentialsEmail = `
-          <div style="background-color: #f7f4ec; padding: 30px; font-family: Arial, sans-serif;">
-            <div style="max-width: 600px; margin: 0 auto; background: #ffffff; padding: 40px; border-radius: 20px; border: 1px solid #efe9db;">
-              
-              <div style="text-align: center; margin-bottom: 30px;">
-                <h1 style="color: #1f5133; font-size: 26px; margin: 0;">Julina Candles & Melts</h1>
-                <span style="font-size: 10px; color: #c4633c; text-transform: uppercase;">Shipper Portal</span>
-              </div>
-
-              <h2 style="color: #1f5133; font-size: 20px;">Welcome to Shipper Portal! 🚚</h2>
-              <p style="font-size: 14px; color: #24291f; margin-bottom: 20px;">Dear ${name},</p>
-              <p style="font-size: 14px; color: #5f6455; margin-bottom: 25px;">Your shipper account has been created. Below are your login credentials:</p>
-              
-              <div style="background-color: #f7f4ec; border-radius: 12px; padding: 25px; margin-bottom: 30px; border: 2px solid #1f5133;">
-                <h3 style="color: #1f5133; margin-top: 0; font-size: 16px;">Login Credentials</h3>
-                <table style="width: 100%; font-size: 14px;">
-                  <tr>
-                    <td style="padding: 8px 0; color: #5f6455;"><strong>Email:</strong></td>
-                    <td style="padding: 8px 0; font-family: monospace; color: #24291f;">${email}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 8px 0; color: #5f6455;"><strong>Password:</strong></td>
-                    <td style="padding: 8px 0; font-family: monospace; color: #c4633c; font-weight: bold;">${generatedPassword}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 8px 0; color: #5f6455;"><strong>Portal URL:</strong></td>
-                    <td style="padding: 8px 0;"><a href="https://julinacandles.in/shipper/login" style="color: #1f5133;">https://julinacandles.in/shipper/login</a></td>
-                  </tr>
-                </table>
-              </div>
-
-              <div style="background-color: #fff8dc; border-left: 4px solid #c4633c; padding: 15px; margin-bottom: 25px; border-radius: 4px;">
-                <p style="font-size: 13px; color: #24291f; margin: 0;">
-                  <strong>📝 Note:</strong> You can see all orders that are Processing or Shipped. Update orders to "Dispatched" when you deliver them.
-                </p>
-              </div>
-
-              <div style="text-align: center; margin-bottom: 20px;">
-                <a href="https://julinacandles.in/shipper/login" style="background-color: #1f5133; color: #ffffff; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px; display: inline-block;">Access Shipper Portal</a>
-              </div>
-
-              <div style="border-top: 1px solid #efe9db; padding-top: 20px; text-align: center; font-size: 11px; color: #5f6455;">
-                <p style="margin: 0;">© ${new Date().getFullYear()} Julina Candles & Melts. All rights reserved.</p>
-              </div>
-
-            </div>
-          </div>
-        `;
-
-        await sendEmail({
-          to: email,
-          subject: 'Your Julina Candles & Melts Shipper Portal Credentials',
-          html: credentialsEmail
-        });
-      } catch (emailErr) {
-        console.error('Failed to send credentials email:', emailErr);
-      }
-
-      return res.status(201).json({
-        success: true,
-        message: 'Shipper created successfully. Credentials sent via email.',
-        shipper: {
-          id: newShipper.id,
-          name: newShipper.name,
-          email: newShipper.email,
-          phone: newShipper.phone,
-          company_name: newShipper.company_name,
-          status: newShipper.status,
-          generatedPassword: generatedPassword // Send back password for admin to note
-        }
-      });
-    }
-
-    // ─── SHIPPERS: Get All Shippers (Admin) ───
-    if (url.includes('/api/v1/shippers/all') && req.method === 'GET') {
-      const { data, error } = await supabase
-        .from('shippers')
-        .select('id, name, email, phone, company_name, address, status, created_at, updated_at')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        return res.status(500).json({ success: false, message: error.message });
-      }
-
-      return res.status(200).json({
-        success: true,
-        shippers: data || []
-      });
-    }
-
-    // ─── SHIPPERS: Update Shipper Status (Admin) ───
-    if (url.includes('/api/v1/shippers/update-status') && req.method === 'PUT') {
-      // ✅ ADMIN PROTECTION: Update shipper status requires authentication
-      const token = req.headers.authorization?.replace('Bearer ', '');
-      
-      if (!token || token.length !== 128 || !/^[a-f0-9]+$/i.test(token)) {
-        return res.status(401).json({ 
-          success: false, 
-          message: 'Unauthorized: Admin authentication required' 
-        });
-      }
-
-      const { shipperId, status } = req.body || {};
-      
-      if (!shipperId || !status) {
-        return res.status(400).json({ success: false, message: 'Shipper ID and status are required' });
-      }
-
-      const { data, error } = await supabase
-        .from('shippers')
-        .update({ status, updated_at: new Date().toISOString() })
-        .eq('id', shipperId)
-        .select()
-        .single();
-
-      if (error) {
-        return res.status(500).json({ success: false, message: error.message });
-      }
-
-      return res.status(200).json({
-        success: true,
-        message: 'Shipper status updated',
-        shipper: data
-      });
-    }
-
-    // ─── SHIPPERS: Delete Shipper (Admin) ───
-    if (url.includes('/api/v1/shippers/delete/') && req.method === 'DELETE') {
-      // ✅ ADMIN PROTECTION: Delete shipper requires authentication
-      const token = req.headers.authorization?.replace('Bearer ', '');
-      
-      if (!token || token.length !== 128 || !/^[a-f0-9]+$/i.test(token)) {
-        return res.status(401).json({ 
-          success: false, 
-          message: 'Unauthorized: Admin authentication required' 
-        });
-      }
-      const id = url.split('/').pop();
-      
-      const { error } = await supabase
-        .from('shippers')
-        .delete()
-        .eq('id', id);
-
-      if (error) {
-        return res.status(500).json({ success: false, message: error.message });
-      }
-
-      return res.status(200).json({
-        success: true,
-        message: 'Shipper deleted successfully'
-      });
-    }
-
-    // ─── SHIPPERS: Login ───
-    if (url.includes('/api/v1/shippers/login') && req.method === 'POST') {
-      const { email, password } = req.body || {};
-      
-      if (!email || !password) {
-        return res.status(400).json({ success: false, message: 'Email and password are required' });
-      }
-
-      const { data: shipper, error } = await supabase
-        .from('shippers')
-        .select('*')
-        .eq('email', email.toLowerCase())
-        .maybeSingle();
-
-      if (!shipper || error) {
-        return res.status(401).json({ success: false, message: 'Invalid credentials' });
-      }
-
-      if (shipper.status !== 'active') {
-        return res.status(403).json({ success: false, message: 'Your account is inactive. Contact admin.' });
-      }
-
-      if (!verifyPassword(password, shipper.password_hash)) {
-        return res.status(401).json({ success: false, message: 'Invalid credentials' });
-      }
-
-      // Generate session token
-      const token = generateShipperToken();
-      const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
-
-      const { error: sessionError } = await supabase
-        .from('shipper_sessions')
-        .insert({
-          shipper_id: shipper.id,
-          token: token,
-          expires_at: expiresAt.toISOString()
-        });
-
-      if (sessionError) {
-        return res.status(500).json({ success: false, message: 'Failed to create session' });
-      }
-
-      return res.status(200).json({
-        success: true,
-        message: 'Login successful',
-        token: token,
-        shipper: {
-          id: shipper.id,
-          name: shipper.name,
-          email: shipper.email,
-          phone: shipper.phone,
-          company_name: shipper.company_name
-        }
-      });
-    }
-
-    // ─── SHIPPERS: Get Assigned Orders ───
-    if (url.includes('/api/v1/shippers/orders') && req.method === 'GET') {
-      const token = req.headers.authorization?.replace('Bearer ', '');
-      
-      if (!token) {
-        return res.status(401).json({ success: false, message: 'No token provided' });
-      }
-
-      // Verify token
-      const { data: session, error: sessionError } = await supabase
-        .from('shipper_sessions')
-        .select('shipper_id, expires_at')
-        .eq('token', token)
-        .maybeSingle();
-
-      if (!session || sessionError || new Date(session.expires_at) < new Date()) {
-        return res.status(401).json({ success: false, message: 'Invalid or expired token' });
-      }
-
-      // Get ALL orders that are Processing, Shipped, or Dispatched (no assignment needed)
-      const { data: orders, error } = await supabase
-        .from('orders')
-        .select('*')
-        .in('status', ['Processing', 'Shipped', 'Dispatched'])
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        return res.status(500).json({ success: false, message: error.message });
-      }
-
-      // Map orders to shipper-safe format (no sensitive info)
-      const shipperOrders = (orders || []).map(order => {
-        const shippingInfo = typeof order.shipping_info === 'string' ? JSON.parse(order.shipping_info) : order.shipping_info;
-        const orderItems = typeof order.order_items === 'string' ? JSON.parse(order.order_items) : order.order_items;
-
-        return {
-          id: order.id,
-          status: order.status,
-          createdAt: order.created_at,
-          // Customer details (limited)
-          customer: {
-            name: shippingInfo.name,
-            phone: shippingInfo.phone,
-            address: shippingInfo.address,
-            city: shippingInfo.city,
-            state: shippingInfo.state,
-            pinCode: shippingInfo.pinCode,
-            landmark: shippingInfo.landmark || null
-          },
-          // Product details
-          items: orderItems.map(item => ({
-            name: item.name,
-            quantity: item.quantity,
-            photo: item.photo
-          })),
-          // Tracking info if available
-          tracking: {
-            awbNumber: order.awb_number || null,
-            senderMobile: order.sender_mobile || null,
-            receiverMobile: order.receiver_mobile || null,
-            trackingUrl: order.tracking_url || null
-          },
-          total: Number(order.total)
-        };
-      });
-
-      return res.status(200).json({
-        success: true,
-        orders: shipperOrders
-      });
-    }
-
-    // ─── SHIPPERS: Update Order to Dispatched ───
-    if (url.includes('/api/v1/shippers/dispatch-order') && req.method === 'PUT') {
-      const token = req.headers.authorization?.replace('Bearer ', '');
-      const { orderId } = req.body || {};
-      
-      console.log('Dispatch request received:', { orderId, hasToken: !!token });
-      
-      if (!token) {
-        return res.status(401).json({ success: false, message: 'No token provided' });
-      }
-
-      if (!orderId) {
-        return res.status(400).json({ success: false, message: 'Order ID is required' });
-      }
-
-      // Verify token
-      const { data: session, error: sessionError } = await supabase
-        .from('shipper_sessions')
-        .select('shipper_id, expires_at')
-        .eq('token', token)
-        .maybeSingle();
-
-      if (!session || sessionError || new Date(session.expires_at) < new Date()) {
-        console.error('Token verification failed:', sessionError);
-        return res.status(401).json({ success: false, message: 'Invalid or expired token' });
-      }
-
-      console.log('Token verified, updating order:', orderId);
-
-      // Update order status to Dispatched
-      const { data: updated, error } = await supabase
-        .from('orders')
-        .update({ 
-          status: 'Dispatched', 
-          updated_at: new Date().toISOString() 
-        })
-        .eq('id', orderId)
-        .select()
-        .single();
-
-      if (error) {
-        console.error('Order update error:', error);
-        return res.status(500).json({ success: false, message: error.message || 'Failed to update order' });
-      }
-
-      if (!updated) {
-        console.error('Order not found:', orderId);
-        return res.status(404).json({ success: false, message: 'Order not found' });
-      }
-
-      console.log('Order updated successfully:', orderId);
-
-      return res.status(200).json({
-        success: true,
-        message: 'Order marked as dispatched',
-        order: mapOrder(updated)
-      });
-    }
-
-    // ─── SHIPPERS: Logout ───
-    if (url.includes('/api/v1/shippers/logout') && req.method === 'POST') {
-      const token = req.headers.authorization?.replace('Bearer ', '');
-      
-      if (token) {
-        await supabase
-          .from('shipper_sessions')
-          .delete()
-          .eq('token', token);
-      }
-
-      return res.status(200).json({
-        success: true,
-        message: 'Logged out successfully'
-      });
-    }
-
-    // ─── SHIPPERS: Verify Token (Check if logged in) ───
-    if (url.includes('/api/v1/shippers/verify') && req.method === 'GET') {
-      const token = req.headers.authorization?.replace('Bearer ', '');
-      
-      if (!token) {
-        return res.status(401).json({ success: false, message: 'No token provided' });
-      }
-
-      const { data: session, error } = await supabase
-        .from('shipper_sessions')
-        .select('shipper_id, expires_at, shippers(id, name, email, phone, company_name)')
-        .eq('token', token)
-        .maybeSingle();
-
-      if (!session || error || new Date(session.expires_at) < new Date()) {
-        return res.status(401).json({ success: false, message: 'Invalid or expired token' });
-      }
-
-      return res.status(200).json({
-        success: true,
-        shipper: session.shippers
-      });
-    }
 
     // ============================================
     // ADMIN AUTHENTICATION ENDPOINTS

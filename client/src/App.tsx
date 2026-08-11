@@ -37,7 +37,6 @@ const AdminCoupons = lazy(() => import('./pages/admin/Coupons'));
 const AdminFeaturedProducts = lazy(() => import('./pages/admin/FeaturedProduct'));
 const AdminManageProduct = lazy(() => import('./components/admin/ManageProduct'));
 const AdminOrderDetails = lazy(() => import('./pages/admin/AdmiOrderDetails'));
-const AdminShippers = lazy(() => import('./pages/admin/AdminShippers'));
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 
 // Other pages
@@ -45,10 +44,6 @@ const MyOrders = lazy(() => import('./pages/MyOrders'));
 const OrderDetails = lazy(() => import('./pages/OrderDetails'));
 const TrackShipment = lazy(() => import('./pages/TrackShipment'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
-
-// Shipper pages
-const ShipperLogin = lazy(() => import('./pages/shipper/ShipperLogin'));
-const ShipperDashboard = lazy(() => import('./pages/shipper/ShipperDashboard'));
 
 const App: React.FC = () => {
     return (
@@ -95,12 +90,7 @@ const App: React.FC = () => {
                                 <Route path="coupons" element={<AdminCoupons />} />
                                 <Route path="orders" element={<AdminOrders />} />
                                 <Route path="orders/:orderId" element={<AdminOrderDetails />} />
-                                <Route path="shippers" element={<AdminShippers />} />
                             </Route>
-
-                            {/* Shipper Portal routes */}
-                            <Route path="/shipper/login" element={<ShipperLogin />} />
-                            <Route path="/shipper/dashboard" element={<ShipperDashboard />} />
 
                             {/* Fallback route */}
                             <Route path="*" element={<NotFoundPage />} />

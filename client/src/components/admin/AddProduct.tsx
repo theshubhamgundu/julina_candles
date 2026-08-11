@@ -53,15 +53,16 @@ const AdminAddProduct: React.FC = () => {
             setUploadingImage(true);
             const { url: cloudinaryUrl } = await uploadToCloudinary(photoFile);
 
-            const productFormData = new FormData();
-            productFormData.append('name', formData.name);
-            productFormData.append('category', formData.category);
-            productFormData.append('stock', formData.stock.toString());
-            productFormData.append('price', formData.price.toString());
-            productFormData.append('description', formData.description);
-            productFormData.append('photo', cloudinaryUrl);
+            const productData = {
+                name: formData.name,
+                category: formData.category,
+                stock: Number(formData.stock),
+                price: Number(formData.price),
+                description: formData.description,
+                photo: cloudinaryUrl,
+            };
 
-            await newProduct({ formData: productFormData }).unwrap();
+            await newProduct({ productData }).unwrap();
             notify('Product added successfully', 'success');
             navigate('/admin/products');
         } catch (err: any) {

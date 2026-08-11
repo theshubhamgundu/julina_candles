@@ -1,11 +1,11 @@
 import Papa from 'papaparse';
 import React, { useEffect, useMemo, useState } from 'react';
-import { FaArrowDown, FaArrowUp, FaEdit, FaFileCsv, FaPlus, FaTrash } from 'react-icons/fa';
+import { FaArrowDown, FaArrowUp, FaEdit, FaFileCsv, FaPlus, FaTrash, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Cell, Column, HeaderGroup, Row, useSortBy, useTable } from 'react-table';
 import Pagination from '../../components/common/Pagination';
 import SkeletonLoader from '../../components/common/SkeletonLoader';
-import { useAllProductsQuery, useDeleteProductMutation } from '../../redux/api/product.api';
+import { useAllProductsQuery, useDeleteProductMutation, useToggleActiveProductMutation } from '../../redux/api/product.api';
 import { CustomError, Product } from '../../types/api-types';
 import { notify } from '../../utils/util';
 
@@ -16,6 +16,7 @@ const AdminProducts: React.FC = () => {
   const [sortBy, setSortBy] = useState<{ id: string; desc: boolean }>({ id: '', desc: false });
   const { data: productsData, isLoading, isError, error, refetch } = useAllProductsQuery({ page, limit, sortBy });
   const [deleteProduct] = useDeleteProductMutation();
+  const [toggleActiveProduct] = useToggleActiveProductMutation();
   const [data, setData] = useState<Product[]>([]);
 
   const handleDelete = async (productId: string, productName: string) => {
@@ -30,10 +31,18 @@ const AdminProducts: React.FC = () => {
     }
   };
 
+  const handleToggleActive = async (productId: string, currentStatus: boolean | undefined) => {
+    try {
+      const res = await toggleActiveProduct({ productId }).unwrap();
+      notify(res.message || `Product ${currentStatus !== false ? 'disabled' : 'enabled'} successfully`, 'success');
+      refetch();
+    } catch (err: any) {
+      notify(err?.data?.message || 'Failed to update product status', 'error');
+    }
+  };
+
   useEffect(() => {
     if (productsData?.products) {
-      // ✅ FIXED: Display products EXACTLY as they exist in database
-      // No more hardcoded normalization - shows real product names, categories, and prices
       setData(productsData.products);
     }
   }, [productsData]);
@@ -78,10 +87,17 @@ const AdminProducts: React.FC = () => {
       { 
         Header: 'Product Name', 
         accessor: 'name',
-        Cell: ({ value }) => <span className="font-semibold text-gray-900">{value}</span>
+        Cell: ({ value, row }: { value: any; row: any }) => (
+          <div>
+            <span className="font-semibold text-gray-900">{value}</span>
+            {row.original.isActive === false && (
+              <span className="ml-2 px-2 py-0.5 text-[10px] uppercase font-bold bg-gray-200 text-gray-600 rounded">Disabled</span>
+            )}
+          </div>
+        )
       },
       { 
-        Header: 'Category & Packs', 
+        Header: 'Category', 
         accessor: 'category',
         Cell: ({ value }) => <span className="text-gray-600 font-medium text-xs bg-[#faf6ee] px-2.5 py-1 rounded-full border border-[#ede3cf]">{value}</span>
       },
@@ -98,12 +114,10 @@ const AdminProducts: React.FC = () => {
         Header: 'Pricing', 
         accessor: 'price',
         Cell: ({ value, row }: { value: any; row: any }) => {
-          // ✅ FIXED: Show variant price range with starting price
           const product = row.original;
           const hasVariants = product.variants && Array.isArray(product.variants) && product.variants.length > 0;
           
           if (hasVariants) {
-            // Show variant price range
             const prices = product.variants.map((v: any) => v.salePrice || v.price || 0);
             const minPrice = Math.min(...prices);
             const maxPrice = Math.max(...prices);
@@ -115,13 +129,32 @@ const AdminProducts: React.FC = () => {
             );
           }
           
-          // Show base price (non-variant products)
           const basePrice = Number(value || 0);
           if (basePrice <= 1) {
             return <span className="font-semibold text-red-600">⚠️ Set Price</span>;
           }
           return <span className="font-semibold text-gray-900">₹{basePrice.toFixed(2)}</span>;
         }
+      },
+      {
+        Header: 'Status',
+        Cell: ({ row }: { row: Row<Product> }) => {
+          const isActive = row.original.isActive !== false;
+          return (
+            <button
+              onClick={() => handleToggleActive(row.original._id, row.original.isActive)}
+              className={`px-3 py-1 rounded-full font-bold text-xs transition flex items-center gap-1.5 ${
+                isActive
+                  ? 'bg-green-100 text-green-800 hover:bg-green-200 border border-green-300'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-300'
+              }`}
+              title={isActive ? 'Click to Disable product from store' : 'Click to Enable product on store'}
+            >
+              {isActive ? <><FaEye className="text-green-600" /> Active</> : <><FaEyeSlash className="text-gray-500" /> Disabled</>}
+            </button>
+          );
+        },
+        disableSortBy: true,
       },
       {
         Header: 'Actions',

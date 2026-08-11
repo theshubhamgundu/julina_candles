@@ -10,26 +10,7 @@ const AdminFeaturedProducts: React.FC = () => {
 
     useEffect(() => {
         if (data && data.products) {
-            const isCombo = (p: Product) => p.category?.toLowerCase().includes('combo') || p.name?.toLowerCase().includes('combo');
-            const singleUnit = data.products.find(p => !isCombo(p));
-            const comboUnit = data.products.find(p => isCombo(p));
-
-            const normalized: Product[] = [];
-            if (singleUnit) {
-                normalized.push({
-                    ...singleUnit,
-                    name: 'Julina Candles & Melts Artisanal Candles',
-                    category: 'Artisanal Candles',
-                });
-            }
-            if (comboUnit) {
-                normalized.push({
-                    ...comboUnit,
-                    name: 'Julina Candles & Melts Artisanal Candles - Combo Pack',
-                    category: 'Combo Pack',
-                });
-            }
-            setProducts(normalized.length > 0 ? normalized : data.products);
+            setProducts(data.products);
         }
     }, [data]);
 

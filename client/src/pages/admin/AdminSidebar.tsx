@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaBox, FaClipboardList, FaMoneyCheckAlt, FaTachometerAlt, FaTimes, FaUsers, FaShippingFast, FaSignOutAlt } from 'react-icons/fa';
+import { FaBox, FaClipboardList, FaMoneyCheckAlt, FaTachometerAlt, FaTimes, FaUsers, FaSignOutAlt } from 'react-icons/fa';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 interface AdminSidebarProps {
@@ -133,20 +133,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ isSidebarOpen, toggleSideba
             Orders
           </NavLink>
 
-          <NavLink
-            to="/admin/shippers"
-            className={({ isActive }) =>
-              `flex items-center px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-sans ${
-                isActive
-                  ? 'bg-gradient-to-r from-[#1f5133] to-[#2f7d43]/10 text-white font-semibold shadow-inner border-l-4 border-primaryMid'
-                  : 'text-gray-400 hover:bg-[#16301d]/30 hover:text-gray-200 border-l-4 border-transparent'
-              }`
-            }
-            onClick={toggleSidebar}
-          >
-            <FaShippingFast className="mr-3 text-lg group-hover:scale-110 transition-transform duration-200" />
-            Shippers
-          </NavLink>
+
 
           {/* Logout Button */}
           <div className="flex-grow"></div>

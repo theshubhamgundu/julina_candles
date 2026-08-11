@@ -7,8 +7,9 @@ interface PopularProductsProps {
 }
 
 const PopularProducts: React.FC<PopularProductsProps> = ({ products }) => {
-  // Take up to 6 products to display in a grid
-  const displayProducts = products && products.length > 0 ? products.slice(0, 6) : [];
+  // Take up to 6 active products to display in a grid
+  const activeProducts = (products || []).filter(p => p.isActive !== false);
+  const displayProducts = activeProducts.length > 0 ? activeProducts.slice(0, 6) : [];
 
   return (
     <section className="py-16 md:py-24 bg-[#FBF6ED]">

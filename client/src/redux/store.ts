@@ -7,7 +7,6 @@ import cartReducer from "./reducers/cart.reducer";
 import { couponApi } from "./api/coupon.api";
 import { paymentApi } from "./api/payment.api";
 import { statsApi } from "./api/stats.api";
-import { shipperApi } from "./api/shipper.api";
 import { adminApi } from "./api/admin.api";
 import { razorpayApi } from "./api/razorpay.api";
 
@@ -21,7 +20,6 @@ const store = configureStore({
         [couponApi.reducerPath]: couponApi.reducer,
         [paymentApi.reducerPath]: paymentApi.reducer,
         [statsApi.reducerPath]: statsApi.reducer,
-        [shipperApi.reducerPath]: shipperApi.reducer,
         [adminApi.reducerPath]: adminApi.reducer,
         [razorpayApi.reducerPath]: razorpayApi.reducer,
     },
@@ -33,7 +31,6 @@ const store = configureStore({
             couponApi.middleware,
             paymentApi.middleware,
             statsApi.middleware,
-            shipperApi.middleware,
             adminApi.middleware,
             razorpayApi.middleware
         )

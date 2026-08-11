@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS public.products (
   photo TEXT NOT NULL,
   photo_public_id VARCHAR(255),
   featured BOOLEAN NOT NULL DEFAULT false,
+  is_active BOOLEAN NOT NULL DEFAULT true,
   variants JSONB DEFAULT '[]'::jsonb,
   created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -72,7 +73,21 @@ ALTER TABLE public.products ADD COLUMN IF NOT EXISTS stock INTEGER DEFAULT 0;
 ALTER TABLE public.products ADD COLUMN IF NOT EXISTS photo TEXT DEFAULT '';
 ALTER TABLE public.products ADD COLUMN IF NOT EXISTS photo_public_id VARCHAR(255);
 ALTER TABLE public.products ADD COLUMN IF NOT EXISTS featured BOOLEAN DEFAULT false;
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT true;
 ALTER TABLE public.products ADD COLUMN IF NOT EXISTS variants JSONB DEFAULT '[]'::jsonb;
+
+-- Safely make legacy columns optional if they exist from an older template
+DO $$
+BEGIN
+  ALTER TABLE public.products ALTER COLUMN event_id DROP NOT NULL;
+EXCEPTION WHEN others THEN NULL;
+END $$;
+
+DO $$
+BEGIN
+  ALTER TABLE public.products ALTER COLUMN title DROP NOT NULL;
+EXCEPTION WHEN others THEN NULL;
+END $$;
 
 DROP TRIGGER IF EXISTS update_products_updated_at ON public.products;
 CREATE TRIGGER update_products_updated_at

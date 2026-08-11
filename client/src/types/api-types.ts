@@ -57,6 +57,7 @@ export interface Product {
     price: number;
     description: string;
     featured: boolean;
+    isActive?: boolean;
     variants?: any[];
     createdAt: string;
     updatedAt: string;
@@ -84,7 +85,7 @@ export interface ProductRequest {
 
 // New Product
 export type NewProductRequest = {
-    formData: FormData;
+    productData: any;
 }
 
 // Product Details
@@ -96,7 +97,7 @@ export type ProductDetailResponse = {
 // Update Product
 export type UpdateProductRequest = {
     productId: string;
-    formData: FormData;
+    formData: any;
 }
 
 // Delete Product
@@ -112,6 +113,11 @@ export type CategoriesResponse = {
 
 // feature Product
 export type FeatureProductRequest = {
+    productId: string;
+}
+
+// toggle active Product
+export type ToggleActiveProductRequest = {
     productId: string;
 }
 

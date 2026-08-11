@@ -10,6 +10,7 @@ import {
     ProductResponse,
     SearchProductRequest,
     SearchProductResponse,
+    ToggleActiveProductRequest,
     UpdateProductRequest
 } from "../../types/api-types";
 
@@ -56,10 +57,10 @@ export const productApi = createApi({
             providesTags: ['Product'],
         }),
         newProduct: builder.mutation<MessageResponse, NewProductRequest>({
-            query: ({ formData }) => ({
+            query: ({ productData }) => ({
                 url: `new`,
                 method: 'POST',
-                body: formData,
+                body: productData,
             }),
             invalidatesTags: ['Product'],
         }),
@@ -94,6 +95,13 @@ export const productApi = createApi({
             }),
             invalidatesTags: ['Product']
         }),
+        toggleActiveProduct: builder.mutation<MessageResponse, ToggleActiveProductRequest>({
+            query: ({ productId }) => ({
+                url: `toggle-active/${productId}`,
+                method: 'PATCH',
+            }),
+            invalidatesTags: ['Product']
+        }),
     }),
 });
 
@@ -107,6 +115,7 @@ export const {
     useUpdateProductMutation,
     useDeleteProductMutation,
     useGetAllFeaturedProductsQuery,
-    useFeatureProductMutation
+    useFeatureProductMutation,
+    useToggleActiveProductMutation,
 } = productApi;
 
