@@ -2,8 +2,8 @@ import crypto from 'crypto';
 import Razorpay from 'razorpay';
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://dpcdscfhdqctlcwfzoue.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRwY2RzY2ZoZHFjdGxjd2Z6b3VlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzMzgzNzcsImV4cCI6MjEwMTkxNDM3N30.apNfacogIt10mKo4vEVRUwut99_xyOAeMKFUux4BzAU';
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://lzsjohnscesymlkuvmng.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6c2pvaG5zY2VzeW1sa3V2bW5nIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NjgwMDQzNCwiZXhwIjoyMTAyMzc2NDM0fQ.ywgq8iG-UWSfeqBCqGgsX_aOt9ZiN5Dav2n4zN1aLlU';
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Simple password hashing and comparison (use bcrypt in production)
@@ -368,6 +368,17 @@ function mapProduct(row) {
   };
 }
 
+// Helper for safe JSON parsing
+function safeJSONParse(value, fallback = {}) {
+  if (typeof value !== 'string') return value || fallback;
+  try {
+    return JSON.parse(value);
+  } catch (e) {
+    console.error('JSON parse error:', e.message);
+    return fallback;
+  }
+}
+
 // Map Supabase row → order object
 function mapOrder(row) {
   if (!row) return null;
@@ -375,8 +386,8 @@ function mapOrder(row) {
     _id: row.id,
     id: row.id,
     user: row.user_uid || row.user_id,
-    shippingInfo: typeof row.shipping_info === 'string' ? JSON.parse(row.shipping_info) : row.shipping_info,
-    orderItems: typeof row.order_items === 'string' ? JSON.parse(row.order_items) : row.order_items,
+    shippingInfo: safeJSONParse(row.shipping_info, {}),
+    orderItems: safeJSONParse(row.order_items, []),
     subtotal: Number(row.subtotal),
     tax: Number(row.tax),
     shippingCharges: Number(row.shipping_charges),

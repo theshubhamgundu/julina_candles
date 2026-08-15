@@ -7,12 +7,12 @@
  */
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = 'https://dpcdscfhdqctlcwfzoue.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRwY2RzY2ZoZHFjdGxjd2Z6b3VlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzMzgzNzcsImV4cCI6MjEwMTkxNDM3N30.apNfacogIt10mKo4vEVRUwut99_xyOAeMKFUux4BzAU';
+const SUPABASE_URL = 'https://lzsjohnscesymlkuvmng.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6c2pvaG5zY2VzeW1sa3V2bW5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY4MDA0MzQsImV4cCI6MjEwMjM3NjQzNH0.qwxY5OJtvprwTC_TJ8806Nl2G-qF0hdWrmlrNLaSleY';
 
 // Use the service_role key to bypass RLS for seeding
 // The anon key is blocked by RLS for product inserts (by design)
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || '';
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6c2pvaG5zY2VzeW1sa3V2bW5nIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NjgwMDQzNCwiZXhwIjoyMTAyMzc2NDM0fQ.ywgq8iG-UWSfeqBCqGgsX_aOt9ZiN5Dav2n4zN1aLlU';
 
 // Optional event id to attach to inserted products (set via env var EVENT_ID)
 const VALID_EVENT_ID = process.env.EVENT_ID || null;
@@ -234,12 +234,7 @@ async function seed() {
   const toInsert = PRODUCTS.map(p => {
     const item = {
       ...p,
-      title: p.name,
-      name: p.name,
     };
-    if (VALID_EVENT_ID) {
-      item.event_id = VALID_EVENT_ID;
-    }
     return item;
   });
 

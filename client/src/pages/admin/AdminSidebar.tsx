@@ -1,5 +1,15 @@
 import React from 'react';
-import { FaBox, FaClipboardList, FaMoneyCheckAlt, FaTachometerAlt, FaTimes, FaUsers, FaSignOutAlt } from 'react-icons/fa';
+import { 
+  FaBox, 
+  FaClipboardList, 
+  FaMoneyCheckAlt, 
+  FaTachometerAlt, 
+  FaTimes, 
+  FaUsers, 
+  FaSignOutAlt,
+  FaExternalLinkAlt,
+  FaStar
+} from 'react-icons/fa';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 interface AdminSidebarProps {
@@ -12,143 +22,132 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ isSidebarOpen, toggleSideba
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
+    sessionStorage.removeItem('vh_admin_auth');
     navigate('/admin/login');
   };
 
+  const navItems = [
+    { to: '/admin/dashboard', label: 'Dashboard', icon: FaTachometerAlt },
+    { to: '/admin/products', label: 'Products Catalog', icon: FaBox },
+    { to: '/admin/featured', label: 'Featured Items', icon: FaStar },
+    { to: '/admin/orders', label: 'Orders', icon: FaClipboardList },
+    { to: '/admin/customers', label: 'Customers', icon: FaUsers },
+    { to: '/admin/coupons', label: 'Coupons & Promos', icon: FaMoneyCheckAlt },
+  ];
+
   return (
     <>
-      <div
-        className={`fixed top-0 left-0 h-screen w-64 bg-[#0a180e] text-gray-300 p-6 border-r border-[#16301d]/30 transform ${
+      {/* Mobile overlay backdrop */}
+      {isSidebarOpen && (
+        <div 
+          onClick={toggleSidebar}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden transition-opacity"
+        />
+      )}
+
+      <aside
+        className={`fixed top-0 left-0 h-screen w-64 bg-[#1a2e1d] text-gray-200 p-5 flex flex-col justify-between border-r border-[#2d4d33] shadow-2xl z-40 transform transition-transform duration-300 ease-in-out md:translate-x-0 ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:block z-40`}
+        }`}
       >
-        {/* Close button for mobile */}
-        <div className="md:hidden mb-6 flex justify-end">
-          <button onClick={toggleSidebar} className="text-gray-400 hover:text-white transition duration-200">
-            <FaTimes size={20} />
-          </button>
-        </div>
-        
-        {/* Logo and Home Link */}
-        <Link to="/" onClick={toggleSidebar}>
-          <div className="mb-10 cursor-pointer border-b border-[#16301d]/50 pb-5">
-            <h1 className="text-xl font-serif font-bold text-white tracking-widest flex items-center gap-2">
-              <span className="inline-block w-3 h-3 bg-secondary rounded-full animate-pulse"></span>
-              Julina Candles & Melts
-            </h1>
-            <span className="text-[10px] text-gray-500 tracking-[0.2em] font-sans uppercase block mt-1">Admin Console</span>
+        <div>
+          {/* Mobile close button */}
+          <div className="md:hidden flex justify-end mb-2">
+            <button 
+              onClick={toggleSidebar} 
+              className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition"
+              aria-label="Close sidebar"
+            >
+              <FaTimes size={18} />
+            </button>
           </div>
-        </Link>
+          
+          {/* Brand Header */}
+          <div className="mb-6 pb-5 border-b border-white/10">
+            <Link to="/admin/dashboard" onClick={toggleSidebar} className="group block">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#C79A56] to-[#e4b97a] flex items-center justify-center text-[#1a2e1d] font-serif font-bold text-xl shadow-md border border-[#C79A56]/40">
+                  🕯️
+                </div>
+                <div>
+                  <h1 className="text-base font-serif font-bold text-white tracking-wide group-hover:text-[#e4b97a] transition-colors leading-tight">
+                    Julina Candles
+                  </h1>
+                  <span className="text-[10px] text-[#C79A56] tracking-[0.18em] uppercase font-semibold block mt-0.5">
+                    Admin Console
+                  </span>
+                </div>
+              </div>
+            </Link>
+            
+            {/* Quick link to storefront */}
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 flex items-center justify-between px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[11px] text-gray-300 hover:text-white transition border border-white/5 group"
+            >
+              <span className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                View Live Store
+              </span>
+              <FaExternalLinkAlt className="text-[10px] text-gray-400 group-hover:text-white transition" />
+            </a>
+          </div>
 
-        {/* Navigation Links */}
-        <nav className="space-y-1 flex flex-col h-[calc(100vh-200px)]">
-          <NavLink
-            to="/admin/dashboard"
-            className={({ isActive }) =>
-              `flex items-center px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-sans ${
-                isActive
-                  ? 'bg-gradient-to-r from-[#1f5133] to-[#2f7d43]/10 text-white font-semibold shadow-inner border-l-4 border-primaryMid'
-                  : 'text-gray-400 hover:bg-[#16301d]/30 hover:text-gray-200 border-l-4 border-transparent'
-              }`
-            }
-            onClick={toggleSidebar}
-          >
-            <FaTachometerAlt className="mr-3 text-lg group-hover:scale-110 transition-transform duration-200" />
-            Dashboard
-          </NavLink>
+          {/* Navigation Links */}
+          <nav className="space-y-1">
+            <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-gray-400">
+              Management
+            </p>
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  onClick={toggleSidebar}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 text-xs font-medium ${
+                      isActive
+                        ? 'bg-gradient-to-r from-[#C79A56] to-[#b38543] text-gray-950 font-bold shadow-md shadow-[#C79A56]/20'
+                        : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                    }`
+                  }
+                >
+                  <Icon className="text-base shrink-0" />
+                  <span>{item.label}</span>
+                </NavLink>
+              );
+            })}
+          </nav>
+        </div>
 
-          <NavLink
-            to="/admin/products"
-            className={({ isActive }) =>
-              `flex items-center px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-sans ${
-                isActive
-                  ? 'bg-gradient-to-r from-[#1f5133] to-[#2f7d43]/10 text-white font-semibold shadow-inner border-l-4 border-primaryMid'
-                  : 'text-gray-400 hover:bg-[#16301d]/30 hover:text-gray-200 border-l-4 border-transparent'
-              }`
-            }
-            onClick={toggleSidebar}
-          >
-            <FaBox className="mr-3 text-lg group-hover:scale-110 transition-transform duration-200" />
-            Products
-          </NavLink>
+        {/* Footer / Account section */}
+        <div className="pt-4 border-t border-white/10 space-y-2">
+          <div className="px-3 py-2 rounded-xl bg-white/5 flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-[#C79A56]/20 text-[#e4b97a] font-bold flex items-center justify-center text-xs border border-[#C79A56]/30">
+              AD
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-semibold text-white truncate">Administrator</p>
+              <p className="text-[10px] text-gray-400 truncate">Store Manager</p>
+            </div>
+          </div>
 
-          <NavLink
-            to="/admin/featured"
-            className={({ isActive }) =>
-              `flex items-center px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-sans ${
-                isActive
-                  ? 'bg-gradient-to-r from-[#1f5133] to-[#2f7d43]/10 text-white font-semibold shadow-inner border-l-4 border-primaryMid'
-                  : 'text-gray-400 hover:bg-[#16301d]/30 hover:text-gray-200 border-l-4 border-transparent'
-              }`
-            }
-            onClick={toggleSidebar}
-          >
-            <FaBox className="mr-3 text-lg group-hover:scale-110 transition-transform duration-200" />
-            Featured Products
-          </NavLink>
-
-          <NavLink
-            to="/admin/customers"
-            className={({ isActive }) =>
-              `flex items-center px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-sans ${
-                isActive
-                  ? 'bg-gradient-to-r from-[#1f5133] to-[#2f7d43]/10 text-white font-semibold shadow-inner border-l-4 border-primaryMid'
-                  : 'text-gray-400 hover:bg-[#16301d]/30 hover:text-gray-200 border-l-4 border-transparent'
-              }`
-            }
-            onClick={toggleSidebar}
-          >
-            <FaUsers className="mr-3 text-lg group-hover:scale-110 transition-transform duration-200" />
-            Customers
-          </NavLink>
-
-
-          <NavLink
-            to="/admin/coupons"
-            className={({ isActive }) =>
-              `flex items-center px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-sans ${
-                isActive
-                  ? 'bg-gradient-to-r from-[#1f5133] to-[#2f7d43]/10 text-white font-semibold shadow-inner border-l-4 border-primaryMid'
-                  : 'text-gray-400 hover:bg-[#16301d]/30 hover:text-gray-200 border-l-4 border-transparent'
-              }`
-            }
-            onClick={toggleSidebar}
-          >
-            <FaMoneyCheckAlt className="mr-3 text-lg group-hover:scale-110 transition-transform duration-200" />
-            Coupons
-          </NavLink>
-
-          <NavLink
-            to="/admin/orders"
-            className={({ isActive }) =>
-              `flex items-center px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-sans ${
-                isActive
-                  ? 'bg-gradient-to-r from-[#1f5133] to-[#2f7d43]/10 text-white font-semibold shadow-inner border-l-4 border-primaryMid'
-                  : 'text-gray-400 hover:bg-[#16301d]/30 hover:text-gray-200 border-l-4 border-transparent'
-              }`
-            }
-            onClick={toggleSidebar}
-          >
-            <FaClipboardList className="mr-3 text-lg group-hover:scale-110 transition-transform duration-200" />
-            Orders
-          </NavLink>
-
-
-
-          {/* Logout Button */}
-          <div className="flex-grow"></div>
           <button
             onClick={handleLogout}
-            className="flex items-center px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-sans text-gray-400 hover:bg-red-900/20 hover:text-red-400 border-l-4 border-transparent hover:border-red-500 mt-auto w-full"
+            className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition duration-200 text-xs font-medium text-red-300 hover:bg-red-500/15 hover:text-red-200 w-full"
           >
-            <FaSignOutAlt className="mr-3 text-lg group-hover:scale-110 transition-transform duration-200" />
-            Logout
+            <FaSignOutAlt className="text-sm" />
+            <span>Sign Out</span>
           </button>
-        </nav>
-      </div>
+        </div>
+      </aside>
     </>
   );
 };
 
 export default AdminSidebar;
+
 
